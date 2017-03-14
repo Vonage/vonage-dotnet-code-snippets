@@ -1,4 +1,4 @@
-#Nexmo APIs Quickstart Examples for ASP .NET Core MVC
+#Nexmo APIs Quickstart Examples for ASP .NET MVC (4.6.2)
 The purpose of the quickstart guide is to provide simple examples focused on one goal. For example, sending an SMS, handling an incoming SMS webhook or making a Text to Speech call.
 
 #Configure with Your Nexmo Credentials 
