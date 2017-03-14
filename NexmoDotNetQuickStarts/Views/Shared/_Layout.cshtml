@@ -20,11 +20,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="SMS" asp-action="Index">SMS</a></li>
-                    <li><a asp-area="" asp-controller="Voice" asp-action="Index">Voice</a></li>
-                    <li><a asp-area="" asp-controller="Verify" asp-action="Index">Verify</a></li>
-                    <li><a asp-area="" asp-controller="NumberInsight" asp-action="Index">Number Insight</a></li>
-                    <li><a asp-area="" asp-controller="Search" asp-action="Index">Search</a></li>
+                    @Html.ActionLink("SMS", "Index", "SMS", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Voice", "Index", "Voice", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Verify", "Index", "Verify", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Number Insight", "Index", "NumberInsight", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Search", "Index", "Search", new { area = "" }, new { @class = "navbar-brand" })
                 </ul>
             </div>
         </div>
