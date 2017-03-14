@@ -14,12 +14,14 @@ namespace NexmoDotNetQuickStarts.Controllers
             {
                 return View();
             }
-            // GET: /<controller>/
+
+            [HttpGet]
             public ActionResult Send()
             {
                 return View();
             }
-            [System.Web.Mvc.HttpPost]
+            
+            [HttpPost]
             public ActionResult Send(string to, string text)
             {
                 var results = SMS.Send(new SMS.SMSRequest
@@ -32,7 +34,7 @@ namespace NexmoDotNetQuickStarts.Controllers
                 return View("Index");
             }
 
-            [System.Web.Mvc.HttpGet]
+            [HttpGet]
             public ActionResult Recieve([FromUri]SMS.SMSInbound response)
             {
 
@@ -56,7 +58,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             }
 
-            [System.Web.Mvc.HttpGet]
+            [HttpGet]
             public ActionResult DLR([FromUri]SMS.SMSDeliveryReceipt response)
             {
 
