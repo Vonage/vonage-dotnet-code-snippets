@@ -37,7 +37,7 @@ namespace NexmoDotNetQuickStarts.Controllers
                 return View("Index");
             }
 
-            [System.Web.Http.HttpGet]
+            [System.Web.Mvc.HttpGet]
             public ActionResult Recieve([FromUri]SMS.SMSInbound response)
             {
 
@@ -61,7 +61,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             }
 
-            [System.Web.Http.HttpGet]
+            [System.Web.Mvc.HttpGet]
             public ActionResult DLR([FromUri]SMS.SMSDeliveryReceipt response)
             {
 
