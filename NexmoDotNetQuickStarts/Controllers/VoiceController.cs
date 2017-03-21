@@ -1,4 +1,5 @@
-﻿using Nexmo.Api.Voice;
+﻿using Nexmo.Api;
+using Nexmo.Api.Voice;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,7 +36,7 @@ namespace NexmoDotNetQuickStarts.Controllers
                 from = new Call.Endpoint
                 {
                     type = "phone",
-                    number = "NEXMO_VIRTUAL_NUMBER"
+                    number = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"]
                 },
                 answer_url = new[]
                 {

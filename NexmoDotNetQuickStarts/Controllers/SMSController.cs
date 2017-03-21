@@ -1,8 +1,10 @@
 ﻿using Nexmo.Api;
 using System.Web.Mvc;
 using System.Diagnostics;
-
 using System.Web.Http;
+using Newtonsoft.Json;
+using System.IO;
+
 namespace NexmoDotNetQuickStarts.Controllers
 {
     // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,26 +17,27 @@ namespace NexmoDotNetQuickStarts.Controllers
                 return View();
             }
 
-            [HttpGet]
+            [System.Web.Mvc.HttpGet]
             public ActionResult Send()
             {
                 return View();
             }
             
-            [HttpPost]
+            [System.Web.Mvc.HttpPost]
             public ActionResult Send(string to, string text)
             {
-                var results = SMS.Send(new SMS.SMSRequest
+
+            var results = SMS.Send(new SMS.SMSRequest
                 {
 
-                    from = "NEXMO_VIRTUAL_NUMBER",
+                    from = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"],
                     to = to,
                     text = text
                 });
                 return View("Index");
             }
 
-            [HttpGet]
+            [System.Web.Http.HttpGet]
             public ActionResult Recieve([FromUri]SMS.SMSInbound response)
             {
 
@@ -58,7 +61,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             }
 
-            [HttpGet]
+            [System.Web.Http.HttpGet]
             public ActionResult DLR([FromUri]SMS.SMSDeliveryReceipt response)
             {
 
