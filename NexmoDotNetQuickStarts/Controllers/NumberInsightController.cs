@@ -76,10 +76,11 @@ namespace NexmoDotNetQuickStarts.Controllers
                 Session["originalCarrierCode"] = results.original_carrier.network_code;
                 Session["originalCarrierType"] = results.original_carrier.network_type;
                 Session["originalCarrierCountry"] = results.original_carrier.country;
-                Session["currentCarrierName"] = results.current_carrier.name;
             }
-            if (results.original_carrier != null)
+            if (results.current_carrier != null)
             {
+
+                Session["currentCarrierName"] = results.current_carrier.name;
                 Session["currentCarrierCode"] = results.current_carrier.network_code;
                 Session["currentCarrierType"] = results.current_carrier.network_type;
                 Session["currentCarrierCountry"] = results.current_carrier.country;
