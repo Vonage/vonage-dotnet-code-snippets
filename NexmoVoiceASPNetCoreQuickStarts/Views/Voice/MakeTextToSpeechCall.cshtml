@@ -6,20 +6,20 @@
 
 <div>
     @{
-        ViewData["Sub-Title"] = "Create NCCO";
+        ViewData["Sub-Title"] = "Create Talk NCCO";
     }
     <h3>@ViewData["Sub-Title"]</h3>
     @{ 
         var buttonText = @ViewData["NCCOButtonText"];
     }
-    <form method="post" action="/Voice/CreateNCCO">
+    <form method="post" action="/Voice/CreateTalkNCCO">
         <input type="text"
                class="input"
                id="text" name="text" placeholder="Text to synthetise into speech " style="min-width:350px" /> <br>
         <h1></h1>
         <input type="text"
                class="input"
-               id="text" name="text" placeholder="Name of the voice used to deliver the text " style="min-width:350px" /> <br>
+               id="voiceName" name="voiceName" placeholder="Name of the voice used to deliver the text " style="min-width:350px" /> <br>
         <h1></h1>
         <input type="submit"  value=@buttonText style="width:250px" /><br>
     </form>

@@ -6,11 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Nexmo.Api;
 using Nexmo.Api.Voice;
 using NexmoVoiceASPNetCoreQuickStarts.Helpers;
+using Microsoft.AspNetCore.Hosting;
+using System.Web;
 
 namespace NexmoVoiceASPNetCoreQuickStarts.Controllers
 {
     public class VoiceController : Controller
     {
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private NCCOHelpers _nccohelper;
+
+        public VoiceController(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            _nccohelper = new NCCOHelpers();
+            
+        }
         public IActionResult Index()
         {
             return View();
@@ -19,17 +30,15 @@ namespace NexmoVoiceASPNetCoreQuickStarts.Controllers
         [HttpGet]
         public ActionResult MakeTextToSpeechCall()
         {
+            ViewData["NCCOButtonText"] = "Create NCCO";
             return View();
         }
         [HttpPost]
         public ActionResult MakeTextToSpeechCall(string to)
         {
-            var temp = new NCCOHelpers();
-            temp.CreateTalkNCCO();
-
             var NEXMO_FROM_NUMBER = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"];
             var NEXMO_TO_NUMBER = to;
-            var NEXMO_CALL_ANSWER_URL = "https://nexmo-community.github.io/ncco-examples/first_call_talk.json";
+            var NEXMO_CALL_ANSWER_URL = "";
 
             var results = Call.Do(new Call.CallCommand
             {
@@ -52,6 +61,59 @@ namespace NexmoVoiceASPNetCoreQuickStarts.Controllers
             });
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult PlayAudioToCaller()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult PlayAudioToCaller(string to)
+        {
+            var NEXMO_FROM_NUMBER = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"];
+            var NEXMO_TO_NUMBER = to;
+            var NEXMO_CALL_ANSWER_URL = "";
+
+            var results = Call.Do(new Call.CallCommand
+            {
+                to = new[]
+                {
+                    new Call.Endpoint {
+                        type = "phone",
+                        number = NEXMO_TO_NUMBER
+                    }
+                },
+                from = new Call.Endpoint
+                {
+                    type = "phone",
+                    number = NEXMO_FROM_NUMBER
+                },
+                answer_url = new[]
+                {
+                    NEXMO_CALL_ANSWER_URL
+                }
+            });
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult CreateTalkNCCO(string text, string voiceName)
+        {
+            _nccohelper.CreateTalkNCCO(_hostingEnvironment.WebRootPath, text, voiceName);
+
+            ViewData["NCCOButtonText"] = "NCCO Created";
+            return View("MakeTextToSpeechCall");
+        }
+
+        [HttpPost]
+        public ActionResult CreateStreamNCCO(string[] streamUrl, int level=0, bool bargeIN = false, int loop =1)
+        {
+            _nccohelper.CreateStreamNCCO(_hostingEnvironment.WebRootPath, streamUrl, level, bargeIN, loop);
+
+            ViewData["NCCOButtonText"] = "NCCO Created";
+            return View("PlayAudioToCaller");
         }
     }
 }

@@ -29,7 +29,7 @@ namespace NexmoVoiceASPNetCoreQuickStarts.Helpers
         {
             dynamic StreamNCCO = new JObject();
             StreamNCCO.action = "stream";
-            StreamNCCO.streamUrl = streamUrl;
+            StreamNCCO.streamUrl = new JArray { streamUrl };
             StreamNCCO.level = level;
             StreamNCCO.bargeIn = bargeIn;
             StreamNCCO.loop = loopTimes;
