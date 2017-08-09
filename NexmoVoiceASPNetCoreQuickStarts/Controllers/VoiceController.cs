@@ -24,21 +24,22 @@ namespace NexmoVoiceASPNetCoreQuickStarts.Controllers
         }
         public IActionResult Index()
         {
+            ViewData["NCCOButtonText"] = "Create NCCO";
             return View();
         }
 
         [HttpGet]
         public ActionResult MakeTextToSpeechCall()
         {
-            ViewData["NCCOButtonText"] = "Create NCCO";
             return View();
         }
+
         [HttpPost]
         public ActionResult MakeTextToSpeechCall(string to)
         {
             var NEXMO_FROM_NUMBER = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"];
             var NEXMO_TO_NUMBER = to;
-            var NEXMO_CALL_ANSWER_URL = "";
+            var NEXMO_CALL_ANSWER_URL = "https://raw.githubusercontent.com/nexmo-community/ncco-examples/gh-pages/first_call_talk.json";
 
             var results = Call.Do(new Call.CallCommand
             {
@@ -68,12 +69,13 @@ namespace NexmoVoiceASPNetCoreQuickStarts.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult PlayAudioToCaller(string to)
         {
             var NEXMO_FROM_NUMBER = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"];
             var NEXMO_TO_NUMBER = to;
-            var NEXMO_CALL_ANSWER_URL = "";
+            var NEXMO_CALL_ANSWER_URL = "https://raw.githubusercontent.com/nexmo-community/ncco-examples/gh-pages/first_call_speech.json";
 
             var results = Call.Do(new Call.CallCommand
             {
