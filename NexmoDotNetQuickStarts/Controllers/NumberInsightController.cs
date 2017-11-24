@@ -24,7 +24,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Basic(string number)
         {
-            var results = NumberInsight.RequestBasic(new NumberInsight.NumberInsightBasicRequest
+            var results = NumberInsight.RequestBasic(new NumberInsight.NumberInsightRequest
             {
                 number = number,
             });
@@ -60,7 +60,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Standard(string number)
         {
-            var results = NumberInsight.RequestStandard(new NumberInsight.NumberInsightBasicRequest()
+            var results = NumberInsight.RequestStandard(new NumberInsight.NumberInsightRequest()
             {
                 number = number,
             });
