@@ -24,17 +24,17 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Basic(string number)
         {
-            var results = NumberInsight.RequestBasic(new NumberInsight.NumberInsightBasicRequest
+            var results = NumberInsight.RequestBasic(new NumberInsight.NumberInsightRequest
             {
-                number = number,
+                Number = number,
             });
 
-            Session["requestID"] = results.request_id;
-            Session["iNumber"] = results.international_format_number;
-            Session["nNumber"] = results.national_format_number;
-            Session["status"] = results.status_message;
-            Session["country"] = results.country_name;
-            Session["countryCode"] = results.country_code;
+            Session["requestID"] = results.RequestId;
+            Session["iNumber"] = results.InternationalFormatNumber;
+            Session["nNumber"] = results.NationalFormatNumber;
+            Session["status"] = results.StatusMessage;
+            Session["country"] = results.CountryName;
+            Session["countryCode"] = results.CountryCode;
 
             return RedirectToAction("BasicResults");
         }
@@ -60,30 +60,30 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Standard(string number)
         {
-            var results = NumberInsight.RequestStandard(new NumberInsight.NumberInsightBasicRequest()
+            var results = NumberInsight.RequestStandard(new NumberInsight.NumberInsightRequest()
             {
-                number = number,
+                Number = number,
             });
-            Session["requestID"] =  results.request_id;
-            Session["iNumber"] = results.international_format_number;
-            Session["nNumber"] = results.national_format_number;
-            Session["country"] = results.country_name;
-            Session["countryCode"] = results.country_code;
-            Session["status"] = results.status_message;
-            if (results.original_carrier != null)
+            Session["requestID"] =  results.RequestId;
+            Session["iNumber"] = results.InternationalFormatNumber;
+            Session["nNumber"] = results.NationalFormatNumber;
+            Session["country"] = results.CallerName;
+            Session["countryCode"] = results.CountryCode;
+            Session["status"] = results.StatusMessage;
+            if (results.OriginalCarrier != null)
             {
-                Session["originalCarrierName"] = results.original_carrier.name;
-                Session["originalCarrierCode"] = results.original_carrier.network_code;
-                Session["originalCarrierType"] = results.original_carrier.network_type;
-                Session["originalCarrierCountry"] = results.original_carrier.country;
+                Session["originalCarrierName"] = results.OriginalCarrier.Name;
+                Session["originalCarrierCode"] = results.OriginalCarrier.NetworkCode;
+                Session["originalCarrierType"] = results.OriginalCarrier.NetworkType;
+                Session["originalCarrierCountry"] = results.OriginalCarrier.Country;
             }
-            if (results.current_carrier != null)
+            if (results.CurrentCarrier != null)
             {
 
-                Session["currentCarrierName"] = results.current_carrier.name;
-                Session["currentCarrierCode"] = results.current_carrier.network_code;
-                Session["currentCarrierType"] = results.current_carrier.network_type;
-                Session["currentCarrierCountry"] = results.current_carrier.country;
+                Session["currentCarrierName"] = results.CurrentCarrier.Name;
+                Session["currentCarrierCode"] = results.CurrentCarrier.NetworkCode;
+                Session["currentCarrierType"] = results.CurrentCarrier.NetworkType;
+                Session["currentCarrierCountry"] = results.CurrentCarrier.Country;
             }
 
             return RedirectToAction("StandardResults");
@@ -106,6 +106,75 @@ namespace NexmoDotNetQuickStarts.Controllers
             ViewBag.originalCarrierCode = Session["originalCarrierCode"];
             ViewBag.originalCarrierType = Session["originalCarrierType"];
             ViewBag.originalCarrierCountry = Session["originalCarrierCountry"];
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Advanced()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Advanced(string number)
+        {
+            var results = NumberInsight.RequestAdvanced(new NumberInsight.NumberInsightRequest()
+            {
+                Number = number,
+            });
+            Session["requestID"] = results.RequestId;
+            Session["iNumber"] = results.InternationalFormatNumber;
+            Session["nNumber"] = results.NationalFormatNumber;
+            Session["country"] = results.CallerName;
+            Session["countryCode"] = results.CountryCode;
+            Session["status"] = results.StatusMessage;
+            if (results.OriginalCarrier != null)
+            {
+                Session["originalCarrierName"] = results.OriginalCarrier.Name;
+                Session["originalCarrierCode"] = results.OriginalCarrier.NetworkCode;
+                Session["originalCarrierType"] = results.OriginalCarrier.NetworkType;
+                Session["originalCarrierCountry"] = results.OriginalCarrier.Country;
+            }
+            if (results.CurrentCarrier != null)
+            {
+
+                Session["currentCarrierName"] = results.CurrentCarrier.Name;
+                Session["currentCarrierCode"] = results.CurrentCarrier.NetworkCode;
+                Session["currentCarrierType"] = results.CurrentCarrier.NetworkType;
+                Session["currentCarrierCountry"] = results.CurrentCarrier.Country;
+            }
+
+            
+            Session["validNumber"] = results.NumberValidity;
+            Session["ported"] = results.PortedStatus;
+            Session["reachable"] = results.NumberReachability;
+            Session["roaming"] = results.RoamingInformation.status;
+
+
+            return RedirectToAction("AdvancedResults");
+        }
+
+        [HttpGet]
+        public ActionResult AdvancedResults()
+        {
+            ViewBag.requestID = Session["requestID"];
+            ViewBag.iNumber = Session["iNumber"];
+            ViewBag.nNumber = Session["nNumber"];
+            ViewBag.status = Session["status"];
+            ViewBag.country = Session["country"];
+            ViewBag.countryCode = Session["countryCode"];
+            ViewBag.currentCarrierName = Session["currentCarrierName"];
+            ViewBag.currentCarrierCode = Session["currentCarrierCode"];
+            ViewBag.currentCarrierType = Session["currentCarrierType"];
+            ViewBag.currentCarrierCountry = Session["currentCarrierCountry"];
+            ViewBag.originalCarrierName = Session["originalCarrierName"];
+            ViewBag.originalCarrierCode = Session["originalCarrierCode"];
+            ViewBag.originalCarrierType = Session["originalCarrierType"];
+            ViewBag.originalCarrierCountry = Session["originalCarrierCountry"];
+            ViewBag.validNumber = Session["validNumber"];
+            ViewBag.ported = Session["ported"];
+            ViewBag.reachable = Session["reachable"];
+            ViewBag.roaming = Session["roaming"];
             return View();
         }
 
