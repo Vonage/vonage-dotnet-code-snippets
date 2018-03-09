@@ -11,8 +11,23 @@ namespace NexmoDotNetQuickStarts.Controllers
     
         public class SMSController : Controller
         {
+        public Client Client
+        {
+            get
+            {
+                return new Client(creds: new Nexmo.Api.Request.Credentials
+                {
+                    ApiKey = "NEXMO_API_KEY",
+                    ApiSecret = "NEXMO_API_SECRET"
+                });
+            }
 
-            public ActionResult Index()
+            set
+            {
+            }
+        }
+
+        public ActionResult Index()
             {
                 return View();
             }
@@ -25,14 +40,14 @@ namespace NexmoDotNetQuickStarts.Controllers
             
             [System.Web.Mvc.HttpPost]
             public ActionResult Send(string to, string text)
-            {
-                var NEXMO_FROM_NUMBER = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"];
+            {   
                 var NEXMO_TO_NUMBER = to;
+            
 
-                var results = SMS.Send(new SMS.SMSRequest
+                var results = Client.SMS.Send(request: new SMS.SMSRequest
                 {
 
-                    from = NEXMO_FROM_NUMBER,
+                    from = "NEXMO_FROM_NUMBER",
                     to = NEXMO_TO_NUMBER,
                     text = "Hello, I'm an SMS sent to you using Nexmo"
                 });

@@ -9,6 +9,22 @@ namespace NexmoDotNetQuickStarts.Controllers
 {
     public class NumberInsightController : Controller
     {
+        public Client Client
+        {
+            get
+            {
+                return new Client(creds: new Nexmo.Api.Request.Credentials
+                {
+                    ApiKey = "NEXMO_API_KEY",
+                    ApiSecret = "NEXMO_API_SECRET"
+                });
+            }
+
+            set
+            {
+            }
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -24,7 +40,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Basic(string number)
         {
-            var results = NumberInsight.RequestBasic(new NumberInsight.NumberInsightRequest
+            var results = Client.NumberInsight.RequestBasic(new NumberInsight.NumberInsightRequest
             {
                 Number = number,
             });
@@ -60,7 +76,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Standard(string number)
         {
-            var results = NumberInsight.RequestStandard(new NumberInsight.NumberInsightRequest()
+            var results = Client.NumberInsight.RequestStandard(new NumberInsight.NumberInsightRequest()
             {
                 Number = number,
             });
@@ -118,7 +134,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult Advanced(string number)
         {
-            var results = NumberInsight.RequestAdvanced(new NumberInsight.NumberInsightRequest()
+            var results = Client.NumberInsight.RequestAdvanced(new NumberInsight.NumberInsightRequest()
             {
                 Number = number,
             });

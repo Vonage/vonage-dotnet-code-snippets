@@ -6,6 +6,22 @@ namespace NexmoDotNetQuickStarts.Controllers
 {
     public class SearchController : Controller
     {
+        public Client Client
+        {
+            get
+            {
+                return new Client(creds: new Nexmo.Api.Request.Credentials
+                {
+                    ApiKey = "NEXMO_API_KEY",
+                    ApiSecret = "NEXMO_API_SECRET"
+                });
+            }
+
+            set
+            {
+            }
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -20,7 +36,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult SearchMessage(string messageID)
         {
-            var message = Search.GetMessage(messageID);
+            var message = Client.Search.GetMessage(messageID);
             if (message.messageId != null)
             {
                 ViewData.Add("message", message);
@@ -43,7 +59,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             string date = rejectionDate.Year + "-" + rejectionDate.Month + "-" + rejectionDate.Day;
 
-            var msgs = Search.GetRejections(new Search.SearchRequest
+            var msgs = Client.Search.GetRejections(new Search.SearchRequest
             {
                 date = date,
                 to = number
