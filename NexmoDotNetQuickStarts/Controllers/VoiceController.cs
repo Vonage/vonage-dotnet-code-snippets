@@ -42,7 +42,6 @@ namespace NexmoDotNetQuickStarts.Controllers
         public ActionResult MakeCall(string to)
         {
             var NEXMO_TO_NUMBER = to;
-            var NEXMO_CALL_ANSWER_URL = "https://nexmo-community.github.io/ncco-examples/first_call_talk.json";
 
             var results = Client.Call.Do(new Call.CallCommand
             {
@@ -60,7 +59,7 @@ namespace NexmoDotNetQuickStarts.Controllers
                 },
                 answer_url = new[]
                 {
-                    NEXMO_CALL_ANSWER_URL
+                    "https://nexmo-community.github.io/ncco-examples/first_call_talk.json"
                 }
             });
             var result = new HttpStatusCodeResult(200);
