@@ -1,4 +1,5 @@
 ﻿using Nexmo.Api;
+using NexmoDotNetQuickStarts.Authentication;
 using System;
 using System.Web.Mvc;
 
@@ -6,20 +7,11 @@ namespace NexmoDotNetQuickStarts.Controllers
 {
     public class SearchController : Controller
     {
-        public Client Client
+        public Client Client { get; set; }
+        public SearchController()
         {
-            get
-            {
-                return new Client(creds: new Nexmo.Api.Request.Credentials
-                {
-                    ApiKey = "NEXMO_API_KEY",
-                    ApiSecret = "NEXMO_API_SECRET"
-                });
-            }
-
-            set
-            {
-            }
+            BasicAuth Auth = new BasicAuth("NEXMO_API_KEY", "NEXMO_API_SECRET");
+            Client = new Client(Auth.Creds);
         }
 
         [HttpGet]
@@ -27,7 +19,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         {
             return View();
         }
-        // GET: /<controller>/
+        
         [HttpGet]
         public ActionResult SearchMessage()
         {

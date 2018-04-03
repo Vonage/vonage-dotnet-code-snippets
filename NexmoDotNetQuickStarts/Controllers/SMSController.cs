@@ -1,33 +1,16 @@
 ﻿using Nexmo.Api;
-using System.Web.Mvc;
+using NexmoDotNetQuickStarts.Authentication;
 using System.Diagnostics;
 using System.Web.Http;
-using Newtonsoft.Json;
-using System.IO;
+using System.Web.Mvc;
 
 namespace NexmoDotNetQuickStarts.Controllers
 {
     // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-    
-        public class SMSController : Controller
-        {
-        public Client Client
-        {
-            get
-            {
-                return new Client(creds: new Nexmo.Api.Request.Credentials
-                {
-                    ApiKey = "NEXMO_API_KEY",
-                    ApiSecret = "NEXMO_API_SECRET"
-                });
-            }
 
-            set
-            {
-            }
-        }
-
-        public ActionResult Index()
+    public class SMSController : Controller
+        {
+            public ActionResult Index()
             {
                 return View();
             }
@@ -41,15 +24,15 @@ namespace NexmoDotNetQuickStarts.Controllers
             [System.Web.Mvc.HttpPost]
             public ActionResult Send(string to, string text)
             {   
-                var NEXMO_TO_NUMBER = to;
-            
+                var TO_NUMBER = to;
+                BasicAuth Auth = new BasicAuth("NEXMO_API_KEY", "NEXMO_API_SECRET");
+                Client Client = new Client(Auth.Creds);
 
                 var results = Client.SMS.Send(request: new SMS.SMSRequest
                 {
-
-                    from = "NEXMO_FROM_NUMBER",
-                    to = NEXMO_TO_NUMBER,
-                    text = "Hello, I'm an SMS sent to you using Nexmo"
+                    from = "Acme Inc",
+                    to = TO_NUMBER,
+                    text = "A test SMS sent using the Nexmo SMS API"
                 });
                 return View("Index");
             }

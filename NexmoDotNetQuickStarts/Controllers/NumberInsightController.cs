@@ -1,4 +1,5 @@
 ﻿using Nexmo.Api;
+using NexmoDotNetQuickStarts.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,11 @@ namespace NexmoDotNetQuickStarts.Controllers
 {
     public class NumberInsightController : Controller
     {
-        public Client Client
+        public Client Client { get; set; }
+        public NumberInsightController()
         {
-            get
-            {
-                return new Client(creds: new Nexmo.Api.Request.Credentials
-                {
-                    ApiKey = "NEXMO_API_KEY",
-                    ApiSecret = "NEXMO_API_SECRET"
-                });
-            }
-
-            set
-            {
-            }
+            BasicAuth Auth = new BasicAuth("NEXMO_API_KEY", "NEXMO_API_SECRET");
+            Client = new Client(Auth.Creds);
         }
 
         [HttpGet]
@@ -30,7 +22,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         {
             return View();
         }
-        // GET: /<controller>/
+        
         [HttpGet]
         public ActionResult Basic()
         {
