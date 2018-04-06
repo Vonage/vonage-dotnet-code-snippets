@@ -1,5 +1,4 @@
 ﻿using Nexmo.Api;
-using NexmoDotNetQuickStarts.Authentication;
 using System.Web.Mvc;
 
 namespace NexmoDotNetQuickStarts.Controllers
@@ -7,20 +6,27 @@ namespace NexmoDotNetQuickStarts.Controllers
     public class VerifyController : Controller
     {
         public Client Client { get; set; }
+
         public VerifyController()
         {
-            BasicAuth Auth = new BasicAuth("NEXMO_API_KEY", "NEXMO_API_SECRET");
-            Client = new Client(Auth.Creds);
+            Client = new Client(creds: new Nexmo.Api.Request.Credentials
+            {
+                ApiKey = "NEXMO_API_KEY",
+                ApiSecret = "NEXMO_API_SECRET"
+            });
         }
+
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult Start()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Start(string to)
         {
@@ -36,11 +42,13 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             return RedirectToAction("Check");
         }
+
         [HttpGet]
         public ActionResult Check()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Check(string code)
         {
@@ -61,11 +69,13 @@ namespace NexmoDotNetQuickStarts.Controllers
             return View();
 
         }
+
         [HttpGet]
         public ActionResult Search()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Search(string requestID)
         {

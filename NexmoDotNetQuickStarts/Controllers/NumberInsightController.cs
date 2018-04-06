@@ -1,9 +1,4 @@
 ﻿using Nexmo.Api;
-using NexmoDotNetQuickStarts.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace NexmoDotNetQuickStarts.Controllers
@@ -11,10 +6,14 @@ namespace NexmoDotNetQuickStarts.Controllers
     public class NumberInsightController : Controller
     {
         public Client Client { get; set; }
+
         public NumberInsightController()
         {
-            BasicAuth Auth = new BasicAuth("NEXMO_API_KEY", "NEXMO_API_SECRET");
-            Client = new Client(Auth.Creds);
+            Client = new Client(creds: new Nexmo.Api.Request.Credentials
+            {
+                ApiKey = "NEXMO_API_KEY",
+                ApiSecret = "NEXMO_API_SECRET"
+            });
         }
 
         [HttpGet]
@@ -56,6 +55,7 @@ namespace NexmoDotNetQuickStarts.Controllers
             ViewBag.status = Session["status"];
             ViewBag.country = Session["country"];
             ViewBag.countryCode = Session["countryCode"];
+
             return View();
         }
 
@@ -65,6 +65,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Standard(string number)
         {
@@ -72,12 +73,14 @@ namespace NexmoDotNetQuickStarts.Controllers
             {
                 Number = number,
             });
+
             Session["requestID"] =  results.RequestId;
             Session["iNumber"] = results.InternationalFormatNumber;
             Session["nNumber"] = results.NationalFormatNumber;
             Session["country"] = results.CallerName;
             Session["countryCode"] = results.CountryCode;
             Session["status"] = results.StatusMessage;
+
             if (results.OriginalCarrier != null)
             {
                 Session["originalCarrierName"] = results.OriginalCarrier.Name;
@@ -114,6 +117,7 @@ namespace NexmoDotNetQuickStarts.Controllers
             ViewBag.originalCarrierCode = Session["originalCarrierCode"];
             ViewBag.originalCarrierType = Session["originalCarrierType"];
             ViewBag.originalCarrierCountry = Session["originalCarrierCountry"];
+
             return View();
         }
 
@@ -130,12 +134,14 @@ namespace NexmoDotNetQuickStarts.Controllers
             {
                 Number = number,
             });
+
             Session["requestID"] = results.RequestId;
             Session["iNumber"] = results.InternationalFormatNumber;
             Session["nNumber"] = results.NationalFormatNumber;
             Session["country"] = results.CallerName;
             Session["countryCode"] = results.CountryCode;
             Session["status"] = results.StatusMessage;
+
             if (results.OriginalCarrier != null)
             {
                 Session["originalCarrierName"] = results.OriginalCarrier.Name;
@@ -151,13 +157,11 @@ namespace NexmoDotNetQuickStarts.Controllers
                 Session["currentCarrierType"] = results.CurrentCarrier.NetworkType;
                 Session["currentCarrierCountry"] = results.CurrentCarrier.Country;
             }
-
-            
+           
             Session["validNumber"] = results.NumberValidity;
             Session["ported"] = results.PortedStatus;
             Session["reachable"] = results.NumberReachability;
             Session["roaming"] = results.RoamingInformation.status;
-
 
             return RedirectToAction("AdvancedResults");
         }
@@ -183,8 +187,8 @@ namespace NexmoDotNetQuickStarts.Controllers
             ViewBag.ported = Session["ported"];
             ViewBag.reachable = Session["reachable"];
             ViewBag.roaming = Session["roaming"];
+
             return View();
         }
-
     }
 }

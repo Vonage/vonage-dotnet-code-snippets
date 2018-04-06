@@ -1,9 +1,6 @@
 ﻿using Nexmo.Api;
 using Nexmo.Api.Voice;
-using NexmoDotNetQuickStarts.Authentication;
-using System;
 using System.Diagnostics;
-using System.IO;
 using System.Web.Mvc;
 
 namespace NexmoDotNetQuickStarts.Controllers
@@ -11,22 +8,29 @@ namespace NexmoDotNetQuickStarts.Controllers
     public class VoiceController : Controller
     {
         public Client Client { get; set; }
+
         public VoiceController()
         {
-            FullAuth Auth = new FullAuth("NEXMO_API_KEY", "NEXMO_API_SECRET", 
-                                         "NEXMO_APPLICATION_ID", "NEXMO_APPLICATION_PRIVATE_KEY");
-            Client = new Client(Auth.Creds);
+            Client = new Client(creds: new Nexmo.Api.Request.Credentials
+            {
+                ApiKey = "NEXMO_API_KEY",
+                ApiSecret = "NEXMO_API_SECRET",
+                ApplicationId = "NEXMO_APPLICATION_ID",
+                ApplicationKey = "NEXMO_APPLICATION_PRIVATE_KEY"
+            });
         }
 
         public ActionResult Index()
         {
            return View();
         }
+
         [HttpGet]
         public ActionResult MakeCall()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult MakeCall(string to)
         {
@@ -64,8 +68,10 @@ namespace NexmoDotNetQuickStarts.Controllers
             {
                 Debug.WriteLine(results[i].conversation_uuid);
             }
+
             ViewData.Add("results", results);
             ViewData.Add("count", results.Count);
+
             return View();
         }
 
@@ -74,11 +80,13 @@ namespace NexmoDotNetQuickStarts.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult GetCall(string id)
         {
             var call = Client.Call.Get(id);
             ViewData.Add("call", call);
+
             return View();
         }
     }
