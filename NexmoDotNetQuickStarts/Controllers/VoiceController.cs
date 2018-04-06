@@ -1,48 +1,41 @@
 ﻿using Nexmo.Api;
 using Nexmo.Api.Voice;
-using System;
 using System.Diagnostics;
-using System.IO;
 using System.Web.Mvc;
 
 namespace NexmoDotNetQuickStarts.Controllers
 {
     public class VoiceController : Controller
     {
-        public Client Client
+        public Client Client { get; set; }
+
+        public VoiceController()
         {
-            get
+            Client = new Client(creds: new Nexmo.Api.Request.Credentials
             {
-                var NEXMO_APPLICATION_PRIVATE_KEY = System.IO.File.ReadAllText("PATH_TO_KEY");
-
-                return new Client(creds: new Nexmo.Api.Request.Credentials
-                {
-                    ApiKey = "NEXMO_API_KEY",
-                    ApiSecret = "NEXMO_API_SECRET",
-                    ApplicationId = "NEXMO_APPLICATION_ID",
-                    ApplicationKey = NEXMO_APPLICATION_PRIVATE_KEY
-                });
-            }
-
-            set
-            {
-            }
+                ApiKey = "NEXMO_API_KEY",
+                ApiSecret = "NEXMO_API_SECRET",
+                ApplicationId = "NEXMO_APPLICATION_ID",
+                ApplicationKey = "NEXMO_APPLICATION_PRIVATE_KEY"
+            });
         }
 
         public ActionResult Index()
         {
-            return View();
+           return View();
         }
+
         [HttpGet]
         public ActionResult MakeCall()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult MakeCall(string to)
         {
-            var NEXMO_TO_NUMBER = to;
-            var NEXMO_CALL_ANSWER_URL = "https://nexmo-community.github.io/ncco-examples/first_call_talk.json";
+            var TO_NUMBER = to;
+            var NEXMO_NUMBER = "NEXMO_NUMBER";
 
             var results = Client.Call.Do(new Call.CallCommand
             {
@@ -50,21 +43,20 @@ namespace NexmoDotNetQuickStarts.Controllers
                 {
                     new Call.Endpoint {
                         type = "phone",
-                        number = NEXMO_TO_NUMBER
+                        number = TO_NUMBER
                     }
                 },
                 from = new Call.Endpoint
                 {
                     type = "phone",
-                    number = "NEXMO_FROM_NUMBER"
+                    number = NEXMO_NUMBER
                 },
                 answer_url = new[]
                 {
-                    NEXMO_CALL_ANSWER_URL
+                    "https://developer.nexmo.com/ncco/tts.json"
                 }
             });
-            var result = new HttpStatusCodeResult(200);
-
+            
             return RedirectToAction("Index", "Voice");
         }
 
@@ -76,8 +68,10 @@ namespace NexmoDotNetQuickStarts.Controllers
             {
                 Debug.WriteLine(results[i].conversation_uuid);
             }
+
             ViewData.Add("results", results);
             ViewData.Add("count", results.Count);
+
             return View();
         }
 
@@ -86,11 +80,13 @@ namespace NexmoDotNetQuickStarts.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult GetCall(string id)
         {
             var call = Client.Call.Get(id);
             ViewData.Add("call", call);
+
             return View();
         }
     }

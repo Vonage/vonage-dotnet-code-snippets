@@ -286,6 +286,8 @@
     <Compile Include="App_Data\App_Start\BundleConfig.cs" />
     <Compile Include="App_Data\App_Start\FilterConfig.cs" />
     <Compile Include="App_Data\App_Start\RouteConfig.cs" />
+    <Compile Include="Authentication\BasicAuth.cs" />
+    <Compile Include="Authentication\FullAuth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NumberInsightController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
