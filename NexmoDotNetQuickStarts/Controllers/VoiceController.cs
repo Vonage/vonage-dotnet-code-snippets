@@ -70,7 +70,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             ViewData.Add("results", results);
           
-            return View();
+            return RedirectToAction("MakeCall");
         }
 
         [HttpGet]
