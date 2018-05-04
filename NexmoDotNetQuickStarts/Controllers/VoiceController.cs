@@ -60,7 +60,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             Session["UUID"] = results.uuid;
             
-            return View();
+            return RedirectToAction("MakeCall"); ;
         }
 
         [HttpGet]
@@ -70,7 +70,7 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             ViewData.Add("results", results);
           
-            return RedirectToAction("MakeCall");
+            return View();
         }
 
         [HttpGet]
