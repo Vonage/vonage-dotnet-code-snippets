@@ -154,5 +154,50 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             return RedirectToAction("MakeCall");
         }
+
+        [HttpPost]
+        public ActionResult PlayttsToCall()
+        {
+            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var TEXT = "This is a text to speech sample";
+
+            var result = Client.Call.BeginTalk(NEXMO_CALL_UUID, new Call.TalkCommand
+            {
+                text = TEXT,
+                voice_name = "Kimberly"
+            });
+
+            return RedirectToAction("MakeCall");
+        }
+
+        [HttpPost]
+        public ActionResult PlayAudioStreamToCall()
+        {
+            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+
+            var result = Client.Call.BeginStream(NEXMO_CALL_UUID, new Call.StreamCommand
+            {
+                stream_url = new[]
+                {
+                    "https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3"
+                }
+            });
+
+            return RedirectToAction("MakeCall");
+        }
+
+        [HttpPost]
+        public ActionResult PlayDTMFToCall()
+        {
+            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var DIGITS = "1234";
+
+            var result = Client.Call.SendDtmf(NEXMO_CALL_UUID, new Call.DtmfCommand
+            {
+                digits= DIGITS
+            });
+
+            return RedirectToAction("MakeCall");
+        }
     }
 }
