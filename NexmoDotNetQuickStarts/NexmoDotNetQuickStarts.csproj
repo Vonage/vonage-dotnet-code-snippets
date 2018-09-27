@@ -373,6 +373,7 @@
     <Content Include="Views\Voice\MakeCall.cshtml" />
     <Content Include="Views\NumberInsight\Advanced.cshtml" />
     <Content Include="Views\NumberInsight\AdvancedResults.cshtml" />
+    <Content Include="Views\Verify\TriggerNext.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
