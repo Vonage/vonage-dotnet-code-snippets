@@ -374,6 +374,7 @@
     <Content Include="Views\NumberInsight\Advanced.cshtml" />
     <Content Include="Views\NumberInsight\AdvancedResults.cshtml" />
     <Content Include="Views\Verify\TriggerNext.cshtml" />
+    <Content Include="Views\SMS\SendUnicodeSMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
