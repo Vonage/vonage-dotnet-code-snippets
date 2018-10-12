@@ -53,8 +53,10 @@ namespace NexmoDotNetQuickStarts.Controllers
         [System.Web.Mvc.HttpPost]
         public ActionResult SendUnicodeSMS(string to, string text)
         {
+        
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
             var TO_NUMBER = to;
-
+            
             var results = Client.SMS.Send(request: new SMS.SMSRequest
             {
                 from = "Acme Inc",
