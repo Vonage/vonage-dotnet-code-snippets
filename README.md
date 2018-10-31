@@ -14,4 +14,4 @@ Run the app.
 Please raise an issue to request an example that isn't present within the quickstart. Pull requests will be gratefully received.
 
 # Licenses
-The code samples in this repo is under MIT
+The code samples in this repo is under the MIT license.
