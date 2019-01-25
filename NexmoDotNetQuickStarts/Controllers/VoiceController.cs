@@ -82,9 +82,9 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult GetCall(string id)
         {
-            var NEXMO_CALL_UUID = id;
+            var UUID = id;
 
-            var call = Client.Call.Get(NEXMO_CALL_UUID);
+            var call = Client.Call.Get(UUID);
             ViewData.Add("call", call);
 
             return View();
@@ -93,11 +93,11 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult MuteCall(string id)
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
 
-            var result = Client.Call.Edit(NEXMO_CALL_UUID, new Call.CallEditCommand
+            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
-                action = "mute"
+                Action = "mute"
             });
 
             return RedirectToAction("MakeCall");
@@ -106,11 +106,11 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult UnmuteCall(string id)
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
 
-            var result = Client.Call.Edit(NEXMO_CALL_UUID, new Call.CallEditCommand
+            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
-                action = "unmute"
+                Action = "unmute"
             });
 
             return RedirectToAction("MakeCall");
@@ -119,11 +119,11 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult EarmuffCall(string id)
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
 
-            var result = Client.Call.Edit(NEXMO_CALL_UUID, new Call.CallEditCommand
+            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
-                action = "earmuff"
+                Action = "earmuff"
             });
 
             return RedirectToAction("MakeCall");
@@ -132,24 +132,24 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult UnearmuffCall(string id)
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
 
-            var result = Client.Call.Edit(NEXMO_CALL_UUID, new Call.CallEditCommand
+            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
-                action = "unearmuff"
+                Action = "unearmuff"
             });
 
-            return RedirectToAction("MakeCall");
-        }
+    return RedirectToAction("MakeCall");
+}
 
         [HttpPost]
         public ActionResult HangupCall()
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
 
-            var result = Client.Call.Edit(NEXMO_CALL_UUID, new Call.CallEditCommand
+            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
-                action = "hangup"
+                Action = "hangup"
             });
 
             return RedirectToAction("MakeCall");
@@ -158,10 +158,10 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult PlayttsToCall()
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
             var TEXT = "This is a text to speech sample";
 
-            var result = Client.Call.BeginTalk(NEXMO_CALL_UUID, new Call.TalkCommand
+            var result = Client.Call.BeginTalk(UUID, new Call.TalkCommand
             {
                 text = TEXT,
                 voice_name = "Kimberly"
@@ -173,14 +173,14 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult PlayAudioStreamToCall()
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
 
-            var result = Client.Call.BeginStream(NEXMO_CALL_UUID, new Call.StreamCommand
+            var result = Client.Call.BeginStream(UUID, new Call.StreamCommand
             {
                 stream_url = new[]
                 {
-                    "https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3"
-                }
+                        "https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3"
+                    }
             });
 
             return RedirectToAction("MakeCall");
@@ -189,12 +189,12 @@ namespace NexmoDotNetQuickStarts.Controllers
         [HttpPost]
         public ActionResult PlayDTMFToCall()
         {
-            var NEXMO_CALL_UUID = Session["UUID"].ToString();
+            var UUID = Session["UUID"].ToString();
             var DIGITS = "1234";
 
-            var result = Client.Call.SendDtmf(NEXMO_CALL_UUID, new Call.DtmfCommand
+            var result = Client.Call.SendDtmf(UUID, new Call.DtmfCommand
             {
-                digits= DIGITS
+                digits = DIGITS
             });
 
             return RedirectToAction("MakeCall");
