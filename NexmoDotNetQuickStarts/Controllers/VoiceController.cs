@@ -199,5 +199,23 @@ namespace NexmoDotNetQuickStarts.Controllers
 
             return RedirectToAction("MakeCall");
         }
+
+        [HttpPost]
+        public ActionResult TransferCall()
+        {
+            var UUID = Session["UUID"].ToString();
+
+            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
+            {
+                Action = "transfer",
+                Destination = new Call.Destination
+                {
+                    Type = "ncco",
+                    Url = new[] { "https://developer.nexmo.com/ncco/transfer.json" }
+                }
+            });
+
+            return RedirectToAction("MakeCall");
+        }
     }
 }
