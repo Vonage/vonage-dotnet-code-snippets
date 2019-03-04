@@ -125,7 +125,7 @@ namespace NexmoDotNetQuickStarts.Controllers
                 Action = "earmuff"
             });
 
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
 
             var unearmuffresult = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
