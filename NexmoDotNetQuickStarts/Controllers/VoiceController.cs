@@ -1,7 +1,6 @@
 ﻿using Nexmo.Api;
 using Nexmo.Api.Voice;
-using System;
-using System.Diagnostics;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace NexmoDotNetQuickStarts.Controllers
@@ -124,6 +123,13 @@ namespace NexmoDotNetQuickStarts.Controllers
             var result = Client.Call.Edit(UUID, new Call.CallEditCommand
             {
                 Action = "earmuff"
+            });
+
+            Thread.Sleep(5000);
+
+            var unearmuffresult = Client.Call.Edit(UUID, new Call.CallEditCommand
+            {
+                Action = "unearmuff"
             });
 
             return RedirectToAction("MakeCall");
