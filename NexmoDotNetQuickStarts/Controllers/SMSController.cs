@@ -31,7 +31,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         }
 
         [System.Web.Mvc.HttpPost]
-        public ActionResult Send(string to, string text)
+        public ActionResult Send(string to)
         {
             var TO_NUMBER = to;
 
@@ -41,6 +41,15 @@ namespace NexmoDotNetQuickStarts.Controllers
                 to = TO_NUMBER,
                 text = "A test SMS sent using the Nexmo SMS API"
             });
+
+            if (results.messages.Count >= 1)
+            {
+                if (results.messages[0].status == "0")
+                    Debug.WriteLine("Message sent successfully.");
+                else 
+                    Debug.WriteLine($"Message failed with error: {results.messages[0].error_text}");
+            }
+
             return View("Index");
         }
 
