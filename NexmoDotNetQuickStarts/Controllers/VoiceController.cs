@@ -1,4 +1,5 @@
-﻿using Nexmo.Api;
+﻿using Newtonsoft.Json.Linq;
+using Nexmo.Api;
 using Nexmo.Api.Voice;
 using System.Threading;
 using System.Web.Mvc;
@@ -36,7 +37,7 @@ namespace NexmoDotNetQuickStarts.Controllers
         {
             var TO_NUMBER = to;
             var NEXMO_NUMBER = "NEXMO_NUMBER";
-            
+
             var results = Client.Call.Do(new Call.CallCommand
             {
                 to = new[]
@@ -58,8 +59,48 @@ namespace NexmoDotNetQuickStarts.Controllers
             });
 
             Session["UUID"] = results.uuid;
-            
+
             return RedirectToAction("MakeCall"); ;
+        }
+
+        [HttpPost]
+        public ActionResult MakeCallWithNCCO(string to)
+        {
+            var TO_NUMBER = to;
+            var NEXMO_NUMBER = "NEXMO_NUMBER";
+
+            var results = Client.Call.Do(new Call.CallCommand
+            {
+                to = new[]
+                {
+                    new Call.Endpoint {
+                        type = "phone",
+                        number = TO_NUMBER
+                    }
+                },
+                from = new Call.Endpoint
+                {
+                    type = "phone",
+                    number = NEXMO_NUMBER
+                },
+
+                Ncco = CreateNCCO()
+            });
+
+            Session["UUID"] = results.uuid;
+
+            return RedirectToAction("MakeCall"); ;
+        }
+
+        private JArray CreateNCCO()
+        {
+            dynamic TalkNCCO = new JObject();
+            TalkNCCO.action = "talk";
+            TalkNCCO.text = "This is a text to speech call from Nexmo";
+
+            JArray ncco = new JArray();
+            ncco.Add(TalkNCCO);
+            return ncco;
         }
 
         [HttpGet]
