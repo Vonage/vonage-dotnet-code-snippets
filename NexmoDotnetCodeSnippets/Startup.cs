@@ -33,7 +33,7 @@ namespace NexmoDotnetCodeSnippets
 
             services.AddSession(options => 
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
