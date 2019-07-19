@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NexmoDotNetQuickStarts", "NexmoDotNetQuickStarts\NexmoDotNetQuickStarts.csproj", "{92B5795A-0B4C-47BF-9529-68C0309709BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NexmoVoiceASPNetCoreQuickStarts", "NexmoVoiceASPNetCoreQuickStarts\NexmoVoiceASPNetCoreQuickStarts.csproj", "{768715DF-BF24-4473-AC79-5EEEF5B00000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NexmoVoiceASPNetCoreQuickStarts", "NexmoVoiceASPNetCoreQuickStarts\NexmoVoiceASPNetCoreQuickStarts.csproj", "{768715DF-BF24-4473-AC79-5EEEF5B00000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NexmoDotnetCodeSnippets", "NexmoDotnetCodeSnippets\NexmoDotnetCodeSnippets.csproj", "{192B371E-8AB8-465D-B5BE-1E884A1F0A96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{768715DF-BF24-4473-AC79-5EEEF5B00000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{768715DF-BF24-4473-AC79-5EEEF5B00000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{768715DF-BF24-4473-AC79-5EEEF5B00000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192B371E-8AB8-465D-B5BE-1E884A1F0A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192B371E-8AB8-465D-B5BE-1E884A1F0A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192B371E-8AB8-465D-B5BE-1E884A1F0A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192B371E-8AB8-465D-B5BE-1E884A1F0A96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F05C356F-46B3-4A18-8149-37E2F71B5F01}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,102 @@
+﻿
+<header>
+    <h1>Code samples for using Nexmo Number Insights API</h1>
+    <h3>Learn how to get basic, standard and advanced information about a phone number</h3>
+</header>
+
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get Basic Insights</span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("Basic", "NumberInsights", FormMethod.Post))
+            {
+                <input type="text" name="number" id="number" placeholder="Phone number" style="height:30px" />
+                <input type="submit" value="Get more information" style="height:30px;" />
+            }
+        </div>
+        <div name=basicResults>
+            <h1>Number Insight Basic Results</h1>
+            <hr style="height:2px;border:none;color:#333;background-color:black" />
+            <h2>Request ID: @ViewBag.requestID</h2>
+            <h2>Status: @ViewBag.status</h2>
+            <h2>International Number: @ViewBag.iNumber</h2>
+            <h2>National Number: @ViewBag.nNumber</h2>
+            <h2>Country: @ViewBag.country</h2>
+            <h2>Country Code: @ViewBag.countryCode</h2>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get Standard Insights</span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("Standard", "NumberInsights", FormMethod.Post))
+            {
+                <input type="text" name="number" id="number" placeholder="Phone number" style="height:30px" />
+                <input type="submit" value="Get more information" style="height:30px;" />
+            }
+        </div>
+        <div name=standardResults>
+            <h1>Number Insight Standard Results</h1>
+            <hr style="height:2px; color:black" />
+            <h2>Request ID: @ViewBag.requestID</h2>
+            <h2>Status: @ViewBag.status</h2>
+            <hr style="border:2px solid black" />
+            <h2>International Number: @ViewBag.iNumber</h2>
+            <h2>National Number: @ViewBag.nNumber</h2>
+            <h2>Country: @ViewBag.country</h2>
+            <h2>Country Code: @ViewBag.countryCode</h2>
+            <hr style="border:2px solid black" />
+            <h2>Current Carrier Name: @ViewBag.currentCarrierName</h2>
+            <h2>Current Carrier Code: @ViewBag.currentCarrierCode</h2>
+            <h2>Current Carrier Type: @ViewBag.currentCarrierType</h2>
+            <h2>Current Carrier Country: @ViewBag.currentCarrierCountry</h2>
+            <hr style="border:2px solid black" />
+            <h2>Original Carrier Name: @ViewBag.originalCarrierName</h2>
+            <h2>Original Carrier Code: @ViewBag.originalCarrierCode</h2>
+            <h2>Original Carrier Type: @ViewBag.originalCarrierType</h2>
+            <h2>Original Carrier Country: @ViewBag.originalCarrierCountry</h2>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get Advanced Insights</span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("Advanced", "NumberInsights", FormMethod.Post))
+            {
+                <input type="text" name="number" id="number" placeholder="Phone number" style="height:30px" />
+                <input type="submit" value="Get more information" style="height:30px;" />
+            }
+        </div>
+        <div name=advancedResults>
+            <h1>Number Insight Advanced Results</h1>
+            <hr style="height:2px; color:black" />
+            <h2>Request ID: @ViewBag.requestID</h2>
+            <h2>Status: @ViewBag.status</h2>
+            <hr style="border:2px solid black" />
+            <h2>International Number: @ViewBag.iNumber</h2>
+            <h2>National Number: @ViewBag.nNumber</h2>
+            <h2>Country: @ViewBag.country</h2>
+            <h2>Country Code: @ViewBag.countryCode</h2>
+            <hr style="border:2px solid black" />
+            <h2>Current Carrier Name: @ViewBag.currentCarrierName</h2>
+            <h2>Current Carrier Code: @ViewBag.currentCarrierCode</h2>
+            <h2>Current Carrier Type: @ViewBag.currentCarrierType</h2>
+            <h2>Current Carrier Country: @ViewBag.currentCarrierCountry</h2>
+            <hr style="border:2px solid black" />
+            <h2>Original Carrier Name: @ViewBag.originalCarrierName</h2>
+            <h2>Original Carrier Code: @ViewBag.originalCarrierCode</h2>
+            <h2>Original Carrier Type: @ViewBag.originalCarrierType</h2>
+            <h2>Original Carrier Country: @ViewBag.originalCarrierCountry</h2>
+            <hr style="border:2px solid black" />
+            <h2>Number Validity: @ViewBag.validNumber</h2>
+            <h2>Number Portability: @ViewBag.ported</h2>
+            <h2>Number Reachability: @ViewBag.reachable</h2>
+            <h2>Roaming Information: @ViewBag.roaming</h2>
+        </div>
+    </div>
+</div>
+
