@@ -1,7 +1,109 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿<header>
+    <h1>Code samples for managing your Nexmo account</h1>
+    <h3>check your balance, configure the account-level settings, and rotate your API secrets for security purposes.</h3>
+</header>
 
-<h2>Index</h2>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get balance</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("GetAccountBalance", "Account", FormMethod.Post))
+            {
+                <input type="submit" value="Get account balance" style="height:30px;" />
+            }
+        </div>
+        <h2> @ViewBag.Balance</h2>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Configure your account</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("ConfigureAccount", "Account", FormMethod.Post))
+            {
+                <input type="text" name="smsCallbackUrl" id="smsCallbackUrl" placeholder="SMS callback url" style="height:30px" />
+                <input type="submit" value="Update URL" style="height:30px;" />
+            }
+            <h2>@ViewBag.result</h2>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Create a secret</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("CreateSecret", "Account", FormMethod.Post))
+            {
+                <input type="text" name="apiKey" id="apiKey" placeholder="Your API key" style="height:30px" />
+                <input type="text" name="newSecret" id="newSecret" placeholder="New secret" style="height:30px" />
 
+                <input type="submit" value="Create secret" style="height:30px;" />
+            }
+            <h2>@ViewBag.creationResult</h2>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Fetch a secret</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("FetchSecret", "Account", FormMethod.Post))
+            {
+                <input type="text" name="apiKey" id="apiKey" placeholder="Your API key" style="height:30px" />
+                <input type="text" name="secretId" id="secretId" placeholder="The secret Id" style="height:30px" />
+
+                <input type="submit" value="Get secret" style="height:30px;" />
+            }
+            <h2>@ViewBag.getResult</h2>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Revoke a secret</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("DeleteSecret", "Account", FormMethod.Post))
+            {
+                <input type="text" name="apiKey" id="apiKey" placeholder="Your API key" style="height:30px" />
+                <input type="text" name="secretId" id="secretId" placeholder="Your secret Id" style="height:30px" />
+
+                <input type="submit" value="Delete secret" style="height:30px;" />
+            }
+            <h2>@ViewBag.deleteResult</h2>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">List all secrets</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("GetAllSecrets", "Account", FormMethod.Post))
+            {
+                <input type="text" name="apiKey" id="apiKey" placeholder="Your API key" style="height:30px" />
+
+                <input type="submit" value="Get secrets" style="height:30px;" />
+            }
+
+            @{
+
+                for (int i = 0; i < ViewBag.count; i++)
+                {
+                    <div>
+                        <h4>Secret Id:  @ViewBag.listResults[i].Id</h4>
+                    </div>
+                    }
+                }
+        </div>
+</div>
