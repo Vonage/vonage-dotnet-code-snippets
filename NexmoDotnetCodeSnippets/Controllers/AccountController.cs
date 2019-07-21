@@ -13,15 +13,10 @@ namespace NexmoDotnetCodeSnippets.Controllers
 
         public AccountController()
         {
-            //Client = new Client(creds: new Nexmo.Api.Request.Credentials
-            //{
-            //    ApiKey = "NEXMO_API_KEY",
-            //    ApiSecret = "NEXMO_API_SECRET"
-            //});
             Client = new Client(creds: new Nexmo.Api.Request.Credentials
             {
-                ApiKey = "973c7ce2",
-                ApiSecret = "6245c2c8978923dc"
+                ApiKey = "NEXMO_API_KEY",
+                ApiSecret = "NEXMO_API_SECRET"
             });
         }
         public IActionResult Index()
