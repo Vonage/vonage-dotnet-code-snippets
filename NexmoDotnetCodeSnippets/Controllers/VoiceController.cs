@@ -65,7 +65,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
 
             HttpContext.Session.SetString(UIDD, results.uuid);
 
-            return RedirectToAction("MakeCall"); ;
+            return View("Index"); 
         }
 
         [HttpPost]
@@ -94,7 +94,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
 
             HttpContext.Session.SetString(UIDD, results.uuid);
 
-            return RedirectToAction("MakeCall"); ;
+            return View("Index");
         }
 
         private JArray CreateNCCO()
@@ -145,7 +145,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 Action = "mute"
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -158,7 +158,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 Action = "unmute"
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -178,7 +178,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 Action = "unearmuff"
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -191,7 +191,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 Action = "unearmuff"
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -204,7 +204,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 Action = "hangup"
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -219,7 +219,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 voice_name = "Kimberly"
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -235,7 +235,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                     }
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -249,7 +249,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 digits = DIGITS
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
 
         [HttpPost]
@@ -267,7 +267,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 }
             });
 
-            return RedirectToAction("MakeCall");
+            return View("Index");
         }
     }
 }

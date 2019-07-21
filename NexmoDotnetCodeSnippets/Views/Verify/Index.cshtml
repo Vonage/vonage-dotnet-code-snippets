@@ -12,8 +12,8 @@
             <div style="padding-top:10px">
                 @using (Html.BeginForm("Start", "Verify", FormMethod.Post))
                 {
-                    <input type="text" name="to" id="to" placeholder="Phone number " style="height:30px"/>
-                    <input type="submit" value="Verify" style="height:30px"/>
+                    <input type="text" name="to" id="to" placeholder="Phone number " style="height:30px" />
+                    <input type="submit" value="Verify" style="height:30px" />
                 }
             </div>
         </div>
@@ -33,7 +33,56 @@
                     using (Html.BeginForm("Check", "Verify", FormMethod.Post))
                     {
                         <input type="text" name="code" id="code" placeholder="code" style="height:30px" />
-                        <input type="submit" value="Check"  style="height:30px"/>
+                        <input type="submit" value="Check" style="height:30px" />
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div style="width:50%; padding-top:10px">
+        <div class="content">
+            <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+                <span style="vertical-align:central; text-align:center">Cancel Verification</span>
+            </div>
+            <div style="padding-top:10px">
+                @using (Html.BeginForm("Cancel", "Verify", FormMethod.Post))
+                {
+                        <input type="text" name="requestID" id="requestID" placeholder="request ID" style="height:30px" />
+                        <input type="submit" value="Cancel" style="height:30px" />
+                }
+            </div>
+        </div>
+    </div>
+    <div style="width:50%; padding-top:10px">
+        <div class="content">
+            <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+                <span style="vertical-align:central; text-align:center">Search for verification</span>
+            </div>
+            <div style="padding-top:10px">
+                @using (Html.BeginForm("Search", "Verify", FormMethod.Post))
+                {
+                    <input type="text" name="requestID" id="requestID" placeholder="request ID" style="height:30px" />
+                    <input type="submit" value="Search" style="height:30px" />
+                }
+            </div>
+        </div>
+    </div>
+    <div style="width:50%; padding-top:10px">
+        <div class="content">
+            <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+                <span style="vertical-align:central; text-align:center">Trigger next verification process</span>
+            </div>
+            <div style="padding-top:10px">
+                @if (ViewBag.Message != null)
+                {
+                    <h2>@ViewBag.Message</h2>
+                }
+                else
+                {
+                    using (Html.BeginForm("TriggerNext", "Verify", FormMethod.Post))
+                    {
+                        <input type="text" name="requestID" id="requestID" placeholder="request ID" style="height:30px" />
+                        <input type="submit" value="Trigger next" style="height:30px" />
                     }
                 }
             </div>
