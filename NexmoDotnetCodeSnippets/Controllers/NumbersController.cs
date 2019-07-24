@@ -27,13 +27,26 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult BuyNumber(string country, string number)
         {
-            var result = Client.Number.Buy(country, number);
+            var COUNTRY_CODE = country;
+            var NEXMO_NUMBER = number;
+
+            var result = Client.Number.Buy(COUNTRY_CODE, NEXMO_NUMBER);
+
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult UpdateNumber()
+        public ActionResult UpdateNumber(string country, string number)
         {
+            var COUNTRY_CODE = country;
+            var NEXMO_NUMBER = number;
+
+            var updatednumber = Client.Number.Update(new Number.NumberUpdateCommand
+            {
+                country = COUNTRY_CODE,
+                msisdn = NEXMO_NUMBER,
+                voiceCallbackType = "tel"
+            });
 
             return View("Index");
         }
@@ -41,22 +54,29 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult CancelNumber(string country, string number)
         {
-            var result = Client.Number.Cancel(country, number);
+            var COUNTRY_CODE = country;
+            var NEXMO_NUMBER = number;
+
+            var result = Client.Number.Cancel(COUNTRY_CODE, NEXMO_NUMBER);
+
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult GetNumbersList()
+        public ActionResult SearchAvailableNumbers(string countryCode)
         {
+            var COUNTRY_CODE = countryCode;
+            var availableNumbers = Client.Number.Search(new Number.SearchRequest
+            {
+                country = COUNTRY_CODE
+            });
+
+            if(availableNumbers.count > 0)
+            {
+                ViewBag.listResults = availableNumbers.numbers;
+                ViewBag.count = 10;
+            }
             return View("Index");
         }
-
-        [HttpPost]
-        public ActionResult SearchAvailableNumbers()
-        {
-            return View("Index");
-        }
-
-
     }
 }
