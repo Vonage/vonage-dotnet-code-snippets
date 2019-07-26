@@ -11,7 +11,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
     public class VerifyController : Controller
     {
         public Client Client { get; set; }
-        const string RequestId = "_RequestId";
+        
         public VerifyController()
         {
             Client = new Client(creds: new Nexmo.Api.Request.Credentials
@@ -36,7 +36,14 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 brand = "AcmeInc"
             });
 
-            HttpContext.Session.SetString(RequestId, start.request_id);
+            if (start.status == "0")
+            {
+                HttpContext.Session.SetString("RequestId", start.request_id);
+                ViewBag.verificationResult = $"Your PIN code was successfully sent to {RECIPIENT_NUMBER}, your request ID is {start.request_id}.";
+            }
+
+            else
+                ViewBag.verificationResult = start.error_text;
 
             return View("Index");
         }
@@ -46,17 +53,17 @@ namespace NexmoDotnetCodeSnippets.Controllers
         {
             var result = Client.NumberVerify.Check(new NumberVerify.CheckRequest
             {
-                request_id = HttpContext.Session.GetString(RequestId),
+                request_id = HttpContext.Session.GetString("RequestId"),
                 code = code
             }); ;
 
             if (result.status == "0")
             {
-                ViewBag.Message = "Verification Sucessful";
+                ViewBag.checkMessage = "Verification Sucessful";
             }
             else
             {
-                ViewBag.Message = result.error_text;
+                ViewBag.checkMessage = result.error_text;
             }
             return View("Index");
 
@@ -83,7 +90,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 request_id = requestID,
                 cmd = "cancel"
             });
-            ViewBag.status = results.status;
+            ViewBag.cancelstatus = results.status;
             return View("Index");
         }
 
@@ -95,7 +102,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
                 request_id = requestID,
                 cmd = "trigger_next_event"
             });
-            ViewBag.status = results.status;
+            ViewBag.nextMessage = results.status;
             return View("Index");
         }
     }
