@@ -14,6 +14,7 @@
                 <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
                 <input type="submit" value="Call" style="height:30px; width:50px" />
             }
+            <h4>@ViewBag.callResult</h4>
         </div>
     </div>
 </div>
@@ -28,6 +29,7 @@
                 <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
                 <input type="submit" value="Call" style="height:30px; width:50px" />
             }
+            <h4>@ViewBag.nccoCallResult</h4>
         </div>
     </div>
 </div>
@@ -42,6 +44,19 @@
                 <input type="text" name="id" id="id" placeholder="UUID" style="height:30px" />
                 <input type="submit" value="Get Info" style="height:30px" />
             }
+                <h4>@ViewBag.calluuid</h4>
+                <h4>@ViewBag.callconversation_uuid</h4>
+                <h4>@ViewBag.calltonumber</h4>
+                <h4>@ViewBag.callfromnumber</h4>
+                <h4>@ViewBag.callstatus</h4>
+                <h4>@ViewBag.calldirection</h4>
+                <h4>@ViewBag.callrate</h4>
+                <h4>@ViewBag.callprice</h4>
+                <h4>@ViewBag.callduration</h4>
+                <h4>@ViewBag.callstart_time</h4>
+                <h4>@ViewBag.callend_time</h4>
+                <h4>@ViewBag.callnetwork</h4>
+           
         </div>
     </div>
 </div>
@@ -112,19 +127,23 @@
         </div>
         <div style="height:150px; padding-top:20px">
             <h2>Inbound Call</h2>
-            <h3>For more details on how to get an SMS delivery receipt, follow <a href="https://www.nexmo.com/blog/2017/07/21/get-sms-delivery-receipt-asp-net-mvc-dr">this step by step tutorial</a></h3>
+            <h3>For more details on how to receive a phone call with Nexmo Voice API, follow <a href="https://www.nexmo.com/blog/2018/11/21/how-to-receive-a-phone-call-with-nexmo-voice-api-asp-core-core-and-nancyfx-dr">this step by step tutorial</a></h3>
         </div>
         <div style="height:150px; padding-top:20px">
             <h2>DTMF</h2>
-            <h3>For more details on how to get an SMS delivery receipt, follow <a href="https://www.nexmo.com/blog/2017/07/21/get-sms-delivery-receipt-asp-net-mvc-dr">this step by step tutorial</a></h3>
+            <h3>For more details on how to handle user input, follow <a href="https://www.nexmo.com/blog/2019/01/10/how-to-handle-user-input-with-asp-net-core-dr">this step by step tutorial</a></h3>
         </div>
         <div style="height:150px; padding-top:20px">
             <h2>Connect a call</h2>
-            <h3>For more details on how to get an SMS delivery receipt, follow <a href="https://www.nexmo.com/blog/2017/07/21/get-sms-delivery-receipt-asp-net-mvc-dr">this step by step tutorial</a></h3>
+            <h3>For more details on how to forward a call via voice proxy, follow <a href="https://www.nexmo.com/blog/2019/04/18/forward-a-call-via-voice-proxy-with-asp-net-core-dr">this step by step tutorial</a></h3>
         </div>
         <div style="height:150px; padding-top:20px">
             <h2>Build conference call</h2>
-            <h3>For more details on how to get an SMS delivery receipt, follow <a href="https://www.nexmo.com/blog/2017/07/21/get-sms-delivery-receipt-asp-net-mvc-dr">this step by step tutorial</a></h3>
+            <h3>For more details on how to build a conference call, follow <a href="https://www.nexmo.com/blog/2019/05/16/build-a-conference-call-with-nexmo-voice-api-and-csharp-dr">this step by step tutorial</a></h3>
+        </div>
+        <div style="height:150px; padding-top:20px">
+            <h2>Build a voicemail</h2>
+            <h3>For more details on how to build a voicemail, follow <a href="https://www.nexmo.com/blog/2019/07/08/how-to-build-a-voicemail-with-asp-net-core-and-nancyfx-dr">this step by step tutorial</a></h3>
         </div>
     </div>
 </div>

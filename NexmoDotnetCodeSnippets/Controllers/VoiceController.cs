@@ -64,6 +64,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
             });
 
             HttpContext.Session.SetString(UIDD, results.uuid);
+            ViewBag.callResult = $"Call started. Call uuid is {results.uuid}";
 
             return View("Index"); 
         }
@@ -93,6 +94,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
             });
 
             HttpContext.Session.SetString(UIDD, results.uuid);
+            ViewBag.nccoCallResult = $"Call started. Call uuid is {results.uuid}";
 
             return View("Index");
         }
@@ -118,21 +120,28 @@ namespace NexmoDotnetCodeSnippets.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult GetCall()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult GetCall(string id)
         {
             var UUID = id;
 
             var call = Client.Call.Get(UUID);
-            ViewData.Add("call", call);
 
-            return View();
+
+            ViewBag.calluuid = $"Uuid: {call.uuid}";
+            ViewBag.callconversation_uuid = $"Conversation uuid: {call.conversation_uuid}";
+            ViewBag.calltonumber = $"To: {call.to.number}";
+            ViewBag.callfromnumber = $"From: {call.from.number}";
+            ViewBag.callstatus = $"Status: {call.status}";
+            ViewBag.calldirection = $"Direction: {call.direction}";
+            ViewBag.callrate = $"Rate: {call.rate}";
+            ViewBag.callprice = $"Price: {call.price}";
+            ViewBag.callduration = $"Duration: {call.duration}";
+            ViewBag.callstart_time = $"Start time: {call.start_time}";
+            ViewBag.callend_time = $"End time: {call.end_time}";
+            ViewBag.callnetwork = $"Network: {call.network}";
+
+            return View("Index");
         }
 
         [HttpPost]
