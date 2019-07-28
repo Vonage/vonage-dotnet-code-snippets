@@ -1,8 +1,6 @@
-# Nexmo APIs Quickstart Examples for CSharp
+# Nexmo APIs code snippets for .NET using CSharp
 
-Quickstarts also available for: [Java](https://github.com/nexmo-community/nexmo-java-quickstart), [Node.js](https://github.com/nexmo-community/nexmo-node-quickstart), [PHP](https://github.com/nexmo-community/nexmo-php-quickstart), [Python](https://github.com/nexmo-community/nexmo-python-quickstart), [Ruby](https://github.com/nexmo-community/nexmo-ruby-quickstart)
-
-The purpose of the quickstart guide is to provide simple examples focused on one goal. For example, sending an SMS, handling an incoming SMS webhook or making a Text to Speech call.
+The purpose of the code snippets project is to provide simple examples focused on one goal. For example, sending an SMS, handling an incoming SMS webhook or making a Text to Speech call.
 
 ## Configure with Your Nexmo Credentials
 
@@ -46,7 +44,7 @@ System.Net.ServicePointManager.SecurityProtocol =  System.Net.SecurityProtocolTy
 
 ## Request an Example
 
-Please [raise an issue](https://github.com/nexmo-community/nexmo-dotnet-quickstart/issues) to request an example that isn't present within the quickstart. Pull requests will be gratefully received.
+Please [raise an issue](https://github.com/nexmo-community/nexmo-dotnet-quickstart/issues) to request an example that isn't present within the code snippets. Pull requests will be gratefully received.
 
 ## License
 
