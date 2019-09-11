@@ -6,21 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Nexmo.Api;
+using NexmoDotnetCodeSnippets.Senders;
 
 namespace NexmoDotnetCodeSnippets.Controllers
 {
     public class SMSController : Controller
     {
-        public Client Client { get; set; }
-
         public SMSController()
         {
-            Client = new Client(creds: new Nexmo.Api.Request.Credentials
-            {
-                ApiKey = "NEXMO_API_KEY",
-                ApiSecret = "NEXMO_API_SECRET"
-            });
         }
+
         public IActionResult Index()
         {
             return View();
@@ -33,16 +28,9 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        public ActionResult Send(string to)
+        public ActionResult Send(string to, string from, string message)
         {
-            var TO_NUMBER = to;
-
-            var results = Client.SMS.Send(request: new SMS.SMSRequest
-            {
-                from = "Acme Inc",
-                to = TO_NUMBER,
-                text = "A test SMS sent using the Nexmo SMS API"
-            });
+            var results = SMSSender.SendSMS(to, from, message);
 
             if (results.messages.Count >= 1)
             {
@@ -68,17 +56,11 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        public ActionResult SendUnicodeSMS(string to, string text)
+        public ActionResult SendUnicodeSMS(string to, string from, string text = "こんにちは世界")
         {
-            var TO_NUMBER = to;
+            var type = "unicode";
 
-            var results = Client.SMS.Send(request: new SMS.SMSRequest
-            {
-                from = "Acme Inc",
-                to = TO_NUMBER,
-                text = "こんにちは世界",
-                type = "unicode"
-            });
+            var results = SMSSender.SendSMSUnicode(to, from, text);
 
             if (results.messages.Count >= 1)
             {

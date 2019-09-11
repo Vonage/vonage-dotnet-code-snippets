@@ -12,6 +12,10 @@
             @using (Html.BeginForm("Send", "SMS", FormMethod.Post))
             {
                 <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
+                <br />
+                <input type="text" name="from" id="from" placeholder="from" style="height:30px" />
+                <br />
+                <input type="text" name="message" id="message" placeholder="message" style="height:30px" />
                 <input type="submit" value="Send" style="height:30px;" />
             }
         </div>
@@ -27,6 +31,8 @@
             @using (Html.BeginForm("SendUnicodeSMS", "SMS", FormMethod.Post))
             {
                 <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
+                <br />
+                <input type="text" name="from" id="from" placeholder="from" style="height:30px" />
                 <input type="submit" value="Send" style="height:30px;" />
             }
         </div>
