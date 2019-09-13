@@ -1,4 +1,5 @@
 ﻿using Nexmo.Api;
+using NexmoDotnetCodeSnippets.Authentication;
 
 namespace NexmoDotnetCodeSnippets.Senders
 {
@@ -6,10 +7,8 @@ namespace NexmoDotnetCodeSnippets.Senders
     {   
 
         public static SMS.SMSResponse SendSMS(string TO_NUMBER, string NEXMO_BRAND_NAME, string message)
-        {
-            const string API_KEY = "NEXMO_API_KEY";
-            const string API_SECRET = "NEXMO_API_SECRET";
-            var client = new Client(creds: new Nexmo.Api.Request.Credentials(nexmoApiKey: API_KEY, nexmoApiSecret: API_SECRET));
+        {            
+            var client = BasicAuth.GetClient();
 
             var results = client.SMS.Send(new SMS.SMSRequest
             {
@@ -23,9 +22,7 @@ namespace NexmoDotnetCodeSnippets.Senders
 
         public static SMS.SMSResponse SendSMSUnicode(string TO_NUMBER, string NEXMO_BRAND_NAME, string message)
         {
-            const string NEXMO_API_KEY = "NEXMO_API_KEY";
-            const string NEXMO_API_SECRET = "NEXMO_API_SECRET";
-            var client = new Client(creds: new Nexmo.Api.Request.Credentials(nexmoApiKey: NEXMO_API_KEY, nexmoApiSecret: NEXMO_API_SECRET));
+            var client = BasicAuth.GetClient();
 
             var messageType = "unicode";
             var results = client.SMS.Send(new SMS.SMSRequest

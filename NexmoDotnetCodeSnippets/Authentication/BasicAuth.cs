@@ -5,20 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace NexmoDotnetCodeSnippets.Authentication
-{
-    /// <summary>
-    /// This class is only used for the purpose of building documentation on https://developer.nexmo.com/
-    /// It is not used in any of the code samples provided in these Quickstarts
-    /// </summary>
+{    
     public class BasicAuth
     {
-        public BasicAuth()
+        public static Client GetClient()
         {
-            var client = new Client(creds: new Nexmo.Api.Request.Credentials
-            {
-                ApiKey = "NEXMO_API_KEY",
-                ApiSecret = "NEXMO_API_SECRET"
-            });
+            const string API_KEY = "NEXMO_API_KEY";
+            const string API_SECRET = "NEXMO_API_SECRET";
+            var client = new Client(creds: new Nexmo.Api.Request.Credentials(nexmoApiKey: API_KEY, nexmoApiSecret: API_SECRET));
+            return client;
         }
     }
 }
