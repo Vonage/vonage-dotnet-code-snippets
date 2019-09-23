@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Nexmo.Api;
-using Nexmo.Api.Voice;
+using NexmoDotnetCodeSnippets.Senders;
+using System.Threading;
 
 namespace NexmoDotnetCodeSnippets.Controllers
 {
@@ -38,30 +33,12 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [HttpPost]
-        public ActionResult MakeCall(string to)
+        public ActionResult MakeCall(string to, string from)
         {
             var TO_NUMBER = to;
-            var NEXMO_NUMBER = "NEXMO_NUMBER";
+            var NEXMO_NUMBER = from;
 
-            var results = Client.Call.Do(new Call.CallCommand
-            {
-                to = new[]
-                {
-                    new Call.Endpoint {
-                        type = "phone",
-                        number = TO_NUMBER
-                    }
-                },
-                from = new Call.Endpoint
-                {
-                    type = "phone",
-                    number = NEXMO_NUMBER
-                },
-                answer_url = new[]
-                {
-                    "https://developer.nexmo.com/ncco/tts.json"
-                }
-            });
+            var results = VoiceSender.MakeCall(to, NEXMO_NUMBER);
 
             HttpContext.Session.SetString(UIDD, results.uuid);
             ViewBag.callResult = $"Call started. Call uuid is {results.uuid}";
@@ -70,44 +47,16 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [HttpPost]
-        public ActionResult MakeCallWithNCCO(string to)
+        public ActionResult MakeCallWithNCCO(string to, string from)
         {
-            var TO_NUMBER = to;
-            var NEXMO_NUMBER = "NEXMO_NUMBER";
+            var NEXMO_NUMBER = from;
 
-            var results = Client.Call.Do(new Call.CallCommand
-            {
-                to = new[]
-                {
-                    new Call.Endpoint {
-                        type = "phone",
-                        number = TO_NUMBER
-                    }
-                },
-                from = new Call.Endpoint
-                {
-                    type = "phone",
-                    number = NEXMO_NUMBER
-                },
-
-                Ncco = CreateNCCO()
-            });
+            var results = VoiceSender.MakeCallWithNCCO(to, NEXMO_NUMBER);
 
             HttpContext.Session.SetString(UIDD, results.uuid);
             ViewBag.nccoCallResult = $"Call started. Call uuid is {results.uuid}";
 
             return View("Index");
-        }
-
-        private JArray CreateNCCO()
-        {
-            dynamic TalkNCCO = new JObject();
-            TalkNCCO.action = "talk";
-            TalkNCCO.text = "This is a text to speech call from Nexmo";
-
-            JArray ncco = new JArray();
-            ncco.Add(TalkNCCO);
-            return ncco;
         }
 
         [HttpGet]
@@ -123,10 +72,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult GetCall(string id)
         {
-            var UUID = id;
-
-            var call = Client.Call.Get(UUID);
-
+            var call = VoiceSender.GetCall(id);
 
             ViewBag.calluuid = $"Uuid: {call.uuid}";
             ViewBag.callconversation_uuid = $"Conversation uuid: {call.conversation_uuid}";
@@ -147,12 +93,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult MuteCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "mute"
-            });
+            var result = VoiceSender.MuteCall(id);
 
             return View("Index");
         }
@@ -160,12 +101,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult UnmuteCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "unmute"
-            });
+            var result = VoiceSender.UnmuteCall(id);
 
             return View("Index");
         }
@@ -175,17 +111,11 @@ namespace NexmoDotnetCodeSnippets.Controllers
         {
             var UUID = HttpContext.Session.GetString(UIDD);
 
-            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "earmuff"
-            });
+            VoiceSender.EarmuffCall(id);
 
             Thread.Sleep(3000);
 
-            var unearmuffresult = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "unearmuff"
-            });
+            VoiceSender.UnearmuffCall(id);
 
             return View("Index");
         }
@@ -195,23 +125,15 @@ namespace NexmoDotnetCodeSnippets.Controllers
         {
             var UUID = HttpContext.Session.GetString(UIDD);
 
-            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "unearmuff"
-            });
+            var result = VoiceSender.UnearmuffCall(id);
 
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult HangupCall()
+        public ActionResult HangupCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "hangup"
-            });
+            VoiceSender.HangupCall(id);
 
             return View("Index");
         }
@@ -220,13 +142,8 @@ namespace NexmoDotnetCodeSnippets.Controllers
         public ActionResult PlayttsToCall()
         {
             var UUID = HttpContext.Session.GetString(UIDD);
-            var TEXT = "This is a text to speech sample";
 
-            var result = Client.Call.BeginTalk(UUID, new Call.TalkCommand
-            {
-                text = TEXT,
-                voice_name = "Kimberly"
-            });
+            var result = VoiceSender.PlayTtsToCall(UUID);
 
             return View("Index");
         }
@@ -236,13 +153,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         {
             var UUID = HttpContext.Session.GetString(UIDD);
 
-            var result = Client.Call.BeginStream(UUID, new Call.StreamCommand
-            {
-                stream_url = new[]
-                {
-                        "https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3"
-                    }
-            });
+            var result = VoiceSender.PlayAudioStreamToCall(UUID);
 
             return View("Index");
         }
@@ -251,32 +162,38 @@ namespace NexmoDotnetCodeSnippets.Controllers
         public ActionResult PlayDTMFToCall()
         {
             var UUID = HttpContext.Session.GetString(UIDD);
-            var DIGITS = "1234";
 
-            var result = Client.Call.SendDtmf(UUID, new Call.DtmfCommand
-            {
-                digits = DIGITS
-            });
+            var result = VoiceSender.PlayDTMFToCall(UUID);
 
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult TransferCall()
+        public ActionResult TransferCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = Client.Call.Edit(UUID, new Call.CallEditCommand
-            {
-                Action = "transfer",
-                Destination = new Call.Destination
-                {
-                    Type = "ncco",
-                    Url = new[] { "https://developer.nexmo.com/ncco/transfer.json" }
-                }
-            });
+            var result = VoiceSender.TransferCall(id);
 
             return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult GetAllCalls()
+        {
+            var calls = VoiceSender.GetAllCalls();
+
+            ViewBag.numCalls = calls.count;
+
+            return View("Index");
+
+        }
+
+        [HttpPost]
+        public FileResult GetRecording(string recording_url, string fileName)
+        {
+            var result = VoiceSender.GetRecording(recording_url);
+            var response = File(result.ResultStream, "audio/mpeg");
+            response.FileDownloadName = fileName;
+            return response;
         }
     }
 }

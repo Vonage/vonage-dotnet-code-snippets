@@ -12,7 +12,7 @@ namespace NexmoDotnetCodeSnippets.Authentication
     /// </summary>
     public class FullAuth
     {
-        public FullAuth()
+        public static Client GetClient()
         {
             var client = new Client(creds: new Nexmo.Api.Request.Credentials
             {
@@ -21,6 +21,7 @@ namespace NexmoDotnetCodeSnippets.Authentication
                 ApplicationId = "NEXMO_APPLICATION_ID",
                 ApplicationKey = "NEXMO_APPLICATION_PRIVATE_KEY"
             });
+            return client;
         }
     }
 }

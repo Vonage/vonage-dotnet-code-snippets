@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nexmo.Api;
+using NexmoDotnetCodeSnippets.Senders;
 
 namespace NexmoDotnetCodeSnippets.Controllers
 {
@@ -14,11 +11,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         
         public VerifyController()
         {
-            Client = new Client(creds: new Nexmo.Api.Request.Credentials
-            {
-                ApiKey = "NEXMO_API_KEY",
-                ApiSecret = "NEXMO_API_SECRET"
-            });
+            Client = NexmoDotnetCodeSnippets.Authentication.BasicAuth.GetClient();
         }
         public IActionResult Index()
         {
@@ -30,11 +23,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         {
             var RECIPIENT_NUMBER = to;
 
-            var start = Client.NumberVerify.Verify(new NumberVerify.VerifyRequest
-            {
-                number = RECIPIENT_NUMBER,
-                brand = "AcmeInc"
-            });
+            var start = VerifySender.StartVerify(to);
 
             if (start.status == "0")
             {
@@ -49,13 +38,9 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [HttpPost]
-        public ActionResult Check(string code)
+        public ActionResult Check(string code, string id)
         {
-            var result = Client.NumberVerify.Check(new NumberVerify.CheckRequest
-            {
-                request_id = HttpContext.Session.GetString("RequestId"),
-                code = code
-            }); ;
+            var result = VerifySender.Check(code, id);
 
             if (result.status == "0")
             {
@@ -72,10 +57,8 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult Search(string requestID)
         {
-            var search = Client.NumberVerify.Search(new NumberVerify.SearchRequest
-            {
-                request_id = requestID
-            });
+            var search = VerifySender.Search(requestID);
+
             ViewBag.error_text = search.error_text;
             ViewBag.status = search.status;
 
@@ -85,11 +68,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult Cancel(string requestID)
         {
-            var results = Client.NumberVerify.Control(new NumberVerify.ControlRequest
-            {
-                request_id = requestID,
-                cmd = "cancel"
-            });
+            var results = VerifySender.Cancel(requestID);
             ViewBag.cancelstatus = results.status;
             return View("Index");
         }
@@ -97,13 +76,18 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult TriggerNext(string requestID)
         {
-            var results = Client.NumberVerify.Control(new NumberVerify.ControlRequest
-            {
-                request_id = requestID,
-                cmd = "trigger_next_event"
-            });
+            var results = VerifySender.TriggerNext(requestID);
             ViewBag.nextMessage = results.status;
             return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult VerifyWithWorkflow(string to, string workflow_id)
+        {
+            var results = VerifySender.VerifyWithWorkflowId(to, workflow_id);
+            ViewBag.verificationResult = results;
+            ViewBag.VerificationId = results.request_id;
+            return View("index");
         }
     }
 }

@@ -12,6 +12,7 @@
             @using (Html.BeginForm("MakeCall", "Voice", FormMethod.Post))
             {
                 <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
+                <input type="text" name="from" id="from" placeholder="From" style="height:30px" />
                 <input type="submit" value="Call" style="height:30px; width:50px" />
             }
             <h4>@ViewBag.callResult</h4>
@@ -27,9 +28,25 @@
             @using (Html.BeginForm("MakeCallWithNCCO", "Voice", FormMethod.Post))
             {
                 <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
+                <input type="text" name="from" id="from" placeholder="From" style="height:30px" />
                 <input type="submit" value="Call" style="height:30px; width:50px" />
             }
             <h4>@ViewBag.nccoCallResult</h4>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get Recording </span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("GetRecording", "Voice", FormMethod.Post))
+            {
+                <input type="text" name="recording_url" id="recording_url" placeholder="recording_url" style="height:30px" />
+                <input type="text" name="fileName" id="fileName" placeholder="fileName" style="height:30px" />
+                <input type="submit" value="Get Recording" style="height:30px; width:50px" />
+            }
         </div>
     </div>
 </div>
@@ -63,55 +80,78 @@
 <div style="width:50%; padding-top:10px">
     <div class="content">
         <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get All Calls </span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("GetAllCalls", "Voice", FormMethod.Post))
+            {
+                @*<input type="text" name="id" id="id" placeholder="UUID" style="height:30px" />*@
+                <input type="submit" value="Get Info" style="height:30px" />
+            }
+            <h2>@ViewBag.numCalls</h2>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
             <span style="vertical-align:central; text-align:center">Modify a call </span>
         </div>
-        <div >
+        <div>
             <h3> You can modify any existing call using the call uuid</h3>
             @using (Html.BeginForm("HangupCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Terminate the current call" />
             }
 
             @using (Html.BeginForm("MuteCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Mute the current call" />
             }
 
             @using (Html.BeginForm("UnmuteCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Unmute the current call" />
             }
 
             @using (Html.BeginForm("EarmuffCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Earmuff the current call" />
             }
 
             @using (Html.BeginForm("TransferCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Transfer the current call" />
             }
 
             @using (Html.BeginForm("PlayttsToCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Play text-to-speech to the current call" />
             }
 
             @using (Html.BeginForm("PlayAudioStreamToCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Play audio stream to the current call" />
             }
 
             @using (Html.BeginForm("PlayDTMFToCall", "Voice", FormMethod.Post))
             {
                 <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Play DTMF to the current call" />
             }
         </div>
