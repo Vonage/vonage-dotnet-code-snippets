@@ -22,6 +22,22 @@
     <div style="width:50%; padding-top:10px">
         <div class="content">
             <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+                <span style="vertical-align:central; text-align:center">Start verification process</span>
+            </div>
+            <div style="padding-top:10px">
+                @using (Html.BeginForm("VerifyWithWorkflow", "Verify", FormMethod.Post))
+                {
+                    <input type="text" name="to" id="to" placeholder="Phone number " style="height:30px" />
+                    <input type="text" name="workflow_id" id="workflow_id" placeholder="workflow_id" style="height:30px" />
+                    <input type="submit" value="Verify" style="height:30px" />
+                }
+            </div>
+            <h4>@ViewBag.VerificationId</h4>
+        </div>
+    </div>
+    <div style="width:50%; padding-top:10px">
+        <div class="content">
+            <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
                 <span style="vertical-align:central; text-align:center">Check code</span>
             </div>
             <div style="padding-top:10px">
@@ -34,6 +50,7 @@
                     using (Html.BeginForm("Check", "Verify", FormMethod.Post))
                     {
                         <input type="text" name="code" id="code" placeholder="code" style="height:30px" />
+                        <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                         <input type="submit" value="Check" style="height:30px" />
                     }
                 }
@@ -48,8 +65,8 @@
             <div style="padding-top:10px">
                 @using (Html.BeginForm("Cancel", "Verify", FormMethod.Post))
                 {
-                        <input type="text" name="requestID" id="requestID" placeholder="request ID" style="height:30px" />
-                        <input type="submit" value="Cancel" style="height:30px" />
+                    <input type="text" name="requestID" id="requestID" placeholder="request ID" style="height:30px" />
+                    <input type="submit" value="Cancel" style="height:30px" />
                 }
                 <h4>@ViewBag.cancelstatus</h4>
             </div>

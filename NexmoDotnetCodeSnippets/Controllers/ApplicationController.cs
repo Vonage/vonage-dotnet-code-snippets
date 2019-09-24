@@ -9,15 +9,9 @@ namespace NexmoDotnetCodeSnippets.Controllers
 {
     public class ApplicationController : Controller
     {
-        public Client Client { get; set; }
 
         public ApplicationController()
         {
-            Client = new Client(creds: new Nexmo.Api.Request.Credentials
-            {
-                ApiKey = "NEXMO_API_KEY",
-                ApiSecret = "NEXMO_API_SECRET"
-            });
         }
         public IActionResult Index()
         {
@@ -27,11 +21,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult CreateApplication(string name)
         {
-            var APPLICATION_NAME = name;
-            var result = Client.ApplicationV2.Create(new AppRequest
-            {
-                Name = APPLICATION_NAME
-            });
+            var result = Senders.ApplicationSender.CreateApp(name);
             ViewBag.creationResult = $"Your app {result.Name} has been created. ID {result.Id}";
             return View("Index");
         }
@@ -40,36 +30,31 @@ namespace NexmoDotnetCodeSnippets.Controllers
         public ActionResult GetApplication(string id)
         {
             var APPLICATION_ID = id;
-            var application = Client.ApplicationV2.Get(APPLICATION_ID);
-            ViewBag.getResult = $"App public key: {application.Keys.PublicKey}";
+            var results = Senders.ApplicationSender.GetApplication(id);
+            ViewBag.getResult = $"App public key: {results.Keys.PublicKey}";
             return View("Index");
         }
 
         [HttpPost]
         public ActionResult ListAvailableApplications()
         {
-            var appList = Client.ApplicationV2.List();
+            var appList = Senders.ApplicationSender.GetAllApplications();
             ViewBag.listResults = appList;
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult UpdateApplication(string appName)
+        public ActionResult UpdateApplication(string id, string name)
         {
-            var APPLICATION_NAME = appName;
-            var updatedApp = Client.ApplicationV2.Update(new AppRequest
-            {
-                Name = appName,
-
-            });
+            var result = Senders.ApplicationSender.UpdateApplication(id, name);
+            ViewBag.updateResult = $"Your app {result.Id} has been updated. ID {result.Name}";
             return View("Index");
         }
 
         [HttpPost]
         public ActionResult DeleteApplication(string id)
         {
-            var APPLICATION_ID = id;
-            var result = Client.ApplicationV2.Delete(APPLICATION_ID);
+            var result = Senders.ApplicationSender.DeleteApplication(id);
             if (result)
                 ViewBag.deleteResult = "App deleted";
             return View("Index");

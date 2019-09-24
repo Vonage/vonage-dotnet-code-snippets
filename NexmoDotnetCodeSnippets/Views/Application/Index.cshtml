@@ -70,5 +70,20 @@
             }
         </div>
     </div>
-
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Update an application</span>
+        </div>
+        <div style="padding-top:10px">
+            @using (Html.BeginForm("UpdateApplication", "Application", FormMethod.Post))
+            {
+                <input type="text" name="id" id="id" placeholder="Your application Id" style="height:30px" />
+                <input type="text" name="name" id="name" placeholder="Your application name" style="height:30px" />
+                <input type="submit" value="Get application" style="height:30px;" />
+            }
+            <h2>@ViewBag.updateResult</h2>
+        </div>
+    </div>
+</div>
 
