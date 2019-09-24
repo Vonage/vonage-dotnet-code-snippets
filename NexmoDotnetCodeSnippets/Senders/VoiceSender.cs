@@ -60,21 +60,10 @@ namespace NexmoDotnetCodeSnippets.Senders
         private static JArray CreateNCCO()
         {
             dynamic TalkNCCO = new JObject();
-            System.Text.StringBuilder sb = new System.Text.StringBuilder("This is a text to speech call from Nexmo. Hey Now Brown Cow");
-            for (int i = 0; i < 10; i++)
-            {
-                sb.AppendFormat(" {0}", i);
-
-            }
             TalkNCCO.action = "talk";
-            TalkNCCO.text = sb.ToString();
-
-            dynamic RecordNCCO = new JObject();
-            RecordNCCO.action = "record";
-            RecordNCCO.eventUrl = new JArray() { "https://29f42c6e.ngrok.io/webhook/recordings" };
+            TalkNCCO.text = "This is a text to speech call from Nexmo";
 
             JArray ncco = new JArray();
-            ncco.Add(RecordNCCO);
             ncco.Add(TalkNCCO);
             return ncco;
         }
