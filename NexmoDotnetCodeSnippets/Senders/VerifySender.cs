@@ -70,7 +70,7 @@ namespace NexmoDotnetCodeSnippets.Senders
             return result;
         }
 
-        public static NumberVerify.VerifyResponse VerifyWithWorkflowId(string NUMBER, string WORKFLOW = "4")
+        public static NumberVerify.VerifyResponse VerifyWithWorkflowId(string NUMBER, string WORKFLOW_ID = "4")
         {
             var client = BasicAuth.GetClient();
 
@@ -79,7 +79,7 @@ namespace NexmoDotnetCodeSnippets.Senders
             {
                 number = NUMBER,
                 brand = BRAND_NAME,
-                workflow_id = WORKFLOW,
+                workflow_id = WORKFLOW_ID,
             });
 
             return result;
