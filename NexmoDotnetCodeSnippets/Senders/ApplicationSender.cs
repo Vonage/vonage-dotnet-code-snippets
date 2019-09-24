@@ -72,7 +72,7 @@ namespace NexmoDotnetCodeSnippets.Senders
                     Vbc = new VbcWebhook()
                 }
             };
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+            
             var resposne = client.ApplicationV2.Update(request: request);
 
             return resposne;
