@@ -33,11 +33,11 @@ namespace NexmoDotnetCodeSnippets.Senders
             return response;
         }
 
-        public static AppResponse GetApplication(string id)
+        public static AppResponse GetApplication(string NEXMO_APPLICATION_ID)
         {
             var client = BasicAuth.GetClient();
 
-            var response = client.ApplicationV2.Get(appId: id);
+            var response = client.ApplicationV2.Get(appId: NEXMO_APPLICATION_ID);
 
             return response;
         }
@@ -51,13 +51,13 @@ namespace NexmoDotnetCodeSnippets.Senders
             return response;
         }
 
-        public static AppResponse UpdateApplication(string id, string name)
+        public static AppResponse UpdateApplication(string NEXMO_APPLICATION_ID, string name)
         {
             var client = BasicAuth.GetClient();
 
             var request = new AppRequest()
             {
-                Id = id,
+                Id = NEXMO_APPLICATION_ID,
                 Name = name,
                 Capabilities = new Capabilities()
                 {
@@ -78,11 +78,11 @@ namespace NexmoDotnetCodeSnippets.Senders
             return resposne;
         }
 
-        public static bool DeleteApplication(string id)
+        public static bool DeleteApplication(string NEXMO_APPLICATION_ID)
         {
             var client = BasicAuth.GetClient();
 
-            var resposne = client.ApplicationV2.Delete(id);
+            var resposne = client.ApplicationV2.Delete(NEXMO_APPLICATION_ID);
 
             return resposne;
         }
