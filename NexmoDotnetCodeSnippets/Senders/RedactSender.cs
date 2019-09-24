@@ -18,13 +18,15 @@ namespace NexmoDotnetCodeSnippets.Senders
         public static NexmoResponse RedactWithId(string NEXMO_REDACT_ID, string NEXMO_REDACT_PRODUCT)
         {
             var client = BasicAuth.GetClient();
-            return client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(NEXMO_REDACT_ID, NEXMO_REDACT_PRODUCT));
+            var result = client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(NEXMO_REDACT_ID, NEXMO_REDACT_PRODUCT));
+            return result;
         }
 
         public static NexmoResponse RedactWithIdAndType(string NEXMO_REDACT_ID, string NEXMO_REDACT_PRODUCT, string NEXMO_REDACT_TYPE)
         {
             var client = BasicAuth.GetClient();
-            return client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(NEXMO_REDACT_ID, NEXMO_REDACT_PRODUCT, NEXMO_REDACT_TYPE));
+            var result = client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(NEXMO_REDACT_ID, NEXMO_REDACT_PRODUCT, NEXMO_REDACT_TYPE));
+            return result;
         }
     }
 }
