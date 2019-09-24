@@ -15,16 +15,16 @@ namespace NexmoDotnetCodeSnippets.Senders
         public const string API_KEY = "API_KEY";
         public const string API_SECRET = "API_SECRET";
         private const string REDACT_URL = @"https://api.nexmo.com/v1/redact/transaction";
-        public static NexmoResponse RedactWithId(string id, string product)
+        public static NexmoResponse RedactWithId(string NEXMO_REDACT_ID, string NEXMO_REDACT_PRODUCT)
         {
             var client = BasicAuth.GetClient();
-            return client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(id, product));
+            return client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(NEXMO_REDACT_ID, NEXMO_REDACT_PRODUCT));
         }
 
-        public static NexmoResponse RedactWithIdAndType(string id, string product, string type)
+        public static NexmoResponse RedactWithIdAndType(string NEXMO_REDACT_ID, string NEXMO_REDACT_PRODUCT, string NEXMO_REDACT_TYPE)
         {
             var client = BasicAuth.GetClient();
-            return client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(id, product, type));
+            return client.Redact.RedactTransaction(redactRequest: new Redact.RedactRequest(NEXMO_REDACT_ID, NEXMO_REDACT_PRODUCT, NEXMO_REDACT_TYPE));
         }
     }
 }
