@@ -73,18 +73,18 @@ namespace NexmoDotnetCodeSnippets.Senders
                 }
             };
             
-            var resposne = client.ApplicationV2.Update(request: request);
+            var response = client.ApplicationV2.Update(request: request);
 
-            return resposne;
+            return response;
         }
 
         public static bool DeleteApplication(string NEXMO_APPLICATION_ID)
         {
             var client = BasicAuth.GetClient();
 
-            var resposne = client.ApplicationV2.Delete(NEXMO_APPLICATION_ID);
+            var response = client.ApplicationV2.Delete(NEXMO_APPLICATION_ID);
 
-            return resposne;
+            return response;
         }
     }
 }
