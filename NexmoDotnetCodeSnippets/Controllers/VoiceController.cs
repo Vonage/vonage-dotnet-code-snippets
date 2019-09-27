@@ -29,7 +29,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpGet]
         public ActionResult MakeCall()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpPost]
@@ -66,7 +66,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
 
             ViewData.Add("results", results);
 
-            return View();
+            return View("Index");
         }
 
         [HttpPost]
