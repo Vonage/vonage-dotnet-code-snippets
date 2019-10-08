@@ -77,6 +77,27 @@ namespace NexmoDotnetCodeSnippets.Controllers
             }
             return View("Index");
         }
+        [HttpPost]
+        public ActionResult SendSignedSms(string to, string from, string message, string NEXMO_API_KEY, string NEXMO_API_SIGNATURE_SECRET)
+        {
+            var results = SMSSender.SendSignedSms(to, from, message, NEXMO_API_KEY, NEXMO_API_SIGNATURE_SECRET);
+
+            if (results.messages.Count >= 1)
+            {
+                if (results.messages[0].status == "0")
+                {
+                    ViewBag.unicoderesult = "Message sent successfully.";
+                    Debug.WriteLine("Message sent successfully.");
+                }
+                else
+                {
+                    ViewBag.unicoderesult = $"Message failed with error: { results.messages[0].error_text}";
+                    Debug.WriteLine($"Message failed with error: {results.messages[0].error_text}");
+                }
+            }
+
+            return View("Index");
+        }
 
         [Microsoft.AspNetCore.Mvc.HttpGet]
         public ActionResult Receive([FromQuery]SMS.SMSInbound response)

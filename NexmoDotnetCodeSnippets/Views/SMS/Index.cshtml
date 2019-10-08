@@ -42,6 +42,29 @@
 <div style="width:50%; padding-top:10px">
     <div class="content">
         <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Send Unicode SMS</span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("SendSignedSms", "SMS", FormMethod.Post))
+            {
+                <input type="text" name="to" id="to" placeholder="To" style="height:30px" />
+                <br />
+                <input type="text" name="from" id="from" placeholder="from" style="height:30px" />
+                <br />
+                <input type="text" name="message" id="message" placeholder="message" style="height:30px" />
+                <br />
+                <input type="text" name="NEXMO_API_KEY" id="NEXMO_API_KEY" placeholder="Api Key" style="height:30px" />
+                <br />
+                <input type="text" name="NEXMO_API_SIGNATURE_SECRET" id="NEXMO_API_SIGNATURE_SECRET" placeholder="Signature Secret" style="height:30px" />
+                <input type="submit" value="Send" style="height:30px;" />
+            }
+        </div>
+        <h2> @ViewBag.unicoderesult</h2>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
             <span style="vertical-align:central; text-align:center">Receive SMS</span>
         </div>
         <div style="height:150px; padding-top:20px">
