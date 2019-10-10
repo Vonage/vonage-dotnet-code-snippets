@@ -56,6 +56,8 @@
                 <input type="text" name="NEXMO_API_KEY" id="NEXMO_API_KEY" placeholder="Api Key" style="height:30px" />
                 <br />
                 <input type="text" name="NEXMO_API_SIGNATURE_SECRET" id="NEXMO_API_SIGNATURE_SECRET" placeholder="Signature Secret" style="height:30px" />
+                <br />
+                @Html.DropDownList("method", new SelectList(Enum.GetValues(typeof(Nexmo.Api.Cryptography.SmsSignatureGenerator.Method))), "Select method", new { @class = "form-control", @style = "height:30px" })
                 <input type="submit" value="Send" style="height:30px;" />
             }
         </div>
