@@ -142,7 +142,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
             var queryDictionary = HttpContext.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
             var signatureString = SMS.SMSInbound.ConstructSignatureStringFromDictionary(queryDictionary);
             var NEXMO_SECRET_SIGNATURE_KEY = "NEXMO_SECRET_SIGNATURE_KEY";
-            var method = SmsSignatureGenerator.Method.sha512;
+            var method = SmsSignatureGenerator.Method.md5hash;
             var testSig = SmsSignatureGenerator.GenerateSignature(signatureString, NEXMO_SECRET_SIGNATURE_KEY, method);
             var match = response.sig == testSig;
 
