@@ -1,5 +1,6 @@
 ﻿using Nexmo.Api;
 using NexmoDotnetCodeSnippets.Authentication;
+using Nexmo.Api.Cryptography;
 
 namespace NexmoDotnetCodeSnippets.Senders
 {
@@ -36,12 +37,13 @@ namespace NexmoDotnetCodeSnippets.Senders
             return results;
         }
 
-        public static SMS.SMSResponse SendSignedSms(string TO_NUMBER, string NEXMO_BRAND_NAME, string message, string NEXMO_API_KEY, string NEXMO_API_SIGNATURE_SECRET)
+        public static SMS.SMSResponse SendSignedSms(string TO_NUMBER, string NEXMO_BRAND_NAME, string message, string NEXMO_API_KEY, string NEXMO_API_SIGNATURE_SECRET, SmsSignatureGenerator.Method method)
         {
             var client = new Nexmo.Api.Client(new Nexmo.Api.Request.Credentials()
             {
                 ApiKey = NEXMO_API_KEY,
-                SecuritySecret = NEXMO_API_SIGNATURE_SECRET
+                SecuritySecret = NEXMO_API_SIGNATURE_SECRET,
+                Method = method
             });
             var results = client.SMS.Send(new SMS.SMSRequest
             {

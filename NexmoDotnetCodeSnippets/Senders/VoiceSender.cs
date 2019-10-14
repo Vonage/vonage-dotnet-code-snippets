@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Nexmo.Api.Request;
 using Nexmo.Api.Voice;
+using Nexmo.Api.Voice.Nccos;
 using NexmoDotnetCodeSnippets.Authentication;
 
 namespace NexmoDotnetCodeSnippets.Senders
@@ -37,6 +38,9 @@ namespace NexmoDotnetCodeSnippets.Senders
         {
             var client = FullAuth.GetClient();
 
+            var talkAction = new TalkAction() { Text = "This is a text to speech call from Nexmo" };
+            var ncco = new Ncco(talkAction);
+
             var results = client.Call.Do(new Call.CallCommand
             {
                 to = new[]
@@ -52,20 +56,9 @@ namespace NexmoDotnetCodeSnippets.Senders
                     number = NEXMO_NUMBER
                 },
 
-                Ncco = CreateNCCO()
+                Ncco = ncco
             });
             return results;
-        }
-
-        private static JArray CreateNCCO()
-        {
-            dynamic TalkNCCO = new JObject();
-            TalkNCCO.action = "talk";
-            TalkNCCO.text = "This is a text to speech call from Nexmo";
-
-            JArray ncco = new JArray();
-            ncco.Add(TalkNCCO);
-            return ncco;
         }
 
         public static Call.CallResponse GetCall(string UUID)
@@ -209,6 +202,24 @@ namespace NexmoDotnetCodeSnippets.Senders
 
             var response = client.Call.GetRecording(recordingUrl);
 
+            return response;
+        }
+
+        public static Call.CallResponse TransferCallWithInlineNCCO(string UUID)
+        {
+            var client = FullAuth.GetClient();
+            var talkAction = new TalkAction() { Text = "This is a transfer action using an inline NCCO" };
+            var ncco = new Ncco(talkAction);
+            var response = client.Call.Edit(UUID,
+                new Call.CallEditCommand()
+                {
+                    Action = "transfer",
+                    Destination = new Call.Destination()
+                    {
+                        Type = "ncco",
+                        Ncco = ncco
+                    }
+                });
             return response;
         }
     }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Nexmo.Api;
+using Nexmo.Api.Cryptography;
+using NexmoDotnetCodeSnippets.Senders;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Nexmo.Api;
-using NexmoDotnetCodeSnippets.Senders;
 
 namespace NexmoDotnetCodeSnippets.Controllers
 {
@@ -78,9 +76,9 @@ namespace NexmoDotnetCodeSnippets.Controllers
             return View("Index");
         }
         [HttpPost]
-        public ActionResult SendSignedSms(string to, string from, string message, string NEXMO_API_KEY, string NEXMO_API_SIGNATURE_SECRET)
+        public ActionResult SendSignedSms(string to, string from, string message, string NEXMO_API_KEY, string NEXMO_API_SIGNATURE_SECRET, SmsSignatureGenerator.Method method )
         {
-            var results = SMSSender.SendSignedSms(to, from, message, NEXMO_API_KEY, NEXMO_API_SIGNATURE_SECRET);
+            var results = SMSSender.SendSignedSms(to, from, message, NEXMO_API_KEY, NEXMO_API_SIGNATURE_SECRET, method);
 
             if (results.messages.Count >= 1)
             {
@@ -137,6 +135,27 @@ namespace NexmoDotnetCodeSnippets.Controllers
             Debug.WriteLine("------------------------------------");
 
             return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status200OK);
+        }
+
+        public ActionResult Validate([FromQuery]SMS.SMSInbound response)
+        {
+            var queryDictionary = HttpContext.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+            var signatureString = SMS.SMSInbound.ConstructSignatureStringFromDictionary(queryDictionary);
+            var NEXMO_SECRET_SIGNATURE_KEY = "NEXMO_SECRET_SIGNATURE_KEY";
+            var method = SmsSignatureGenerator.Method.md5hash;
+            var testSig = SmsSignatureGenerator.GenerateSignature(signatureString, NEXMO_SECRET_SIGNATURE_KEY, method);
+            var match = response.sig == testSig;
+
+            if (match)
+            {
+                Debug.WriteLine("Valid Signature");
+            }
+            else
+            {
+                Debug.WriteLine("Invalid Signature");
+            }
+
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }

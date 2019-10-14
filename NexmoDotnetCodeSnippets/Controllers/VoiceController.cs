@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nexmo.Api;
 using NexmoDotnetCodeSnippets.Senders;
 using System.Threading;
 
@@ -8,18 +7,10 @@ namespace NexmoDotnetCodeSnippets.Controllers
 {
     public class VoiceController : Controller
     {
-        public Client Client { get; set; }
         const string UIDD = "_UIDD";
 
         public VoiceController()
         {
-            Client = new Client(creds: new Nexmo.Api.Request.Credentials
-            {
-                ApiKey = "NEXMO_API_KEY",
-                ApiSecret = "NEXMO_API_SECRET",
-                ApplicationId = "NEXMO_APPLICATION_ID",
-                ApplicationKey = "NEXMO_APPLICATION_PRIVATE_KEY"
-            });
         }
         public IActionResult Index()
         {
@@ -35,7 +26,6 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpPost]
         public ActionResult MakeCall(string to, string from)
         {
-            var TO_NUMBER = to;
             var NEXMO_NUMBER = from;
 
             var results = VoiceSender.MakeCall(to, NEXMO_NUMBER);
@@ -62,7 +52,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpGet]
         public ActionResult CallList()
         {
-            var results = Client.Call.List()._embedded.calls;
+            var results = VoiceSender.GetAllCalls()._embedded.calls;
 
             ViewData.Add("results", results);
 
@@ -139,31 +129,25 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [HttpPost]
-        public ActionResult PlayttsToCall()
+        public ActionResult PlayttsToCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = VoiceSender.PlayTtsToCall(UUID);
+            var result = VoiceSender.PlayTtsToCall(id);
 
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult PlayAudioStreamToCall()
+        public ActionResult PlayAudioStreamToCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = VoiceSender.PlayAudioStreamToCall(UUID);
+            var result = VoiceSender.PlayAudioStreamToCall(id);
 
             return View("Index");
         }
 
         [HttpPost]
-        public ActionResult PlayDTMFToCall()
+        public ActionResult PlayDTMFToCall(string id)
         {
-            var UUID = HttpContext.Session.GetString(UIDD);
-
-            var result = VoiceSender.PlayDTMFToCall(UUID);
+            var result = VoiceSender.PlayDTMFToCall(id);
 
             return View("Index");
         }
@@ -194,6 +178,13 @@ namespace NexmoDotnetCodeSnippets.Controllers
             var response = File(result.ResultStream, "audio/mpeg");
             response.FileDownloadName = fileName;
             return response;
+        }
+
+        [HttpPost]
+        public ActionResult TransferWithInlineNCCO(string id)
+        {
+            var result = VoiceSender.TransferCallWithInlineNCCO(id);
+            return View("Index");
         }
     }
 }
