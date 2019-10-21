@@ -154,7 +154,14 @@
                 <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
                 <input type="submit" value="Play DTMF to the current call" />
             }
+            @using (Html.BeginForm("TransferWithInlineNCCO", "Voice", FormMethod.Post))
+            {
+                <br />
+                <input type="text" name="id" id="id" placeholder="id" style="height:30px" />
+                <input type="submit" value="Transfer With Inline NCCO" />
+            }
         </div>
+
     </div>
 </div>
 <div style="width:50%; padding-top:10px">
