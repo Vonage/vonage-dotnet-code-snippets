@@ -56,7 +56,7 @@ namespace NexmoDotnetCodeSnippets.Senders
                     number = NEXMO_NUMBER
                 },
 
-                Ncco = ncco
+                NccoObj = ncco
             });
             return results;
         }
