@@ -34,6 +34,25 @@ namespace NexmoDotnetCodeSnippets.Modules
             Post("/webhook/record", x => { return OnRecordComplete(); });
         }
 
+        private string OnRecordComplete()
+        {
+            var recordEvent = EventBase.ParseEvent(Request.Body.AsString()) as Record;
+            if (recordEvent != null)
+            {
+                Debug.WriteLine($"Recording URL: {recordEvent.RecordingUrl}");
+            }
+
+            var talkAction = new TalkAction()
+            {
+                Text = "Thank you for calling in the recording is now finished, have a nice day",
+                VoiceName = "Kimberly"
+            };
+
+            var ncco = new Ncco(talkAction);
+
+            return ncco.ToString();
+        }
+
         private Response OnAnswer()
         {
             switch (Mode)
@@ -84,6 +103,26 @@ namespace NexmoDotnetCodeSnippets.Modules
             };
 
             var ncco = new Ncco(talkAction, inputAction);
+            return ncco.ToString();
+        }
+
+        private Response GetDTMFInput()
+        {
+            var input = EventBase.ParseEvent(Request.Body.AsString()) as Input;
+
+            var talkNcco = new TalkAction();
+
+            if (input != null)
+            {
+                talkNcco.Text = $"You pressed {input.Dtmf}";
+            }
+            else
+            {
+                talkNcco.Text = "No input received";
+            }
+
+            var ncco = new Ncco(talkNcco);
+
             return ncco.ToString();
         }
 
@@ -139,25 +178,6 @@ namespace NexmoDotnetCodeSnippets.Modules
             return ncco.ToString();
         }
 
-        private string OnRecordComplete()
-        {
-            var recordEvent = EventBase.ParseEvent(Request.Body.AsString()) as Record;
-            if (recordEvent != null)
-            {
-                Debug.WriteLine($"Recording URL: {recordEvent.RecordingUrl}");
-            }
-
-            var talkAction = new TalkAction()
-            {
-                Text = "Thank you for calling in the recording is now finished, have a nice day",
-                VoiceName = "Kimberly"
-            };
-
-            var ncco = new Ncco(talkAction);
-
-            return ncco.ToString();
-        }
-
         private Response OnAnswerConnect()
         {
             var talkAction = new TalkAction()
@@ -176,26 +196,6 @@ namespace NexmoDotnetCodeSnippets.Modules
             };
 
             var ncco = new Ncco(talkAction, connectAction);
-            return ncco.ToString();
-        }
-
-        private Response GetDTMFInput()
-        {
-            var input = EventBase.ParseEvent(Request.Body.AsString()) as Input;
-
-            var talkNcco = new TalkAction();
-
-            if (input != null)
-            {
-                talkNcco.Text = $"You pressed {input.Dtmf}";
-            }
-            else
-            {
-                talkNcco.Text = "No input received";
-            }
-
-            var ncco = new Ncco(talkNcco);
-
             return ncco.ToString();
         }
 
