@@ -38,6 +38,22 @@
 <div style="width:50%; padding-top:10px">
     <div class="content">
         <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Track in progress NCCO</span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("TrackInProgressNCCO", "Voice", FormMethod.Post))
+            {
+                <input type="text" name="TO_NUMBER" id="TO_NUMBER" placeholder="To" style="height:30px" />
+                <input type="text" name="NEXMO_NUMBER" id="NEXMO_NUMBER" placeholder="From" style="height:30px" />
+                <input type="submit" value="Call" style="height:30px; width:50px" />
+            }
+            <h4>@ViewBag.trackNccoCallResult</h4>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
             <span style="vertical-align:central; text-align:center">Get Recording </span>
         </div>
         <div style="padding-top:20px">
