@@ -1,0 +1,100 @@
+﻿<header>
+    <h1>Code samples for using Nexmo Conversation API</h1>
+    <h3>Learn how to to build high-quality voice applications in the Cloud</h3>
+</header>
+
+<h2>Conversations</h2>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Create a Conversation </span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("CreateConversation", "Conversation", FormMethod.Post))
+            {
+                <input type="text" name="name" id="name" placeholder="name" style="height:30px" />
+                <input type="text" name="displayName" id="displayName" placeholder="display name" style="height:30px" />
+                <input type="text" name="imageUrl" id="imageUrl" placeholder="image url" style="height:30px" />
+                <input type="submit" value="Create" style="height:30px; width:50px" />
+            }
+            <h4>@ViewBag.CreateId</h4>
+            <h4>@ViewBag.CreateDisplayName</h4>
+            <h4>@ViewBag.CreateName</h4>
+            <h4>@ViewBag.CreateImageUrl</h4>
+            <h4>@ViewBag.CreateSelf</h4>
+            <h4>@ViewBag.CreateTimestamp</h4>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Get a Conversation </span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("GetConversation", "Conversation", FormMethod.Post))
+            {
+                <input type="text" name="id" id="id" placeholder="conversation Id" style="height:30px" />
+                <input type="submit" value="Get" style="height:30px; width:50px" />
+            }
+            <h4>@ViewBag.GetId</h4>
+            <h4>@ViewBag.GetDisplayName</h4>
+            <h4>@ViewBag.GetName</h4>
+            <h4>@ViewBag.GetImageUrl</h4>
+            <h4>@ViewBag.GetSelf</h4>
+            <h4>@ViewBag.GetTimestamp</h4>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Update a Conversation </span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("UpdateConversation", "Conversation", FormMethod.Post))
+            {
+            <input type="text" name="id" id="id" placeholder="conversation Id" style="height:30px" />
+                <input type="text" name="name" id="name" placeholder="name" style="height:30px" />
+                <input type="text" name="displayName" id="displayName" placeholder="display name" style="height:30px" />
+                <input type="text" name="imageUrl" id="imageUrl" placeholder="image url" style="height:30px" />
+                <input type="submit" value="Update" style="height:30px; width:50px" />
+            }
+            <h4>@ViewBag.UpdateId</h4>
+            <h4>@ViewBag.UpdateDisplayName</h4>
+            <h4>@ViewBag.UpdateName</h4>
+            <h4>@ViewBag.UpdateImageUrl</h4>
+            <h4>@ViewBag.UpdateSelf</h4>
+            <h4>@ViewBag.UpdateTimestamp</h4>
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">List Conversations</span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("ListConversations", "Conversation", FormMethod.Post))
+            {                
+                <input type="submit" value="List" style="height:30px; width:50px" />
+            }
+            <h4>@ViewBag.ConversationCount</h4>            
+        </div>
+    </div>
+</div>
+<div style="width:50%; padding-top:10px">
+    <div class="content">
+        <div class="title" style="height:20px; background-color:cornflowerblue; text-align:center">
+            <span style="vertical-align:central; text-align:center">Delete a Conversation </span>
+        </div>
+        <div style="padding-top:20px">
+            @using (Html.BeginForm("DeleteConversation", "Conversation", FormMethod.Post))
+            {
+                <input type="text" name="id" id="id" placeholder="conversation Id" style="height:30px" />
+                <input type="submit" value="Delete" style="height:30px; width:50px" />
+            }
+            <h4>@ViewBag.ConversationStatus</h4>            
+        </div>
+    </div>
+</div>
