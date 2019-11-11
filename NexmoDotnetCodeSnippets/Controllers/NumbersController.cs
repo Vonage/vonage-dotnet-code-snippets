@@ -63,19 +63,22 @@ namespace NexmoDotnetCodeSnippets.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchAvailableNumbers(string countryCode)
+        public ActionResult SearchAvailableNumbers(string country, string type, string features, string criteria, string pattern)
         {
-            var COUNTRY_CODE = countryCode;
-            var availableNumbers = Client.Number.Search(new Number.SearchRequest
-            {
-                country = COUNTRY_CODE
-            });
+            var availableNumbers = Senders.NumberSender.SearchNumbers(country, type, features, criteria, pattern);
 
             if(availableNumbers.count > 0)
             {
                 ViewBag.listResults = availableNumbers.numbers;
                 ViewBag.count = 10;
             }
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult ListOwnNumber(string criteria, string seachPattern)
+        {
+            var response = Senders.NumberSender.ListOwnNumbers(criteria, seachPattern);
             return View("Index");
         }
     }
