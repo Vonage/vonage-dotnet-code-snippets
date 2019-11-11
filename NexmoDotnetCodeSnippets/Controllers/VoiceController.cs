@@ -192,15 +192,12 @@ namespace NexmoDotnetCodeSnippets.Controllers
             return View("Index");
         }
 
-        [HttpPost]
-        public ActionResult TrackInProgressNCCO(string TO_NUMBER, string NEXMO_NUMBER)
+        [HttpGet]
+        public string AnswerForTrackInProgressNCCO()
         {
-            var client = FullAuth.GetClient();
-
             var talkAction = new TalkAction() { Text = "This is a text to speech call from Nexmo" };
 
-            var payload = new Dictionary<string, string>();
-            payload.Add("foo", "bar");
+            var payload = new Foo() { Bar = "Bar" };
 
             var nofityAction = new NotifyAction()
             {
@@ -212,43 +209,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
 
             var ncco = new Ncco(talkAction, nofityAction, talkAction2);
 
-            var command = new Call.CallCommand
-            {
-                to = new[]
-                {
-                    new Call.Endpoint {
-                        type = "phone",
-                        number = TO_NUMBER
-                    }
-                },
-                from = new Call.Endpoint
-                {
-                    type = "phone",
-                    number = NEXMO_NUMBER
-                },
-
-                NccoObj = ncco
-            };
-
-            var results = client.Call.Do(new Call.CallCommand
-            {
-                to = new[]
-                {
-                    new Call.Endpoint {
-                        type = "phone",
-                        number = TO_NUMBER
-                    }
-                },
-                from = new Call.Endpoint
-                {
-                    type = "phone",
-                    number = NEXMO_NUMBER
-                },
-
-                NccoObj = ncco
-            });
-            ViewBag.trackNccoCallResult = $"Call started. Call uuid is {results.uuid}";
-            return View("Index");
+            return ncco.ToString();
         }
 
         [HttpPost]
@@ -258,6 +219,11 @@ namespace NexmoDotnetCodeSnippets.Controllers
             var ncco = new Ncco(talkAction);
 
             return ncco.ToString();
+        }
+
+        class Foo
+        {
+            public string Bar { get; set; }
         }
     }
 }
