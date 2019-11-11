@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nexmo.Api.Voice;
+using Nexmo.Api.Voice.Nccos;
+using NexmoDotnetCodeSnippets.Authentication;
 using NexmoDotnetCodeSnippets.Senders;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace NexmoDotnetCodeSnippets.Controllers
@@ -8,6 +12,7 @@ namespace NexmoDotnetCodeSnippets.Controllers
     public class VoiceController : Controller
     {
         const string UIDD = "_UIDD";
+        const string SITE_BASE = @"SITE_BASE";
 
         public VoiceController()
         {
@@ -185,6 +190,40 @@ namespace NexmoDotnetCodeSnippets.Controllers
         {
             var result = VoiceSender.TransferCallWithInlineNCCO(id);
             return View("Index");
+        }
+
+        [HttpGet]
+        public string AnswerForTrackInProgressNCCO()
+        {
+            var talkAction = new TalkAction() { Text = "This is a text to speech call from Nexmo" };
+
+            var payload = new Foo() { Bar = "Bar" };
+
+            var nofityAction = new NotifyAction()
+            {
+                EventUrl = new[] { $"{SITE_BASE}/voice/Notify" },
+                Payload = payload
+            };
+
+            var talkAction2 = new TalkAction() { Text = "You'll never hear this talk action because the notification handler will return an NCCO" };
+
+            var ncco = new Ncco(talkAction, nofityAction, talkAction2);
+
+            return ncco.ToString();
+        }
+
+        [HttpPost]
+        public string Notify()
+        {
+            var talkAction = new TalkAction() { Text = "Hello, This is the talk action from the notify NCCO." };
+            var ncco = new Ncco(talkAction);
+
+            return ncco.ToString();
+        }
+
+        class Foo
+        {
+            public string Bar { get; set; }
         }
     }
 }
