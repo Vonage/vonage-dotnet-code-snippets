@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetCliCodeSnippets", "DotNetCliCodeSnippets\DotnetCliCodeSnippets.csproj", "{53ACD789-37CE-46B2-ACA0-A75D5752BC2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D15ECCC3-D70C-46FF-B6B2-496CED663916}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetWebhookCodeSnippets", "DotNetWebhookCodeSnippets\DotnetWebhookCodeSnippets.csproj", "{1FCFF60D-958E-4DAE-B890-214C05E750CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53ACD789-37CE-46B2-ACA0-A75D5752BC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53ACD789-37CE-46B2-ACA0-A75D5752BC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53ACD789-37CE-46B2-ACA0-A75D5752BC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53ACD789-37CE-46B2-ACA0-A75D5752BC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCFF60D-958E-4DAE-B890-214C05E750CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCFF60D-958E-4DAE-B890-214C05E750CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCFF60D-958E-4DAE-B890-214C05E750CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCFF60D-958E-4DAE-B890-214C05E750CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2EFD6AC-AE65-4AD5-A697-E97C15FB5C70}
+	EndGlobalSection
+EndGlobal
