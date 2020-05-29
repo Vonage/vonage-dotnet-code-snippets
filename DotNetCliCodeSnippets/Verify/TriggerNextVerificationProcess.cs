@@ -1,4 +1,4 @@
-﻿using Nexmo.Api.Client;
+﻿using Nexmo.Api;
 using Nexmo.Api.Request;
 using Nexmo.Api.Verify;
 using System;
@@ -20,7 +20,7 @@ namespace DotnetCliCodeSnippets.Verify
             var request = new VerifyControlRequest() { RequestId = REQUEST_ID, Cmd = "trigger_next_event" };
 
             var response = client.VerifyClient.VerifyControl(request);
-            Console.WriteLine($"Cancel Verify Request Complete\nStatus:{response.Status}");
+            Console.WriteLine($"Next Verify Request Triggered\nStatus:{response.Status}");
         }
     }
 }

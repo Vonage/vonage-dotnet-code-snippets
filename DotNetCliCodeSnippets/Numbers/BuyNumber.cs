@@ -2,7 +2,7 @@
 using Nexmo.Api.Request;
 using System.Collections.Generic;
 using System.Text;
-using Nexmo.Api.Client;
+using Nexmo.Api;
 using Nexmo.Api.Numbers;
 
 namespace DotnetCliCodeSnippets.Numbers

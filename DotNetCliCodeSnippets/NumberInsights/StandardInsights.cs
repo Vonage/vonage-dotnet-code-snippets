@@ -1,4 +1,4 @@
-﻿using Nexmo.Api.Client;
+﻿using Nexmo.Api;
 using Nexmo.Api.NumberInsights;
 using Nexmo.Api.Request;
 using System;

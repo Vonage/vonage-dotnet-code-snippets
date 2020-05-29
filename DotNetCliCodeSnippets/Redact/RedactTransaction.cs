@@ -1,4 +1,4 @@
-﻿using Nexmo.Api.Client;
+﻿using Nexmo.Api;
 using Nexmo.Api.Redaction;
 using Nexmo.Api.Request;
 using System;

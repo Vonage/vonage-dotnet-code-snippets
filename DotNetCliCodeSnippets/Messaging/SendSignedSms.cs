@@ -1,10 +1,10 @@
-﻿using Nexmo.Api.Client;
+﻿using Nexmo.Api;
 using Nexmo.Api.Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DotnetCliCodeSnippets
+namespace DotnetCliCodeSnippets.Messaging
 {
     public class SendSignedSms : ICodeSnippet
     {

@@ -1,4 +1,5 @@
-﻿using Nexmo.Api.Client;
+﻿using Nexmo.Api;
+using Nexmo.Api.Messaging;
 using Nexmo.Api.Request;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,12 @@ namespace DotnetCliCodeSnippets.Messaging
 
             var nexmoClient = new NexmoClient(credentials);
 
-            var response = nexmoClient.SmsClient.SendAnSms(new Nexmo.Api.Messaging.SendSmsRequest()
+            var response = nexmoClient.SmsClient.SendAnSms(new SendSmsRequest()
             {
                 To = TO_NUMBER,
                 From = NEXMO_BRAND_NAME,
                 Text = "こんにちは世界",
-                Type = "unicode"
+                Type = SmsType.unicode
             });
             Console.WriteLine(response.Messages[0].To);
         }

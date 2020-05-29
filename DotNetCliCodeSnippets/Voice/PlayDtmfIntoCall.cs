@@ -1,6 +1,6 @@
 ﻿using Nexmo.Api.Voice;
 using Nexmo.Api.Request;
-using Nexmo.Api.Client;
+using Nexmo.Api;
 using System;
 using System.Collections.Generic;
 using System.Text;

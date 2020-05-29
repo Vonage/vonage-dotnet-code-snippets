@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Nexmo.Api.Voice;
 using Nexmo.Api.Request;
-using Nexmo.Api.Client;
+using Nexmo.Api;
 
 namespace DotnetCliCodeSnippets.Voice
 {

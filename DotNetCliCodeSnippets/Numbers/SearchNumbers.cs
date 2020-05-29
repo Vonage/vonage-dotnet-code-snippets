@@ -1,6 +1,6 @@
 ﻿using Nexmo.Api.Numbers;
 using Nexmo.Api.Request;
-using Nexmo.Api.Client;
+using Nexmo.Api;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +18,7 @@ namespace DotnetCliCodeSnippets.Numbers
             var NEXMO_NUMBER_TYPE = Environment.GetEnvironmentVariable("NEXMO_NUMBER_TYPE") ?? "NEXMO_NUMBER_TYPE";
             var NEXMO_NUMBER_FEATURES = Environment.GetEnvironmentVariable("NEXMO_NUMBER_FEATURES") ?? "NEXMO_NUMBER_FEATURES";
             var NUMBER_SEARCH_CRITERIA = Environment.GetEnvironmentVariable("NUMBER_SEARCH_CRITERIA") ?? "NUMBER_SEARCH_CRITERIA";
-            var NUMBER_SEARCH_PATTERN = Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN") != null ? int.Parse(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN")) : 0;
+            var NUMBER_SEARCH_PATTERN = (SearchPattern)(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN") != null ? int.Parse(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN")) : 0);
 
             var credentials = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
             var client = new NexmoClient(credentials);
