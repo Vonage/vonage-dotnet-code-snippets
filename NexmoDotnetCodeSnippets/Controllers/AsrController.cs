@@ -18,8 +18,10 @@ namespace NexmoDotnetCodeSnippets.Controllers
         [HttpGet("/webhooks/answer")]
         public string Answer([FromQuery]Answer request)
         {
+            //when using ngrok swap out Request.Host for Request.Headers["X-Original-Host"]
+            var eventUrl = $"{Request.Scheme}://{Request.Host}/webhooks/asr";
             var speechSettings = new SpeechSettings {Language="en-US", EndOnSilence=1, Uuid = new[] { request.Uuid } };
-            var inputAction = new MultiInputAction { Speech = speechSettings, EventUrl = new[] { "http://ngrok.io.slorello.ngrok.io/webhooks/asr" } };
+            var inputAction = new MultiInputAction { Speech = speechSettings, EventUrl = new[] { eventUrl } };
 
             var talkAction = new TalkAction { Text = "Please speak now" };
 
