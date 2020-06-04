@@ -2,13 +2,11 @@
 
  <img src="https://developer.nexmo.com/assets/images/Vonage_Nexmo.svg" height="48px" alt="Nexmo is now known as Vonage" />
 
-<img src="https://developer.nexmo.com/assets/images/Vonage_Nexmo.svg" height="48px" alt="Nexmo is now known as Vonage" />
-
 The purpose of the code snippets project is to provide simple examples focused on one goal. For example, sending an SMS, handling an incoming SMS webhook or making a Text to Speech call.
 
-## Setup
+## Configure with Your Nexmo Credentials
 
-These code examples are meant to be used in the manner described on [Nexmo's Developer Portal](https://developer.nexmo.com) for example [Sending an SMS](https://developer.nexmo.com/messaging/sms/code-snippets/send-an-sms/dotnet). This repo is structured in such a way as to support internal testing. Developers are free to use these snippets as a reference - but they may require some changes to get them to work inside your application. 
+To use this sample you will first need a [Nexmo account](https://dashboard.nexmo.com/sign-up). Once you have your own API credentials, Create a Nexmo Client instance and pass in credentials in the constructor.
 
 Setting up environment variables
 
@@ -103,7 +101,7 @@ When routed through ngrok.
 
 For some of the examples, you will need to [buy a number](https://dashboard.nexmo.com/buy-numbers).
 
-### TLS Upgrade
+## TLS Upgrade
 
 Nexmo permanently disabled support of legacy TLSv1 and TLSv1.1 protocols. Vulnerabilities within these TLS versions are serious and, left unaddressed, put organizations at risk of being breached. The only supported encryption protocol for HTTPS connections is now TLSv1.2. All API requests and all web requests to the Nexmo Dashboard using legacy TLS protocols will be rejected.
 
