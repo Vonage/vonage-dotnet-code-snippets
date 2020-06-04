@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.WebPages;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Nexmo.Api;
@@ -17,16 +18,19 @@ namespace NexmoDotnetCodeSnippets.Controllers
     {
         [HttpGet("/webhooks/answer")]
         public string Answer([FromQuery]Answer request)
-        {            
-            var eventUrl = $"{Request.Scheme}://{Request.Host}/webhooks/asr";
+        {
+            var host = Request.Host.ToString();
+            //Uncomment the next line if using ngrok with --host-header option
+            //host = Request.Headers["X-Original-Host"];
+
+            var eventUrl = $"{Request.Scheme}://{host}/webhooks/asr";
             var speechSettings = new SpeechSettings {Language="en-US", EndOnSilence=1, Uuid = new[] { request.Uuid } };
             var inputAction = new MultiInputAction { Speech = speechSettings, EventUrl = new[] { eventUrl } };
 
             var talkAction = new TalkAction { Text = "Please speak now" };
 
             var ncco = new Ncco(talkAction, inputAction);
-            var ret = ncco.ToString();
-            return ret;
+            return ncco.ToString();
         }
 
         [HttpPost("/webhooks/asr")]
