@@ -1,5 +1,5 @@
 ﻿# Nexmo APIs code snippets for .NET using CSharp
- 
+
  <img src="https://developer.nexmo.com/assets/images/Vonage_Nexmo.svg" height="48px" alt="Nexmo is now known as Vonage" />
 
 The purpose of the code snippets project is to provide simple examples focused on one goal. For example, sending an SMS, handling an incoming SMS webhook or making a Text to Speech call.
@@ -8,13 +8,13 @@ The purpose of the code snippets project is to provide simple examples focused o
 
 To use this sample you will first need a [Nexmo account](https://dashboard.nexmo.com/sign-up). Once you have your own API credentials, Create a Nexmo Client instance and pass in credentials in the constructor.
 
-Setting up enviornment variables
+Setting up environment variables
 
-### Configuring Enviornment Variables
+### Configuring Environment Variables
 
-Open the sln file. For each project, right click and go to properties -> debug -> Enviornment Variables. Alternitively you can edit the enviornment variables in the Properties/launchSettings.json file associated with each project
+Open the sln file. For each project, right click and go to properties -> debug -> Environment Variables. Alternatively you can edit the environment variables in the Properties/launchSettings.json - there is a Properties/launchSettings.json.dist file present you can rename. This file has keys associated with each relevant property.
 
-### Enviornment Variable Reference
+### Environment Variable Reference
 
 Key | Description
 ----|------------
@@ -54,17 +54,18 @@ Key | Description
 `NEXMO_SECRET_ID` | The secret to revoke/retrieve
 `NEW_SECRET` | The new secret to use with this API key
 
-## Other option for setting Enviornment Variables
+## Other option for setting Environment Variables
 
-If you just want to set the enviornment variables via code you can do so by:
+If you just want to set the environment variables via code you can do so by:
 
 1. Remove the field from the Properties/launchSettings.Json file
 2. In the snippet - edit the string values on the right side of the `??` :
+
 ```csharp
 var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "CHANGE_ME";
 ```
 
-As the enviornment variable has been removed from the launchSettings.json file it will return null when read into the enviornment - causing the app to default to the alternate string value.
+As the environment variable has been removed from the launchSettings.json file it will return null when read into the environment - causing the app to default to the alternate string value.
 
 ## Running the Code Snippets
 
@@ -78,9 +79,9 @@ dotnet run --project .\DotNetCliCodeSnippets\DotnetCliCodeSnippets.csproj --s=Me
 
 ### Webhook snippets
 
-The webhook code snippets are designed to be run in an MVC controller in IIS or IIS Express. Each controller defintes it's own snippet or set of snippets.
+The webhook code snippets are designed to be run in an MVC controller in IIS or IIS Express. Each controller defines its own snippet or set of snippets.
 
-For example the inbound-sms snippet is located at 
+For example the inbound-sms snippet is located at
 
 `/sms/webhooks/inbound-sms`
 
@@ -88,7 +89,7 @@ For example the inbound-sms snippet is located at
 
 In order to test the incoming webhook data from Nexmo, the Nexmo API needs an externally accessible URL to send that data to. A commonly used service for development and testing is ngrok. The service will provide you with an externally available web address that creates a secure tunnel to your local environment. The [Nexmo Developer Platform](https://developer.nexmo.com/concepts/guides/testing-with-ngrok) has a guide to getting started with testing with ngrok. 
 
-Once you have your ngrok URL, you can enter your [Nexmo Dashboard](https://dashboard.nexmo.com) and supply it as the `EVENT URL` for any Nexmo service that sends event data via a webhook. A good test case is creating a Voice application and providing the ngrok URL in the following format as the event url: 
+Once you have your ngrok URL, you can enter your [Nexmo Dashboard](https://dashboard.nexmo.com) and supply it as the `EVENT URL` for any Nexmo service that sends event data via a webhook. A good test case is creating a Voice application and providing the ngrok URL in the following format as the event url:
 
 The snippet webhook path above is then translated to:
 
@@ -114,7 +115,7 @@ System.Net.ServicePointManager.SecurityProtocol =  System.Net.SecurityProtocolTy
 
 Please [raise an issue](https://github.com/Nexmo/nexmo-dotnet/issues) to request an example that isn't present within the code snippets. Pull requests will be gratefully received.
 
-## Contributing 
+## Contributing
 
 We ❤️ contributions from everyone! [Bug reports](https://github.com/Nexmo/nexmo-dotnet-code-snippets/issues), [bug fixes](https://github.com/Nexmo/nexmo-dotnet-code-snippets/pulls) and feedback on the application is always appreciated. Look at the [Contributor Guidelines](https://github.com/Nexmo/nexmo-dotnet-code-snippets/blob/master/CONTRIBUTING.md) for more information and please follow the [GitHub Flow](https://guides.github.com/introduction/flow/index.html).
 
