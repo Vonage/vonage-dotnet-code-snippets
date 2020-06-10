@@ -1,0 +1,45 @@
+{
+  "profiles": {
+    "DotNetCliCodeSnippets": {
+      "commandName": "Project",
+      "commandLineArgs": "-s=Redact.RedactTransaction",
+      "environmentVariables": {
+        "SMS_CALLBACK_URL": "https://www.example.com/sms_callback",
+        "NEXMO_API_KEY": "NEXMO_API_KEY",
+        "CODE": "CODE",
+        "NEXMO_APPLICATION_ID": "NEXMO_APPLICATION_ID",
+        "DIGITS": "DIGITS",
+        "API_KEY": "API_KEY",
+        "NEXMO_PRIVATE_KEY_PATH": "NEXMO_PRIVATE_KEY_PATH",
+        "VOICE_CALLBACK_VALUE": "VOICE_CALLBACK_VALUE",
+        "VOICE_CALLBACK_TYPE": "VOICE_CALLBACK_TYPE",
+        "NEXMO_API_SIGNATURE_SECRET": "NEXMO_API_SIGNATURE_SECRET",
+        "NEXMO_NUMBER": "NEXMO_NUMBER",
+        "NEXMO_API_SECRET": "NEXMO_API_SECRET",
+        "NEXMO_NUMBER_FEATURES": "NEXMO_NUMBER_FEATURES",
+        "TO_NUMBER": "TO_NUMBER",
+        "TEXT": "TEXT",
+        "NEXMO_REDACT_ID": "NEXMO_REDACT_ID",
+        "REQUEST_ID": "REQUEST_ID",
+        "INSIGHT_NUMBER": "INSIGHT_NUMBER",
+        "NEXMO_BRAND_NAME": "NEXMO_BRAND_NAME",
+        "UUID": "UUID",
+        "NUMBER_SEARCH_PATTERN": "NUMBER_SEARCH_PATTERN",
+        "NUMBER_SEARCH_CRITERIA": "NUMBER_SEARCH_CRITERIA",
+        "RECIPIENT_NUMBER": "RECIPIENT_NUMBER",
+        "NCCO_URL": "NCCO_URL",
+        "VOICE_STATUS_URL": "VOICE_STATUS_URL",
+        "BRAND_NAME": "BRAND_NAME",
+        "NEXMO_NUMBER_TYPE": "NEXMO_NUMBER_TYPE",
+        "COUNTRY_CODE": "COUNTRY_CODE",
+        "RECORDING_URL": "RECORDING_URL",
+        "URL": "URL",
+        "FROM_NUMBER": "FROM_NUMBER",
+        "NEXMO_REDACT_TYPE": "NEXMO_REDACT_TYPE",
+        "NEXMO_REDACT_PRODUCT": "NEXMO_REDACT_PRODUCT",
+        "NEXMO_SECRET_ID": "NEXMO_SECRET_ID",
+        "NEW_SECRET": "NEW_SECRET"
+      }
+    }
+  }
+}
