@@ -16,13 +16,16 @@ namespace DotNetWebhookCodeSnippets.Controllers
         [HttpGet("webhooks/answer")]
         public string Answer()
         {
-            var sitebase = $"{Request.Scheme}://{Request.Host}";
-            sitebase = "http://ngrok.io.slorello.ngrok.io/HandlDtmfInput";
+            var host = Request.Host.ToString();
+            //Uncomment the next line if using ngrok with --host-header option
+            //host = Request.Headers["X-Original-Host"];
+
+            var eventUrl = $"{Request.Scheme}://{host}/webhooks/dtmf";
 
             var talkAction = new TalkAction() { Text = "Hello please press any key to continue" };
             var inputAction = new InputAction()
             {
-                EventUrl = new[] { $"{sitebase}/webhooks/dtmf" },
+                EventUrl = new[] { eventUrl },
                 MaxDigits = 1
             };
             var ncco = new Ncco(talkAction, inputAction);

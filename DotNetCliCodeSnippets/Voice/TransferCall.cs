@@ -1,10 +1,7 @@
 ﻿using Nexmo.Api;
 using Nexmo.Api.Request;
 using Nexmo.Api.Voice;
-using Nexmo.Api.Voice.Nccos;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DotnetCliCodeSnippets.Voice
 {

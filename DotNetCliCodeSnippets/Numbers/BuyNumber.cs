@@ -1,9 +1,7 @@
-﻿using System;
-using Nexmo.Api.Request;
-using System.Collections.Generic;
-using System.Text;
-using Nexmo.Api;
+﻿using Nexmo.Api;
 using Nexmo.Api.Numbers;
+using Nexmo.Api.Request;
+using System;
 
 namespace DotnetCliCodeSnippets.Numbers
 {

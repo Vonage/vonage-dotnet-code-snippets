@@ -17,13 +17,16 @@ namespace DotnetWebhookCodeSnippets.Controllers
         [HttpGet("webhooks/answer")]
         public string Answer()
         {
-            var sitebase = $"{Request.Scheme}://{Request.Host}";
-            sitebase = "http://ngrok.io.slorello.ngrok.io/TrackNcco";
+            var host = Request.Host.ToString();
+            //Uncomment the next line if using ngrok with --host-header option
+            //host = Request.Headers["X-Original-Host"];
+
+            var eventUrl = $"{Request.Scheme}://{host}/webhooks/dtmf";
 
             var talkAction = new TalkAction() { Text = "Thanks for calling the notification line" };
             var notifyAction = new NotifyAction()
             {
-                EventUrl = new[] { $"{sitebase}/webhooks/notification" },
+                EventUrl = new[] { eventUrl },
                 Payload = new FooBar() { Foo = "bar" }
             };
             var talkAction2 = new TalkAction() { Text = "You will never hear me as the notification URL will return an NCCO" };

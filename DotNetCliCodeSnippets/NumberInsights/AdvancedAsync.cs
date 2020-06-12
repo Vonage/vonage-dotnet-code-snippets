@@ -14,7 +14,7 @@ namespace DotnetCliCodeSnippets.NumberInsights
             var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
             var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
             var INSIGHT_NUMBER = Environment.GetEnvironmentVariable("INSIGHT_NUMBER") ?? "INSIGHT_NUMBER";
-            var callbackUrl = "http://ngrok.io.slorello.ngrok.io/numberinsights/webhooks/insight";
+            var callbackUrl = "https://demo.ngrok.io/webhooks/insight";
 
             var creds = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
             var client = new NexmoClient(creds);
