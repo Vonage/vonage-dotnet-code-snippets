@@ -24,7 +24,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
             //Uncomment the next line if using ngrok with --host-header option
             //host = Request.Headers["X-Original-Host"];
 
-            var eventUrl = $"{Request.Scheme}://{host}/webhooks/dtmf";
+            var eventUrl = $"{Request.Scheme}://{host}/SplitAudio/webhooks/recording";
             var talkAction = new TalkAction{ Text = "recording call", BargeIn="false" };
             var recordAction = new RecordAction()
             {

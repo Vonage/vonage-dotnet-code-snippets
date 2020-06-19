@@ -17,7 +17,10 @@ namespace DotNetWebhookCodeSnippets.Controllers
         [HttpGet("webhooks/answer")]
         public string Answer()
         {
-            var sitebase = $"{Request.Scheme}://{Request.Host}";
+            var host = Request.Host.ToString();
+            //Uncomment the next line if using ngrok with --host-header option
+            //host = Request.Headers["X-Original-Host"];
+            var sitebase = $"{Request.Scheme}://{host}";
             var outGoingAction = new TalkAction() { Text = "Please leave a message after the tone, then press #. We will get back to you as soon as we can" };            
             var recordAction = new RecordAction()
             {

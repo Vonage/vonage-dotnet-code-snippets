@@ -11,17 +11,16 @@ using Nexmo.Api.Voice.Nccos;
 
 namespace DotnetWebhookCodeSnippets.Controllers
 {
-    [Route("[controller]")]
     public class TrackNccoController : Controller
     {
-        [HttpGet("webhooks/answer")]
+        [HttpGet("[controller]/webhooks/answer")]
         public string Answer()
         {
             var host = Request.Host.ToString();
             //Uncomment the next line if using ngrok with --host-header option
             //host = Request.Headers["X-Original-Host"];
 
-            var eventUrl = $"{Request.Scheme}://{host}/webhooks/dtmf";
+            var eventUrl = $"{Request.Scheme}://{host}/webhooks/notification";
 
             var talkAction = new TalkAction() { Text = "Thanks for calling the notification line" };
             var notifyAction = new NotifyAction()

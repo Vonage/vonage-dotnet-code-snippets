@@ -7,7 +7,6 @@ using System.Text;
 
 namespace DotnetWebhookCodeSnippets.Controllers
 {
-    [Route("[controller]")]
     public class NumberInsightsController : Controller
     {
         [HttpPost("webhooks/insight")]

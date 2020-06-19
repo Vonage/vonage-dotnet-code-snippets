@@ -10,10 +10,9 @@ using Nexmo.Api.Voice.Nccos;
 
 namespace DotNetWebhookCodeSnippets.Controllers
 {
-    [Route("[controller]")]
     public class HandlDtmfInputController : Controller
     {
-        [HttpGet("webhooks/answer")]
+        [HttpGet("[controller]/webhooks/answer")]
         public string Answer()
         {
             var host = Request.Host.ToString();

@@ -20,7 +20,10 @@ namespace DotNetWebhookCodeSnippets.Controllers
         {
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
             var NEXMO_NUMBER = Environment.GetEnvironmentVariable("NEXMO_NUMBER") ?? "NEXMO_NUMBER";
-            var sitebase = $"{Request.Scheme}://{Request.Host}";            
+            var host = Request.Host.ToString();
+            //Uncomment the next line if using ngrok with --host-header option
+            //host = Request.Headers["X-Original-Host"];
+            var sitebase = $"{Request.Scheme}://{host}";
 
             var recordAction = new RecordAction()
             {

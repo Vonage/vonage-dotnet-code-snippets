@@ -3,6 +3,7 @@ using Nexmo.Api.Request;
 using Nexmo.Api.Voice;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace DotnetCliCodeSnippets.Voice
@@ -19,7 +20,7 @@ namespace DotnetCliCodeSnippets.Voice
             var client = new NexmoClient(credentials);
 
             var response = client.VoiceClient.GetRecording(RECORDING_URL);
-
+            File.WriteAllBytes("your_recording.mp3", response.ResultStream);
             Console.WriteLine($"Recording size: {response.ResultStream.Length}");
         }
     }
