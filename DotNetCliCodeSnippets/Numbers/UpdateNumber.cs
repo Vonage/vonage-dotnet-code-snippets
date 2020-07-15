@@ -19,6 +19,8 @@ namespace DotnetCliCodeSnippets.Numbers
 
             var SMS_CALLBACK_URL = Environment.GetEnvironmentVariable("SMS_CALLBACK_URL") ?? "SMS_CALLBACK_URL";
             
+            var NEXMO_APPLICATION_ID = Environment.GetEnvironmentVariable("NEXMO_APPLICATION_ID") ?? "NEXMO_APPLICATION_ID";
+
             var VOICE_CALLBACK_TYPE = Environment.GetEnvironmentVariable("VOICE_CALLBACK_TYPE") ?? "VOICE_CALLBACK_TYPE";
             var VOICE_CALLBACK_VALUE = Environment.GetEnvironmentVariable("VOICE_CALLBACK_VALUE") ?? "VOICE_CALLBACK_VALUE";
             var VOICE_STATUS_URL = Environment.GetEnvironmentVariable("VOICE_STATUS_URL") ?? "VOICE_STATUS_URL";
@@ -32,6 +34,7 @@ namespace DotnetCliCodeSnippets.Numbers
                 Country = COUNTRY_CODE,
                 Msisdn = NEXMO_NUMBER,
                 MoHttpUrl = SMS_CALLBACK_URL,
+                AppId = NEXMO_APPLICATION_ID,
                 VoiceCallbackType = VOICE_CALLBACK_TYPE,
                 VoiceCallbackValue = VOICE_CALLBACK_VALUE,
                 VoiceStatusCallback = VOICE_STATUS_URL
