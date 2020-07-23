@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Nexmo.Api.Utility;
 using Nexmo.Api.Voice.EventWebhooks;
 using Nexmo.Api.Voice.Nccos;
 using Nexmo.Api.Voice.Nccos.Endpoints;
@@ -16,7 +17,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
     public class SplitAudioController : Controller
     {
         [HttpGet("webhooks/answer")]
-        public string Answer()
+        public IActionResult Answer()
         {
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
             var NEXMO_NUMBER = Environment.GetEnvironmentVariable("NEXMO_NUMBER") ?? "NEXMO_NUMBER";
@@ -41,20 +42,14 @@ namespace DotNetWebhookCodeSnippets.Controllers
 
             };
 
-            var ncco = new Ncco(talkAction, recordAction, connectAction);
-            var json = ncco.ToString();
-            return json;
+            var ncco = new Ncco(talkAction, recordAction, connectAction);            
+            return Ok(ncco.ToString());
         }
 
         [HttpPost("webhooks/recording")]
-        public IActionResult Recording()
+        public async Task<IActionResult> Recording()
         {
-            Record record;
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                record = JsonConvert.DeserializeObject<Record>(reader.ReadToEndAsync().Result);
-            }
-
+            var record = await WebhookParser.ParseWebhookAsync<Record>(Request.Body, Request.ContentType);
             Console.WriteLine($"Record event received on webhook - URL: {record?.RecordingUrl}");
             return StatusCode(204);
         }

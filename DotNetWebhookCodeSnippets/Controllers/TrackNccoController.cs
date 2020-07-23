@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Nexmo.Api.Utility;
 using Nexmo.Api.Voice.EventWebhooks;
 using Nexmo.Api.Voice.Nccos;
 
@@ -14,7 +15,7 @@ namespace DotnetWebhookCodeSnippets.Controllers
     public class TrackNccoController : Controller
     {
         [HttpGet("[controller]/webhooks/answer")]
-        public string Answer()
+        public IActionResult Answer()
         {
             var host = Request.Host.ToString();
             //Uncomment the next line if using ngrok with --host-header option
@@ -30,23 +31,17 @@ namespace DotnetWebhookCodeSnippets.Controllers
             };
             var talkAction2 = new TalkAction() { Text = "You will never hear me as the notification URL will return an NCCO" };
             var ncco = new Ncco(talkAction, notifyAction, talkAction2);
-            return ncco.ToString();
+            return Ok(ncco.ToString());
         }
 
         [HttpPost("webhooks/notification")]
-        public string Notify()
+        public async Task<IActionResult> Notify()
         {
-            string json;
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                json = reader.ReadToEndAsync().Result;                
-            }
-            var notification = JsonConvert.DeserializeObject<Notification<FooBar>>(json);
-
+            var notification = await WebhookParser.ParseWebhookAsync<Notification<FooBar>>(Request.Body, Request.ContentType);
             Console.WriteLine($"Notification received payload's foo = {notification.Payload.Foo}");
             var talkAction = new TalkAction() { Text = "Your notification has been received, loud and clear" };
             var ncco = new Ncco(talkAction);
-            return ncco.ToString();
+            return Ok(ncco.ToString());
         }
 
         public class FooBar
