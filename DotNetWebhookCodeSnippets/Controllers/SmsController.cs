@@ -6,34 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Nexmo.Api;
 using Nexmo.Api.Messaging;
+using Nexmo.Api.Utility;
 
 namespace DotnetWebhookCodeSnippets.Controllers
 {
-    [Route("[controller]")]
     public class SmsController : Controller
     {
-        [HttpPost("webhooks/inbound-sms")]        
+        [HttpGet("webhooks/inbound-sms")]        
         public IActionResult InboundSms()
-        {
-            InboundSms sms;
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                sms = JsonConvert.DeserializeObject<InboundSms>(reader.ReadToEndAsync().Result);
-            }
+        {            
+            var sms = WebhookParser.ParseQuery<InboundSms>(Request.Query);
             Console.WriteLine($"SMS Received with message: {sms.Text}");
             return NoContent();
         }
 
-        [HttpPost("webhooks/delivery-receipt")]
-        public IActionResult DeliveryReceipt()
+        [HttpGet("webhooks/delivery-receipt")]
+        public async Task<IActionResult> DeliveryReceipt()
         {
-            DeliveryReceipt dlr;
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                dlr = JsonConvert.DeserializeObject<DeliveryReceipt>(reader.ReadToEndAsync().Result);
-            }
-            Console.WriteLine($"Delivery receipt received for messages {dlr.MessageId}");
+            var dlr = WebhookParser.ParseQuery<DeliveryReceipt>(Request.Query);
+            Console.WriteLine($"Delivery receipt received for messages {dlr.MessageId} at {dlr.MessageTimestamp}");
             return NoContent();
         }
 
@@ -41,11 +34,7 @@ namespace DotnetWebhookCodeSnippets.Controllers
         public IActionResult VerifySms()
         {
             var NEXMO_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SIGNATURE_SECRET") ?? "NEXMO_API_SIGNATURE_SECRET";
-            InboundSms sms;
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                sms = JsonConvert.DeserializeObject<InboundSms>(reader.ReadToEndAsync().Result);
-            }
+            var sms = WebhookParser.ParseQuery<InboundSms>(Request.Query);
             if (sms.ValidateSignature(NEXMO_API_SIGNATURE_SECRET, Nexmo.Api.Cryptography.SmsSignatureGenerator.Method.sha512))
             {
                 Console.WriteLine("Signature is valid");

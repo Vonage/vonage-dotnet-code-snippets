@@ -9,6 +9,7 @@ using Nexmo.Api.Voice.EventWebhooks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using Nexmo.Api.Utility;
 
 namespace DotNetWebhookCodeSnippets.Controllers
 {
@@ -16,7 +17,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
     public class RecordCallController : Controller
     {   
         [HttpGet("webhooks/answer")]
-        public string Answer()
+        public IActionResult Answer()
         {
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
             var NEXMO_NUMBER = Environment.GetEnvironmentVariable("NEXMO_NUMBER") ?? "NEXMO_NUMBER";
@@ -33,20 +34,14 @@ namespace DotNetWebhookCodeSnippets.Controllers
 
             var connectAction = new ConnectAction() { From = NEXMO_NUMBER, Endpoint = new[] { new PhoneEndpoint{ Number = TO_NUMBER } } };
 
-            var ncco = new Ncco(recordAction, connectAction);
-            var json = ncco.ToString();
-            return json;
+            var ncco = new Ncco(recordAction, connectAction);            
+            return Ok(ncco.ToString());
         }
                 
         [HttpPost("webhooks/recording")]
-        public IActionResult Recording()
-        {
-            Record record;
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                record = JsonConvert.DeserializeObject<Record>(reader.ReadToEndAsync().Result);
-            }
-            
+        public async Task<IActionResult> Recording()
+        {            
+            var record = await WebhookParser.ParseWebhookAsync<Record>(Request.Body, Request.ContentType);            
             Console.WriteLine($"Record event received on webhook - URL: {record?.RecordingUrl}");
             return StatusCode(204);
         }
