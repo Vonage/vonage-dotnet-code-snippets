@@ -30,12 +30,12 @@ namespace DotnetWebhookCodeSnippets.Controllers
             return NoContent();
         }
 
-        [HttpPost("webhooks/verify-sms")]
+        [HttpGet("webhooks/verify-sms")]
         public IActionResult VerifySms()
         {
             var NEXMO_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SIGNATURE_SECRET") ?? "NEXMO_API_SIGNATURE_SECRET";
             var sms = WebhookParser.ParseQuery<InboundSms>(Request.Query);
-            if (sms.ValidateSignature(NEXMO_API_SIGNATURE_SECRET, Nexmo.Api.Cryptography.SmsSignatureGenerator.Method.sha512))
+            if (sms.ValidateSignature(NEXMO_API_SIGNATURE_SECRET, Nexmo.Api.Cryptography.SmsSignatureGenerator.Method.md5hash))
             {
                 Console.WriteLine("Signature is valid");
             }
