@@ -13,7 +13,6 @@ using Nexmo.Api.Utility;
 
 namespace DotnetWebhookCodeSnippets.Controllers
 {
-    //[Route("[controller]")]
     public class AsrController : Controller
     {
         [HttpGet("[controller]/webhooks/answer")]
