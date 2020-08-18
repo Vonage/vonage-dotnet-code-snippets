@@ -1,6 +1,6 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Messaging;
-using Nexmo.Api.Request;
+﻿using Vonage;
+using Vonage.Messaging;
+using Vonage.Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,21 +12,21 @@ namespace DotnetCliCodeSnippets.Messaging
         public void Execute()
         {
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var NEXMO_BRAND_NAME = Environment.GetEnvironmentVariable("NEXMO_BRAND_NAME") ?? "NEXMO_BRAND_NAME";
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
+            var VONAGE_BRAND_NAME = Environment.GetEnvironmentVariable("VONAGE_BRAND_NAME") ?? "VONAGE_BRAND_NAME";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
 
             var credentials = Credentials.FromApiKeyAndSecret(
-                NEXMO_API_KEY,
-                NEXMO_API_SECRET
+                VONAGE_API_KEY,
+                VONAGE_API_SECRET
                 );
 
-            var nexmoClient = new NexmoClient(credentials);
+            var VonageClient = new VonageClient(credentials);
 
-            var response = nexmoClient.SmsClient.SendAnSms(new SendSmsRequest()
+            var response = VonageClient.SmsClient.SendAnSms(new SendSmsRequest()
             {
                 To = TO_NUMBER,
-                From = NEXMO_BRAND_NAME,
+                From = VONAGE_BRAND_NAME,
                 Text = "こんにちは世界",
                 Type = SmsType.unicode
             });

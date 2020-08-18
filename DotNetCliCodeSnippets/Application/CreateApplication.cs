@@ -1,8 +1,8 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Request;
-using Nexmo.Api.Applications;
-using Nexmo.Api.Applications.Capabilities;
-using Webhook = Nexmo.Api.Common.Webhook;
+﻿using Vonage;
+using Vonage.Request;
+using Vonage.Applications;
+using Vonage.Applications.Capabilities;
+using Webhook = Vonage.Common.Webhook;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -14,11 +14,11 @@ namespace DotnetCliCodeSnippets.Application
         public void Execute()
         {
             var APPLICATION_NAME = Environment.GetEnvironmentVariable("APPLICATION_NAME") ?? "APPLICATION_NAME";
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
 
-            var credentials = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
-            var client = new NexmoClient(credentials);
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(credentials);
 
             var messagesWebhooks = new Dictionary<Webhook.Type, Webhook>();
             messagesWebhooks.Add(

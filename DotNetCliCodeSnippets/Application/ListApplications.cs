@@ -1,6 +1,6 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Request;
-using Nexmo.Api.Applications;
+﻿using Vonage;
+using Vonage.Request;
+using Vonage.Applications;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,11 +12,11 @@ namespace DotnetCliCodeSnippets.Application
     {
         public void Execute()
         {
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
 
-            var credentials = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
-            var client = new NexmoClient(credentials);
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(credentials);
 
             var request = new ListApplicationsRequest { Page = 1, PageSize = 10 };
             var response = client.ApplicationClient.ListApplications(request);

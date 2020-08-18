@@ -1,6 +1,6 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Numbers;
-using Nexmo.Api.Request;
+﻿using Vonage;
+using Vonage.Numbers;
+using Vonage.Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,14 +11,14 @@ namespace DotnetCliCodeSnippets.Numbers
     {
         public void Execute()
         {
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";            
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";            
                         
             var NUMBER_SEARCH_CRITERIA = Environment.GetEnvironmentVariable("NUMBER_SEARCH_CRITERIA") ?? "NUMBER_SEARCH_CRITERIA";
             var NUMBER_SEARCH_PATTERN = (SearchPattern)(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN") != null ? int.Parse(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN")) : 0);
 
-            var credentials = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
-            var client = new NexmoClient(credentials);
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(credentials);
 
             var request = new NumberSearchRequest() 
             { 

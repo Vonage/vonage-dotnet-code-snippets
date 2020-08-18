@@ -12,8 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "NEXMO_API_SIGNATURE_SECRET": "NEXMO_API_SIGNATURE_SECRET",
-        "NEXMO_NUMBER": "NEXMO_NUMBER",
+        "VONAGE_API_SIGNATURE_SECRET": "VONAGE_API_SIGNATURE_SECRET",
+        "VONAGE_NUMBER": "VONAGE_NUMBER",
         "TO_NUMBER": "TO_NUMBER",
         "YOUR_SECOND_NUMBER": "YOUR_SECOND_NUMBER",
         "ASPNETCORE_ENVIRONMENT": "Development"

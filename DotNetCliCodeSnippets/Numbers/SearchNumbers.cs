@@ -1,6 +1,6 @@
-﻿using Nexmo.Api.Numbers;
-using Nexmo.Api.Request;
-using Nexmo.Api;
+﻿using Vonage.Numbers;
+using Vonage.Request;
+using Vonage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,23 +11,23 @@ namespace DotnetCliCodeSnippets.Numbers
     {
         public void Execute()
         {
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
             var COUNTRY_CODE = Environment.GetEnvironmentVariable("COUNTRY_CODE") ?? "COUNTRY_CODE";            
 
-            var NEXMO_NUMBER_TYPE = Environment.GetEnvironmentVariable("NEXMO_NUMBER_TYPE") ?? "NEXMO_NUMBER_TYPE";
-            var NEXMO_NUMBER_FEATURES = Environment.GetEnvironmentVariable("NEXMO_NUMBER_FEATURES") ?? "NEXMO_NUMBER_FEATURES";
+            var VONAGE_NUMBER_TYPE = Environment.GetEnvironmentVariable("VONAGE_NUMBER_TYPE") ?? "VONAGE_NUMBER_TYPE";
+            var VONAGE_NUMBER_FEATURES = Environment.GetEnvironmentVariable("VONAGE_NUMBER_FEATURES") ?? "VONAGE_NUMBER_FEATURES";
             var NUMBER_SEARCH_CRITERIA = Environment.GetEnvironmentVariable("NUMBER_SEARCH_CRITERIA") ?? "NUMBER_SEARCH_CRITERIA";
             var NUMBER_SEARCH_PATTERN = (SearchPattern)(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN") != null ? int.Parse(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN")) : 0);
 
-            var credentials = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
-            var client = new NexmoClient(credentials);
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(credentials);
 
             var request = new NumberSearchRequest()
             {
                 Country = COUNTRY_CODE,
-                Type = NEXMO_NUMBER_TYPE,
-                Features = NEXMO_NUMBER_FEATURES,
+                Type = VONAGE_NUMBER_TYPE,
+                Features = VONAGE_NUMBER_FEATURES,
                 Pattern = NUMBER_SEARCH_CRITERIA,
                 SearchPattern = NUMBER_SEARCH_PATTERN
             };

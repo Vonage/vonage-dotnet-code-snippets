@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Nexmo.Api.Utility;
-using Nexmo.Api.Voice.EventWebhooks;
-using Nexmo.Api.Voice.Nccos;
-using Nexmo.Api.Voice.Nccos.Endpoints;
+using Vonage.Utility;
+using Vonage.Voice.EventWebhooks;
+using Vonage.Voice.Nccos;
+using Vonage.Voice.Nccos.Endpoints;
 
 namespace DotNetWebhookCodeSnippets.Controllers
 {
@@ -20,7 +20,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
         public IActionResult Answer()
         {
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var NEXMO_NUMBER = Environment.GetEnvironmentVariable("NEXMO_NUMBER") ?? "NEXMO_NUMBER";
+            var VONAGE_NUMBER = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";
             var host = Request.Host.ToString();
             //Uncomment the next line if using ngrok with --host-header option
             //host = Request.Headers["X-Original-Host"];
@@ -37,7 +37,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
 
             var connectAction = new ConnectAction() 
             { 
-                From = NEXMO_NUMBER, 
+                From = VONAGE_NUMBER, 
                 Endpoint = new[] { new PhoneEndpoint { Number = TO_NUMBER } }, 
 
             };

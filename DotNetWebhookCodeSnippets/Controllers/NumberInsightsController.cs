@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Nexmo.Api.NumberInsights;
-using Nexmo.Api.Utility;
+using Vonage.NumberInsights;
+using Vonage.Utility;
 using System;
 using System.IO;
 using System.Text;
