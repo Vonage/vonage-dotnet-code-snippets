@@ -20,7 +20,7 @@ Key | Description
 ----|------------
 `VONAGE_API_KEY` | Your API key
 `VONAGE_API_SECRET` | Vonage API secret
-`VONAGE_PRIVATE_KEY_PATH` | Path to a private key for your vonage app
+`VONAGE_PRIVATE_KEY_PATH` | Path to a private key for your Vonage app
 `VONAGE_APPLICATION_ID` | Your application ID
 `VONAGE_API_SIGNATURE_SECRET` | Vonage SIGNATURE_SECRET from the Dashboard. This is different to the usual API_SECRET.
 `CODE` | User Supplied Verification code (for checking verify requests)
@@ -41,7 +41,7 @@ Key | Description
 `NUMBER_SEARCH_PATTERN` | Whether to look for `NUMBER_SEARCH_CRITERIA` at the beginning of the number (`0`), anywhere within the number (`1`) or at the end of the number (`2`)
 `NUMBER_SEARCH_CRITERIA` | The number pattern you want to search for, e.g. `234`
 `RECIPIENT_NUMBER` | Telephone number to verify, in E.164 format
-`NCCO_URL` | The URL of the NCCO to transfer control to, eg `https://developer.nexmo.com/ncco/tts.json`
+`NCCO_URL` | The URL of the NCCO to transfer control to, eg `https://raw.githubusercontent.com/nexmo-community/ncco-examples/gh-pages/text-to-speech.json`
 `VOICE_STATUS_URL` | The webhook URL that Vonage makes a request to when a call completes
 `BRAND_NAME` | Included in the message to explain who is confirming the phone number
 `VONAGE_NUMBER_TYPE` | `landline`, `mobile-lvn` or `landline-toll-free`
