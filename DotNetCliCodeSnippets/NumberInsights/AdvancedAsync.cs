@@ -1,6 +1,6 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Request;
-using Nexmo.Api.NumberInsights;
+﻿using Vonage;
+using Vonage.Request;
+using Vonage.NumberInsights;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,13 +11,13 @@ namespace DotnetCliCodeSnippets.NumberInsights
     {
         public void Execute()
         {
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
             var INSIGHT_NUMBER = Environment.GetEnvironmentVariable("INSIGHT_NUMBER") ?? "INSIGHT_NUMBER";
             var callbackUrl = "https://demo.ngrok.io/webhooks/insight";
 
-            var creds = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
-            var client = new NexmoClient(creds);
+            var creds = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(creds);
 
             var request = new AdvancedNumberInsightAsynchronousRequest() { Number = INSIGHT_NUMBER, Callback = callbackUrl };
             var response = client.NumberInsightClient.GetNumberInsightAsync(request);

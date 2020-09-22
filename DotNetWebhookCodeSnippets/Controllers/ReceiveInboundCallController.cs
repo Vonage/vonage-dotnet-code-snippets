@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Nexmo.Api.Voice.AnswerWebhooks;
-using Nexmo.Api.Voice.EventWebhooks;
-using Nexmo.Api.Voice.Nccos;
+using Vonage.Voice.AnswerWebhooks;
+using Vonage.Voice.EventWebhooks;
+using Vonage.Voice.Nccos;
 using System.IO;
 using System.Text;
 

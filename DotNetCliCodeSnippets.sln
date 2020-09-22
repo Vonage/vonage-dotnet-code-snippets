@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D15ECCC3-D70C-46FF-B6B2-496CED663916}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetWebhookCodeSnippets", "DotNetWebhookCodeSnippets\DotnetWebhookCodeSnippets.csproj", "{1FCFF60D-958E-4DAE-B890-214C05E750CC}"

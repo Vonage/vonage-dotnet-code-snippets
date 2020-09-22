@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Nexmo.Api.Utility;
-using Nexmo.Api.Voice.EventWebhooks;
-using Nexmo.Api.Voice.Nccos;
+using Vonage.Utility;
+using Vonage.Voice.EventWebhooks;
+using Vonage.Voice.Nccos;
 
 namespace DotNetWebhookCodeSnippets.Controllers
 {

@@ -1,8 +1,8 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Request;
-using Nexmo.Api.Applications;
-using Nexmo.Api.Applications.Capabilities;
-using Webhook = Nexmo.Api.Common.Webhook;
+﻿using Vonage;
+using Vonage.Request;
+using Vonage.Applications;
+using Vonage.Applications.Capabilities;
+using Webhook = Vonage.Common.Webhook;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,12 +15,12 @@ namespace DotnetCliCodeSnippets.Application
         public void Execute()
         {
             var APPLICATION_NAME = Environment.GetEnvironmentVariable("APPLICATION_NAME") ?? "APPLICATION_NAME";
-            var NEXMO_APPLICATION_ID = Environment.GetEnvironmentVariable("NEXMO_APPLICATION_ID") ?? "NEXMO_APPLICATION_ID";
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SECRET") ?? "NEXMO_API_SECRET";
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
 
-            var credentials = Credentials.FromApiKeyAndSecret(NEXMO_API_KEY, NEXMO_API_SECRET);
-            var client = new NexmoClient(credentials);
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(credentials);
 
             var messagesWebhooks = new Dictionary<Webhook.Type, Webhook>();
             messagesWebhooks.Add(
@@ -51,7 +51,7 @@ namespace DotnetCliCodeSnippets.Application
                     Address = "https://example.com/webhooks/events",
                     Method = "POST"
                 });
-            var voiceCapability = new Nexmo.Api.Applications.Capabilities.Voice(voiceWebhooks);
+            var voiceCapability = new Vonage.Applications.Capabilities.Voice(voiceWebhooks);
             var rtcWebhooks = new Dictionary<Webhook.Type, Webhook>();
             rtcWebhooks.Add(Webhook.Type.event_url,
                 new Webhook
@@ -71,7 +71,7 @@ namespace DotnetCliCodeSnippets.Application
                     Vbc = vbcCapability 
                 } 
             };
-            var response = client.ApplicationClient.UpdateApplication(NEXMO_APPLICATION_ID, request);
+            var response = client.ApplicationClient.UpdateApplication(VONAGE_APPLICATION_ID, request);
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
     }

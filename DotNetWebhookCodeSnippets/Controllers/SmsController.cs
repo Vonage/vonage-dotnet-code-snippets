@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Nexmo.Api;
-using Nexmo.Api.Messaging;
-using Nexmo.Api.Utility;
+using Vonage;
+using Vonage.Messaging;
+using Vonage.Utility;
 
 namespace DotnetWebhookCodeSnippets.Controllers
 {
@@ -33,9 +33,9 @@ namespace DotnetWebhookCodeSnippets.Controllers
         [HttpGet("webhooks/verify-sms")]
         public IActionResult VerifySms()
         {
-            var NEXMO_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SIGNATURE_SECRET") ?? "NEXMO_API_SIGNATURE_SECRET";
+            var VONAGE_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SIGNATURE_SECRET") ?? "VONAGE_API_SIGNATURE_SECRET";
             var sms = WebhookParser.ParseQuery<InboundSms>(Request.Query);
-            if (sms.ValidateSignature(NEXMO_API_SIGNATURE_SECRET, Nexmo.Api.Cryptography.SmsSignatureGenerator.Method.md5hash))
+            if (sms.ValidateSignature(VONAGE_API_SIGNATURE_SECRET, Vonage.Cryptography.SmsSignatureGenerator.Method.md5hash))
             {
                 Console.WriteLine("Signature is valid");
             }

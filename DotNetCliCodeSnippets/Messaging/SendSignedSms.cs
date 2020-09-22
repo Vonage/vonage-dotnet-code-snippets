@@ -1,5 +1,5 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Request;
+﻿using Vonage;
+using Vonage.Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,18 +12,18 @@ namespace DotnetCliCodeSnippets.Messaging
         {
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
             var FROM_NUMBER = Environment.GetEnvironmentVariable("FROM_NUMBER") ?? "FROM_NUMBER";
-            var NEXMO_API_KEY = Environment.GetEnvironmentVariable("NEXMO_API_KEY") ?? "NEXMO_API_KEY";
-            var NEXMO_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("NEXMO_API_SIGNATURE_SECRET") ?? "NEXMO_API_SIGNATURE_SECRET";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SIGNATURE_SECRET") ?? "VONAGE_API_SIGNATURE_SECRET";
 
             var credentials = Credentials.FromApiKeySignatureSecretAndMethod(
-                NEXMO_API_KEY,
-                NEXMO_API_SIGNATURE_SECRET,
-                Nexmo.Api.Cryptography.SmsSignatureGenerator.Method.md5hash
+                VONAGE_API_KEY,
+                VONAGE_API_SIGNATURE_SECRET,
+                Vonage.Cryptography.SmsSignatureGenerator.Method.md5hash
                 );
 
-            var nexmoClient = new NexmoClient(credentials);
+            var VonageClient = new VonageClient(credentials);
 
-            var response = nexmoClient.SmsClient.SendAnSms(new Nexmo.Api.Messaging.SendSmsRequest()
+            var response = VonageClient.SmsClient.SendAnSms(new Vonage.Messaging.SendSmsRequest()
             {
                 To = TO_NUMBER,
                 From = FROM_NUMBER,

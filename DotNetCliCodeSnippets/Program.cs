@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-using Nexmo.Api.Logger;
+using Vonage.Logger;
 using Serilog;
 using System;
 using System.Reflection;

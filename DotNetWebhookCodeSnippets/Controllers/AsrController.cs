@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Nexmo.Api.Voice.AnswerWebhooks;
-using Nexmo.Api.Voice.EventWebhooks;
-using Nexmo.Api.Voice.Nccos;
-using Nexmo.Api.Utility;
+using Vonage.Voice.AnswerWebhooks;
+using Vonage.Voice.EventWebhooks;
+using Vonage.Voice.Nccos;
+using Vonage.Utility;
 
 namespace DotnetWebhookCodeSnippets.Controllers
 {

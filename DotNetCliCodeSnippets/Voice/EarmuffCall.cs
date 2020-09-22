@@ -1,6 +1,6 @@
-﻿using Nexmo.Api;
-using Nexmo.Api.Request;
-using Nexmo.Api.Voice;
+﻿using Vonage;
+using Vonage.Request;
+using Vonage.Voice;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,12 +12,12 @@ namespace DotnetCliCodeSnippets.Voice
     {
         public void Execute()
         {
-            var NEXMO_APPLICATION_ID = Environment.GetEnvironmentVariable("NEXMO_APPLICATION_ID") ?? "NEXMO_APPLICATION_ID";
-            var NEXMO_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("NEXMO_PRIVATE_KEY_PATH") ?? "NEXMO_PRIVATE_KEY_PATH";
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
             var UUID = Environment.GetEnvironmentVariable("UUID") ?? "UUID";
 
-            var credentials = Credentials.FromAppIdAndPrivateKeyPath(NEXMO_APPLICATION_ID, NEXMO_PRIVATE_KEY_PATH);
-            var client = new NexmoClient(credentials);
+            var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
+            var client = new VonageClient(credentials);
 
             var command = new CallEditCommand() { Action = CallEditCommand.ActionType.earmuff };
             var response = client.VoiceClient.UpdateCall(UUID, command);
