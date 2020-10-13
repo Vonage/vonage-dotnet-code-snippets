@@ -16,8 +16,8 @@ namespace DotnetCliCodeSnippets.Voice
             var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
             var VONAGE_NUMBER = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";
-            var ANSWER_URL = Environment.GetEnvironmentVariable("ANSWER_URL") ?? "ANSWER_URL";
 
+            var ANSWER_URL = "https://raw.githubusercontent.com/nexmo-community/ncco-examples/gh-pages/text-to-speech.json";
             var toEndpoint = new PhoneEndpoint() { Number = TO_NUMBER };
             var fromEndpoint = new PhoneEndpoint() { Number = VONAGE_NUMBER };                        
 
