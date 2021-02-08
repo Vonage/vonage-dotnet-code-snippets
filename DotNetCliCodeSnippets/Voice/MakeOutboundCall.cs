@@ -15,14 +15,14 @@ namespace DotnetCliCodeSnippets.Voice
             var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
             var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
             var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var VONAGE_NUMBER = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";
-
-            var ANSWER_URL = "https://nexmo-community.github.io/ncco-examples/text-to-speech.json";
-            var toEndpoint = new PhoneEndpoint() { Number = TO_NUMBER };
-            var fromEndpoint = new PhoneEndpoint() { Number = VONAGE_NUMBER };                        
+            var VONAGE_NUMBER = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";                                    
 
             var creds = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
             var client = new VonageClient(creds);
+
+            var ANSWER_URL = "https://nexmo-community.github.io/ncco-examples/text-to-speech.json";
+            var toEndpoint = new PhoneEndpoint() { Number = TO_NUMBER };
+            var fromEndpoint = new PhoneEndpoint() { Number = VONAGE_NUMBER };
 
             var command = new CallCommand() { To = new Endpoint[] { toEndpoint }, From = fromEndpoint, AnswerUrl = new[] { ANSWER_URL } };
             var response = client.VoiceClient.CreateCall(command);
