@@ -14,7 +14,7 @@ namespace DotnetCliCodeSnippets.Application
     {
         public void Execute()
         {
-            var APPLICATION_NAME = Environment.GetEnvironmentVariable("APPLICATION_NAME") ?? "APPLICATION_NAME";
+            var NAME = Environment.GetEnvironmentVariable("APPLICATION_NAME") ?? "APPLICATION_NAME";
             var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
             var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
             var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
@@ -62,7 +62,7 @@ namespace DotnetCliCodeSnippets.Application
             var rtcCapability = new Rtc(rtcWebhooks);
             var vbcCapability = new Vbc();
             var request = new CreateApplicationRequest { 
-                Name = APPLICATION_NAME,
+                Name = NAME,
                 Capabilities = new ApplicationCapabilities 
                 { 
                     Messages = messagesCapability,
