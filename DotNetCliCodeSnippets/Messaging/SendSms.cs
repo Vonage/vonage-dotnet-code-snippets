@@ -32,4 +32,4 @@ namespace DotnetCliCodeSnippets.Messaging
 
         }
     }
-}
+} 
