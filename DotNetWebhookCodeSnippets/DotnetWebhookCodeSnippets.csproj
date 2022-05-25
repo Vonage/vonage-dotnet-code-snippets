@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,17 +14,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="Vonage" Version="6.0.0-rc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Vonage, Version=6.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\vonage-dotnet-sdk\Vonage\bin\Debug\netstandard2.0\Vonage.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\vonage-dotnet-sdk\Vonage\Vonage.csproj" />
+    <PackageReference Include="Vonage" Version="6.0.1-rc" />
   </ItemGroup>
 
 </Project>

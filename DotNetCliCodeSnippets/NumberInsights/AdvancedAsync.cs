@@ -21,7 +21,7 @@ namespace DotnetCliCodeSnippets.NumberInsights
             var client = new VonageClient(creds);
 
             var request = new AdvancedNumberInsightAsynchronousRequest() { Number = insightNumber, Callback = callbackUrl };
-            var response = await client.NumberInsightClient.GetNumberInsightAsync(request);
+            var response = await client.NumberInsightClient.GetNumberInsightAsynchronousAsync(request);
 
             Console.WriteLine($"Advanced insights request status: {response.Status}");
         }

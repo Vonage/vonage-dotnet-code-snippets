@@ -4,12 +4,14 @@ using Vonage.Logger;
 using Serilog;
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
+using CommandLine;
 
 namespace DotnetCliCodeSnippets
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var log = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -18,15 +20,26 @@ namespace DotnetCliCodeSnippets
             var factory = new LoggerFactory();
             factory.AddSerilog(log);
             LogProvider.SetLogFactory(factory);
-            var snippet = string.Empty;
-            var oSet = new OptionSet() { { "s|snippet=", "The Code Snippet you'd like to execute", v=> snippet=v } };
 
-            var parsedArgs = oSet.Parse(args);
+            var result = Parser.Default.ParseArguments<Options>(args);
 
+            if (!string.IsNullOrEmpty(result.Value.Snippet))
+            {
+                await RunSnippet(result.Value.Snippet);
+            }
+        }
+
+        private static async Task RunSnippet(string snippet)
+        {
             var type = Type.GetType("DotnetCliCodeSnippets." + snippet);
+            if (type == null)
+                Console.WriteLine($"Could not locate snippet '{snippet}'");
 
-            var runnableSnippet = (ICodeSnippet)Activator.CreateInstance(type);
-            runnableSnippet.Execute();
+            var runnableSnippet = (ICodeSnippet) Activator.CreateInstance(type);
+            if (runnableSnippet != null)
+                await runnableSnippet.Execute();
+            else
+                Console.WriteLine($"Could not find '{type.Name}'");
         }
     }
 }

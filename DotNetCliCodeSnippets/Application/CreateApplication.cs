@@ -34,7 +34,7 @@ namespace DotnetCliCodeSnippets.Application
                     Address = "https://example.com/webhooks/status", 
                     Method = "POST" 
                 });
-            var messagesCapability = new Messages(messagesWebhooks);
+            var messagesCapability = new Vonage.Applications.Capabilities.Messages(messagesWebhooks);
             var request = new CreateApplicationRequest { 
                 Name = applicationName, 
                 Capabilities = new ApplicationCapabilities{ Messages = messagesCapability } 

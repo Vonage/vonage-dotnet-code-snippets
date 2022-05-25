@@ -1,8 +1,6 @@
 ﻿using Vonage;
 using Vonage.Request;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets.Messaging
