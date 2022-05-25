@@ -2,24 +2,25 @@
 using Vonage.Request;
 using Vonage.Verify;
 using System;
+using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets.Verify
 {
     public class SendPsd2WithWorkflow : ICodeSnippet
     {
-        public void Execute()
+        public async Task Execute()
         {
-            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
-            var RECIPIENT_NUMBER = Environment.GetEnvironmentVariable("RECIPIENT_NUMBER") ?? "RECIPIENT_NUMBER";
-            var PAYEE_NAME = Environment.GetEnvironmentVariable("PAYEE_NAME") ?? "PAYEE_NAME";
-            var AMOUNT = Double.Parse(Environment.GetEnvironmentVariable("Amount") ?? "5.0");
+            var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+            var recipientNumber = Environment.GetEnvironmentVariable("RECIPIENT_NUMBER") ?? "RECIPIENT_NUMBER";
+            var payeeName = Environment.GetEnvironmentVariable("PAYEE_NAME") ?? "PAYEE_NAME";
+            var amount = Double.Parse(Environment.GetEnvironmentVariable("Amount") ?? "5.0");
 
-            var creds = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var creds = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
             var client = new VonageClient(creds);
 
-            var request = new Psd2Request { Amount = AMOUNT, Payee = PAYEE_NAME, Number = RECIPIENT_NUMBER, WorkflowId = Psd2Request.Workflow.TTS };
-            var response = client.VerifyClient.VerifyRequestWithPSD2(request);
+            var request = new Psd2Request { Amount = amount, Payee = payeeName, Number = recipientNumber, WorkflowId = Psd2Request.Workflow.TTS };
+            var response = await client.VerifyClient.VerifyRequestWithPSD2Async(request);
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Vonage.NumberInsights;
 using Vonage.Utility;
 using System;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DotnetWebhookCodeSnippets.Controllers

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets
 {
     public interface ICodeSnippet
     {
-        void Execute();
+        Task Execute();
     }
 }

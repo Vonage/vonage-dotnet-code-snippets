@@ -234,24 +234,24 @@ namespace DotnetCliCodeSnippets
     public class OptionValueCollection : IList, IList<string>
     {
 
-        List<string> values = new List<string>();
-        OptionContext c;
+        List<string> _values = new List<string>();
+        OptionContext _c;
 
         internal OptionValueCollection(OptionContext c)
         {
-            this.c = c;
+            this._c = c;
         }
 
         #region ICollection
 
         void ICollection.CopyTo(Array array, int index)
         {
-            (values as ICollection).CopyTo(array, index);
+            (_values as ICollection).CopyTo(array, index);
         }
 
-        bool ICollection.IsSynchronized { get { return (values as ICollection).IsSynchronized; } }
+        bool ICollection.IsSynchronized { get { return (_values as ICollection).IsSynchronized; } }
 
-        object ICollection.SyncRoot { get { return (values as ICollection).SyncRoot; } }
+        object ICollection.SyncRoot { get { return (_values as ICollection).SyncRoot; } }
 
         #endregion
 
@@ -259,30 +259,30 @@ namespace DotnetCliCodeSnippets
 
         public void Add(string item)
         {
-            values.Add(item);
+            _values.Add(item);
         }
 
         public void Clear()
         {
-            values.Clear();
+            _values.Clear();
         }
 
         public bool Contains(string item)
         {
-            return values.Contains(item);
+            return _values.Contains(item);
         }
 
         public void CopyTo(string[] array, int arrayIndex)
         {
-            values.CopyTo(array, arrayIndex);
+            _values.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(string item)
         {
-            return values.Remove(item);
+            return _values.Remove(item);
         }
 
-        public int Count { get { return values.Count; } }
+        public int Count { get { return _values.Count; } }
 
         public bool IsReadOnly { get { return false; } }
 
@@ -292,7 +292,7 @@ namespace DotnetCliCodeSnippets
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return values.GetEnumerator();
+            return _values.GetEnumerator();
         }
 
         #endregion
@@ -301,7 +301,7 @@ namespace DotnetCliCodeSnippets
 
         public IEnumerator<string> GetEnumerator()
         {
-            return values.GetEnumerator();
+            return _values.GetEnumerator();
         }
 
         #endregion
@@ -310,37 +310,37 @@ namespace DotnetCliCodeSnippets
 
         int IList.Add(object value)
         {
-            return (values as IList).Add(value);
+            return (_values as IList).Add(value);
         }
 
         bool IList.Contains(object value)
         {
-            return (values as IList).Contains(value);
+            return (_values as IList).Contains(value);
         }
 
         int IList.IndexOf(object value)
         {
-            return (values as IList).IndexOf(value);
+            return (_values as IList).IndexOf(value);
         }
 
         void IList.Insert(int index, object value)
         {
-            (values as IList).Insert(index, value);
+            (_values as IList).Insert(index, value);
         }
 
         void IList.Remove(object value)
         {
-            (values as IList).Remove(value);
+            (_values as IList).Remove(value);
         }
 
         void IList.RemoveAt(int index)
         {
-            (values as IList).RemoveAt(index);
+            (_values as IList).RemoveAt(index);
         }
 
         bool IList.IsFixedSize { get { return false; } }
 
-        object IList.this[int index] { get { return this[index]; } set { (values as IList)[index] = value; } }
+        object IList.this[int index] { get { return this[index]; } set { (_values as IList)[index] = value; } }
 
         #endregion
 
@@ -348,30 +348,30 @@ namespace DotnetCliCodeSnippets
 
         public int IndexOf(string item)
         {
-            return values.IndexOf(item);
+            return _values.IndexOf(item);
         }
 
         public void Insert(int index, string item)
         {
-            values.Insert(index, item);
+            _values.Insert(index, item);
         }
 
         public void RemoveAt(int index)
         {
-            values.RemoveAt(index);
+            _values.RemoveAt(index);
         }
 
         private void AssertValid(int index)
         {
-            if (c.Option == null)
+            if (_c.Option == null)
                 throw new InvalidOperationException("OptionContext.Option is null.");
-            if (index >= c.Option.MaxValueCount)
+            if (index >= _c.Option.MaxValueCount)
                 throw new ArgumentOutOfRangeException("index");
-            if (c.Option.OptionValueType == OptionValueType.Required &&
-                index >= values.Count)
+            if (_c.Option.OptionValueType == OptionValueType.Required &&
+                index >= _values.Count)
                 throw new OptionException(string.Format(
-                    c.OptionSet.MessageLocalizer("Missing required value for option '{0}'."), c.OptionName),
-                    c.OptionName);
+                    _c.OptionSet.MessageLocalizer("Missing required value for option '{0}'."), _c.OptionName),
+                    _c.OptionName);
         }
 
         public string this[int index]
@@ -379,11 +379,11 @@ namespace DotnetCliCodeSnippets
             get
             {
                 AssertValid(index);
-                return index >= values.Count ? null : values[index];
+                return index >= _values.Count ? null : _values[index];
             }
             set
             {
-                values[index] = value;
+                _values[index] = value;
             }
         }
 
@@ -391,60 +391,60 @@ namespace DotnetCliCodeSnippets
 
         public List<string> ToList()
         {
-            return new List<string>(values);
+            return new List<string>(_values);
         }
 
         public string[] ToArray()
         {
-            return values.ToArray();
+            return _values.ToArray();
         }
 
         public override string ToString()
         {
-            return string.Join(", ", values.ToArray());
+            return string.Join(", ", _values.ToArray());
         }
     }
 
     public class OptionContext
     {
-        private Option option;
-        private string name;
-        private int index;
-        private OptionSet set;
-        private OptionValueCollection c;
+        private Option _option;
+        private string _name;
+        private int _index;
+        private OptionSet _set;
+        private OptionValueCollection _c;
 
         public OptionContext(OptionSet set)
         {
-            this.set = set;
-            this.c = new OptionValueCollection(this);
+            this._set = set;
+            this._c = new OptionValueCollection(this);
         }
 
         public Option Option
         {
-            get { return option; }
-            set { option = value; }
+            get { return _option; }
+            set { _option = value; }
         }
 
         public string OptionName
         {
-            get { return name; }
-            set { name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
         public int OptionIndex
         {
-            get { return index; }
-            set { index = value; }
+            get { return _index; }
+            set { _index = value; }
         }
 
         public OptionSet OptionSet
         {
-            get { return set; }
+            get { return _set; }
         }
 
         public OptionValueCollection OptionValues
         {
-            get { return c; }
+            get { return _c; }
         }
     }
 
@@ -457,12 +457,12 @@ namespace DotnetCliCodeSnippets
 
     public abstract class Option
     {
-        string prototype, description;
-        string[] names;
-        OptionValueType type;
-        int count;
-        string[] separators;
-        bool hidden;
+        string _prototype, _description;
+        string[] _names;
+        OptionValueType _type;
+        int _count;
+        string[] _separators;
+        bool _hidden;
 
         protected Option(string prototype, string description)
             : this(prototype, description, 1, false)
@@ -483,10 +483,10 @@ namespace DotnetCliCodeSnippets
             if (maxValueCount < 0)
                 throw new ArgumentOutOfRangeException("maxValueCount");
 
-            this.prototype = prototype;
-            this.description = description;
-            this.count = maxValueCount;
-            this.names = (this is OptionSet.Category)
+            this._prototype = prototype;
+            this._description = description;
+            this._count = maxValueCount;
+            this._names = (this is OptionSet.Category)
                 // append GetHashCode() so that "duplicate" categories have distinct
                 // names, e.g. adding multiple "" categories should be valid.
                 ? new[] { prototype + this.GetHashCode() }
@@ -495,46 +495,46 @@ namespace DotnetCliCodeSnippets
             if (this is OptionSet.Category)
                 return;
 
-            this.type = ParsePrototype();
-            this.hidden = hidden;
+            this._type = ParsePrototype();
+            this._hidden = hidden;
 
-            if (this.count == 0 && type != OptionValueType.None)
+            if (this._count == 0 && _type != OptionValueType.None)
                 throw new ArgumentException(
                     "Cannot provide maxValueCount of 0 for OptionValueType.Required or " +
                     "OptionValueType.Optional.",
                     "maxValueCount");
-            if (this.type == OptionValueType.None && maxValueCount > 1)
+            if (this._type == OptionValueType.None && maxValueCount > 1)
                 throw new ArgumentException(
                     string.Format("Cannot provide maxValueCount of {0} for OptionValueType.None.", maxValueCount),
                     "maxValueCount");
-            if (Array.IndexOf(names, "<>") >= 0 &&
-                ((names.Length == 1 && this.type != OptionValueType.None) ||
-                (names.Length > 1 && this.MaxValueCount > 1)))
+            if (Array.IndexOf(_names, "<>") >= 0 &&
+                ((_names.Length == 1 && this._type != OptionValueType.None) ||
+                (_names.Length > 1 && this.MaxValueCount > 1)))
                 throw new ArgumentException(
                     "The default option handler '<>' cannot require values.",
                     "prototype");
         }
 
-        public string Prototype { get { return prototype; } }
+        public string Prototype { get { return _prototype; } }
 
-        public string Description { get { return description; } }
+        public string Description { get { return _description; } }
 
-        public OptionValueType OptionValueType { get { return type; } }
+        public OptionValueType OptionValueType { get { return _type; } }
 
-        public int MaxValueCount { get { return count; } }
+        public int MaxValueCount { get { return _count; } }
 
-        public bool Hidden { get { return hidden; } }
+        public bool Hidden { get { return _hidden; } }
 
         public string[] GetNames()
         {
-            return (string[])names.Clone();
+            return (string[])_names.Clone();
         }
 
         public string[] GetValueSeparators()
         {
-            if (separators == null)
+            if (_separators == null)
                 return new string[0];
-            return (string[])separators.Clone();
+            return (string[])_separators.Clone();
         }
 
         protected static T Parse<T>(string value, OptionContext c)
@@ -565,9 +565,9 @@ namespace DotnetCliCodeSnippets
             return t;
         }
 
-        internal string[] Names { get { return names; } }
+        internal string[] Names { get { return _names; } }
 
-        internal string[] ValueSeparators { get { return separators; } }
+        internal string[] ValueSeparators { get { return _separators; } }
 
         static readonly char[] NameTerminator = new char[] { '=', ':' };
 
@@ -575,16 +575,16 @@ namespace DotnetCliCodeSnippets
         {
             char type = '\0';
             List<string> seps = new List<string>();
-            for (int i = 0; i < names.Length; ++i)
+            for (int i = 0; i < _names.Length; ++i)
             {
-                string name = names[i];
+                string name = _names[i];
                 if (name.Length == 0)
                     throw new ArgumentException("Empty option names are not supported.", "prototype");
 
                 int end = name.IndexOfAny(NameTerminator);
                 if (end == -1)
                     continue;
-                names[i] = name.Substring(0, end);
+                _names[i] = name.Substring(0, end);
                 if (type == '\0' || type == name[end])
                     type = name[end];
                 else
@@ -597,18 +597,18 @@ namespace DotnetCliCodeSnippets
             if (type == '\0')
                 return OptionValueType.None;
 
-            if (count <= 1 && seps.Count != 0)
+            if (_count <= 1 && seps.Count != 0)
                 throw new ArgumentException(
-                    string.Format("Cannot provide key/value separators for Options taking {0} value(s).", count),
+                    string.Format("Cannot provide key/value separators for Options taking {0} value(s).", _count),
                     "prototype");
-            if (count > 1)
+            if (_count > 1)
             {
                 if (seps.Count == 0)
-                    this.separators = new string[] { ":", "=" };
+                    this._separators = new string[] { ":", "=" };
                 else if (seps.Count == 1 && seps[0].Length == 0)
-                    this.separators = null;
+                    this._separators = null;
                 else
-                    this.separators = seps.ToArray();
+                    this._separators = seps.ToArray();
             }
 
             return type == '=' ? OptionValueType.Required : OptionValueType.Optional;
@@ -739,7 +739,7 @@ namespace DotnetCliCodeSnippets
 
     public class OptionException : Exception
     {
-        private string option;
+        private string _option;
 
         public OptionException()
         {
@@ -748,18 +748,18 @@ namespace DotnetCliCodeSnippets
         public OptionException(string message, string optionName)
             : base(message)
         {
-            this.option = optionName;
+            this._option = optionName;
         }
 
         public OptionException(string message, string optionName, Exception innerException)
             : base(message, innerException)
         {
-            this.option = optionName;
+            this._option = optionName;
         }
 
         public string OptionName
         {
-            get { return this.option; }
+            get { return this._option; }
         }
     }
 
@@ -774,23 +774,23 @@ namespace DotnetCliCodeSnippets
 
         public OptionSet(Func<string, string> localizer)
         {
-            this.localizer = localizer;
-            this.roSources = new ReadOnlyCollection<ArgumentSource>(sources);
+            this._localizer = localizer;
+            this._roSources = new ReadOnlyCollection<ArgumentSource>(_sources);
         }
 
-        Func<string, string> localizer;
+        Func<string, string> _localizer;
 
         public Func<string, string> MessageLocalizer
         {
-            get { return localizer; }
+            get { return _localizer; }
         }
 
-        List<ArgumentSource> sources = new List<ArgumentSource>();
-        ReadOnlyCollection<ArgumentSource> roSources;
+        List<ArgumentSource> _sources = new List<ArgumentSource>();
+        ReadOnlyCollection<ArgumentSource> _roSources;
 
         public ReadOnlyCollection<ArgumentSource> ArgumentSources
         {
-            get { return roSources; }
+            get { return _roSources; }
         }
 
 
@@ -899,7 +899,7 @@ namespace DotnetCliCodeSnippets
 
         sealed class ActionOption : Option
         {
-            Action<OptionValueCollection> action;
+            Action<OptionValueCollection> _action;
 
             public ActionOption(string prototype, string description, int count, Action<OptionValueCollection> action)
                 : this(prototype, description, count, action, false)
@@ -911,12 +911,12 @@ namespace DotnetCliCodeSnippets
             {
                 if (action == null)
                     throw new ArgumentNullException("action");
-                this.action = action;
+                this._action = action;
             }
 
             protected override void OnParseComplete(OptionContext c)
             {
-                action(c.OptionValues);
+                _action(c.OptionValues);
             }
         }
 
@@ -966,37 +966,37 @@ namespace DotnetCliCodeSnippets
 
         sealed class ActionOption<T> : Option
         {
-            Action<T> action;
+            Action<T> _action;
 
             public ActionOption(string prototype, string description, Action<T> action)
                 : base(prototype, description, 1)
             {
                 if (action == null)
                     throw new ArgumentNullException("action");
-                this.action = action;
+                this._action = action;
             }
 
             protected override void OnParseComplete(OptionContext c)
             {
-                action(Parse<T>(c.OptionValues[0], c));
+                _action(Parse<T>(c.OptionValues[0], c));
             }
         }
 
         sealed class ActionOption<TKey, TValue> : Option
         {
-            OptionAction<TKey, TValue> action;
+            OptionAction<TKey, TValue> _action;
 
             public ActionOption(string prototype, string description, OptionAction<TKey, TValue> action)
                 : base(prototype, description, 2)
             {
                 if (action == null)
                     throw new ArgumentNullException("action");
-                this.action = action;
+                this._action = action;
             }
 
             protected override void OnParseComplete(OptionContext c)
             {
-                action(
+                _action(
                     Parse<TKey>(c.OptionValues[0], c),
                     Parse<TValue>(c.OptionValues[1], c));
             }
@@ -1026,7 +1026,7 @@ namespace DotnetCliCodeSnippets
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-            sources.Add(source);
+            _sources.Add(source);
             return this;
         }
 
@@ -1070,31 +1070,31 @@ namespace DotnetCliCodeSnippets
 
         class ArgumentEnumerator : IEnumerable<string>
         {
-            List<IEnumerator<string>> sources = new List<IEnumerator<string>>();
+            List<IEnumerator<string>> _sources = new List<IEnumerator<string>>();
 
             public ArgumentEnumerator(IEnumerable<string> arguments)
             {
-                sources.Add(arguments.GetEnumerator());
+                _sources.Add(arguments.GetEnumerator());
             }
 
             public void Add(IEnumerable<string> arguments)
             {
-                sources.Add(arguments.GetEnumerator());
+                _sources.Add(arguments.GetEnumerator());
             }
 
             public IEnumerator<string> GetEnumerator()
             {
                 do
                 {
-                    IEnumerator<string> c = sources[sources.Count - 1];
+                    IEnumerator<string> c = _sources[_sources.Count - 1];
                     if (c.MoveNext())
                         yield return c.Current;
                     else
                     {
                         c.Dispose();
-                        sources.RemoveAt(sources.Count - 1);
+                        _sources.RemoveAt(_sources.Count - 1);
                     }
-                } while (sources.Count > 0);
+                } while (_sources.Count > 0);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -1105,7 +1105,7 @@ namespace DotnetCliCodeSnippets
 
         bool AddSource(ArgumentEnumerator ae, string argument)
         {
-            foreach (ArgumentSource source in sources)
+            foreach (ArgumentSource source in _sources)
             {
                 IEnumerable<string> replacement;
                 if (!source.GetArguments(argument, out replacement))
@@ -1129,7 +1129,7 @@ namespace DotnetCliCodeSnippets
             return false;
         }
 
-        private readonly Regex ValueOption = new Regex(
+        private readonly Regex _valueOption = new Regex(
                                                  @"^(?<flag>--|-|/)(?<name>[^:=]+)((?<sep>[:=])(?<value>.*))?$");
 
         protected bool GetOptionParts(string argument, out string flag, out string name, out string sep, out string value)
@@ -1138,7 +1138,7 @@ namespace DotnetCliCodeSnippets
                 throw new ArgumentNullException("argument");
 
             flag = name = sep = value = null;
-            Match m = ValueOption.Match(argument);
+            Match m = _valueOption.Match(argument);
             if (!m.Success)
             {
                 return false;
@@ -1208,7 +1208,7 @@ namespace DotnetCliCodeSnippets
                 c.Option.Invoke(c);
             else if (c.OptionValues.Count > c.Option.MaxValueCount)
             {
-                throw new OptionException(localizer(string.Format(
+                throw new OptionException(_localizer(string.Format(
                     "Error: Found {0} option values when expecting {1}.",
                     c.OptionValues.Count, c.Option.MaxValueCount)),
                     c.OptionName);
@@ -1246,7 +1246,7 @@ namespace DotnetCliCodeSnippets
                 {
                     if (i == 0)
                         return false;
-                    throw new OptionException(string.Format(localizer(
+                    throw new OptionException(string.Format(_localizer(
                         "Cannot bundle unregistered option '{0}'."), opt), opt);
                 }
                 p = this[rn];
@@ -1280,8 +1280,8 @@ namespace DotnetCliCodeSnippets
         }
 
         private const int OptionWidth = 29;
-        private const int Description_FirstWidth = 80 - OptionWidth;
-        private const int Description_RemWidth = 80 - OptionWidth - 2;
+        private const int DescriptionFirstWidth = 80 - OptionWidth;
+        private const int DescriptionRemWidth = 80 - OptionWidth - 2;
 
         public void WriteOptionDescriptions(TextWriter o)
         {
@@ -1311,10 +1311,10 @@ namespace DotnetCliCodeSnippets
                 }
 
                 WriteDescription(o, p.Description, new string(' ', OptionWidth + 2),
-                    Description_FirstWidth, Description_RemWidth);
+                    DescriptionFirstWidth, DescriptionRemWidth);
             }
 
-            foreach (ArgumentSource s in sources)
+            foreach (ArgumentSource s in _sources)
             {
                 string[] names = s.GetNames();
                 if (names == null || names.Length == 0)
@@ -1339,14 +1339,14 @@ namespace DotnetCliCodeSnippets
                 }
 
                 WriteDescription(o, s.Description, new string(' ', OptionWidth + 2),
-                    Description_FirstWidth, Description_RemWidth);
+                    DescriptionFirstWidth, DescriptionRemWidth);
             }
         }
 
         void WriteDescription(TextWriter o, string value, string prefix, int firstWidth, int remWidth)
         {
             bool indent = false;
-            foreach (string line in GetLines(localizer(GetDescription(value)), firstWidth, remWidth))
+            foreach (string line in GetLines(_localizer(GetDescription(value)), firstWidth, remWidth))
             {
                 if (indent)
                     o.Write(prefix);
@@ -1387,19 +1387,19 @@ namespace DotnetCliCodeSnippets
             {
                 if (p.OptionValueType == OptionValueType.Optional)
                 {
-                    Write(o, ref written, localizer("["));
+                    Write(o, ref written, _localizer("["));
                 }
-                Write(o, ref written, localizer("=" + GetArgumentName(0, p.MaxValueCount, p.Description)));
+                Write(o, ref written, _localizer("=" + GetArgumentName(0, p.MaxValueCount, p.Description)));
                 string sep = p.ValueSeparators != null && p.ValueSeparators.Length > 0
                     ? p.ValueSeparators[0]
                     : " ";
                 for (int c = 1; c < p.MaxValueCount; ++c)
                 {
-                    Write(o, ref written, localizer(sep + GetArgumentName(c, p.MaxValueCount, p.Description)));
+                    Write(o, ref written, _localizer(sep + GetArgumentName(c, p.MaxValueCount, p.Description)));
                 }
                 if (p.OptionValueType == OptionValueType.Optional)
                 {
-                    Write(o, ref written, localizer("]"));
+                    Write(o, ref written, _localizer("]"));
                 }
             }
             return true;
