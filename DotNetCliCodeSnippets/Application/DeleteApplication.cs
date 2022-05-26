@@ -3,21 +3,22 @@ using Vonage.Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets.Application
 {
     public class DeleteApplication : ICodeSnippet
     {
-        public void Execute()
+        public async Task Execute()
         {
-            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
-            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
 
-            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var credentials = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
             var client = new VonageClient(credentials);
 
-            var response = client.ApplicationClient.DeleteApplication(VONAGE_APPLICATION_ID);
+            var response = await client.ApplicationClient.DeleteApplicationAsync(vonageApplicationId);
             Console.WriteLine(response);
         }
     }

@@ -4,24 +4,25 @@ using Vonage.Voice;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets.Voice
 {
     public class PlayTextToSpeech : ICodeSnippet
     {
-        public void Execute()
+        public async Task Execute()
         {
-            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-            var UUID = Environment.GetEnvironmentVariable("UUID") ?? "UUID";
-            var TEXT = Environment.GetEnvironmentVariable("TEXT") ?? "TEXT";
+            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var vonagePrivateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+            var uuid = Environment.GetEnvironmentVariable("UUID") ?? "UUID";
+            var text = Environment.GetEnvironmentVariable("TEXT") ?? "TEXT";
 
-            var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
+            var credentials = Credentials.FromAppIdAndPrivateKeyPath(vonageApplicationId, vonagePrivateKeyPath);
             var client = new VonageClient(credentials);
 
-            var command = new TalkCommand() { Text = TEXT};
+            var command = new TalkCommand() { Text = text};
 
-            var response = client.VoiceClient.StartTalk(UUID, command);
+            var response = await client.VoiceClient.StartTalkAsync(uuid, command);
 
             Console.WriteLine($"Play Text-To-Speech complete message: {response.Message}");
         }

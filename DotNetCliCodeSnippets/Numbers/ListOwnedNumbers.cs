@@ -4,29 +4,30 @@ using Vonage.Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets.Numbers
 {
     public class ListOwnedNumbers : ICodeSnippet
     {
-        public void Execute()
+        public async Task Execute()
         {
-            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";            
+            var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";            
                         
-            var NUMBER_SEARCH_CRITERIA = Environment.GetEnvironmentVariable("NUMBER_SEARCH_CRITERIA") ?? "NUMBER_SEARCH_CRITERIA";
-            var NUMBER_SEARCH_PATTERN = (SearchPattern)(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN") != null ? int.Parse(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN")) : 0);
+            var numberSearchCriteria = Environment.GetEnvironmentVariable("NUMBER_SEARCH_CRITERIA") ?? "NUMBER_SEARCH_CRITERIA";
+            var numberSearchPattern = (SearchPattern)(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN") != null ? int.Parse(Environment.GetEnvironmentVariable("NUMBER_SEARCH_PATTERN")) : 0);
 
-            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var credentials = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
             var client = new VonageClient(credentials);
 
             var request = new NumberSearchRequest() 
             { 
-                SearchPattern = NUMBER_SEARCH_PATTERN, 
-                Pattern = NUMBER_SEARCH_CRITERIA 
+                SearchPattern = numberSearchPattern, 
+                Pattern = numberSearchCriteria 
             };
 
-            var response = client.NumbersClient.GetOwnedNumbers(request);
+            var response = await client.NumbersClient.GetOwnedNumbersAsync(request);
 
             Console.WriteLine($"First Owned Number Matching Criteria : {response.Numbers[0].Msisdn}");
         }

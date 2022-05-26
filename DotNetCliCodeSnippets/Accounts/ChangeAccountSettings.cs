@@ -2,24 +2,23 @@
 using Vonage.Request;
 using Vonage.Accounts;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace DotnetCliCodeSnippets.Accounts
 {
     public class ChangeAccountSettings : ICodeSnippet
     {
-        public void Execute()
+        public async Task Execute()
         {
-            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
-            var SMS_CALLBACK_URL = Environment.GetEnvironmentVariable("SMS_CALLBACK_URL") ?? "SMS_CALLBACK_URL";
+            var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+            var smsCallbackUrl = Environment.GetEnvironmentVariable("SMS_CALLBACK_URL") ?? "SMS_CALLBACK_URL";
 
-            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var credentials = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
             var client = new VonageClient(credentials);
 
-            var request = new AccountSettingsRequest() { MoCallBackUrl = SMS_CALLBACK_URL };
-            var response = client.AccountClient.ChangeAccountSettings(request);
+            var request = new AccountSettingsRequest { MoCallBackUrl = smsCallbackUrl };
+            var response = await client.AccountClient.ChangeAccountSettingsAsync(request);
 
             Console.WriteLine($"SMS Callback url set to: {response.MoCallbackUrl}");
         }

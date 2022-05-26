@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vonage.Utility;
 using Vonage.Voice.EventWebhooks;
@@ -33,10 +28,10 @@ namespace DotNetWebhookCodeSnippets.Controllers
         }
 
         [HttpPost("webhooks/dtmf")]
-        public async Task<IActionResult> Dtmf()
+        public IActionResult Dtmf()
         {            
             var input = WebhookParser.ParseWebhook<MultiInput>(Request.Body, Request.ContentType);
-            var talkAction = new TalkAction() { Text = $"You Pressed {input?.Dtmf.Digits}, goodbye" };
+            var talkAction = new TalkAction { Text = $"You Pressed {input?.Dtmf.Digits}, goodbye" };
             var ncco = new Ncco(talkAction);
             return Ok(ncco.ToString());
         }

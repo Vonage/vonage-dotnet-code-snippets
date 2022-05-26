@@ -18,11 +18,11 @@ namespace DotnetWebhookCodeSnippets.Controllers
         [HttpPost("/webhooks/validatejwt")]
         public IActionResult ValidateJwt()
         {
-            var VONAGE_API_SIGNATURE_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SIGNATURE_SECRET") ?? "VONAGE_API_SIGNATURE_SECRET";
+            var vonageApiSignatureSecret = Environment.GetEnvironmentVariable("VONAGE_API_SIGNATURE_SECRET") ?? "VONAGE_API_SIGNATURE_SECRET";
             var jwt = Request.Headers["Authorization"].ToString().Substring(7);
             try
             {
-                var decoded = JWT.Decode(jwt, Encoding.ASCII.GetBytes(VONAGE_API_SIGNATURE_SECRET), alg: JwsAlgorithm.HS256);
+                var decoded = JWT.Decode(jwt, Encoding.ASCII.GetBytes(vonageApiSignatureSecret), alg: JwsAlgorithm.HS256);
                 return Ok();
             }
             catch (Exception)

@@ -1,5 +1,3 @@
-using System;
-
 namespace DotNetWebhookCodeSnippets.Models
 {
     public class ErrorViewModel
