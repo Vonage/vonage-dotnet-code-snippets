@@ -3,7 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Vonage.Logger;
 using Serilog;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using CommandLine;
 
@@ -22,18 +25,21 @@ namespace DotnetCliCodeSnippets
             LogProvider.SetLogFactory(factory);
 
             var result = Parser.Default.ParseArguments<Options>(args);
-
+            
             if (!string.IsNullOrEmpty(result.Value.Snippet))
             {
                 await RunSnippet(result.Value.Snippet);
             }
         }
-
+        
         private static async Task RunSnippet(string snippet)
         {
             var type = Type.GetType("DotnetCliCodeSnippets." + snippet);
             if (type == null)
+            {
                 Console.WriteLine($"Could not locate snippet '{snippet}'");
+                return;
+            }
 
             var runnableSnippet = (ICodeSnippet) Activator.CreateInstance(type);
             if (runnableSnippet != null)

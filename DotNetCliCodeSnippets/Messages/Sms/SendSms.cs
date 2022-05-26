@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Messages;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Messages;
+namespace DotnetCliCodeSnippets.Messages.Sms;
 
-public class SendMmsAudio : ICodeSnippet
+public class SendSms : ICodeSnippet
 {
     public async Task Execute()
     {
@@ -22,15 +21,11 @@ public class SendMmsAudio : ICodeSnippet
 
         var vonageClient = new VonageClient(credentials);
         
-        var request = new Vonage.Messages.Mms.MmsAudioRequest
+        var request = new Vonage.Messages.Sms.SmsRequest
         {
             To = to,
             From = brandName,
-            Audio = new CaptionedAttachment
-            {
-                Caption = "My music",
-                Url = "https://file-examples.com/storage/fe6bd68931628d5b79b8f47/2017/11/file_example_MP3_700KB.mp3"
-            }
+            Text = "An SMS sent using the Vonage Messages API"
         };
 
         var response = await vonageClient.MessagesClient.SendAsync(request);

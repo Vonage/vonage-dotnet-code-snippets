@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Vonage;
+using Vonage.Messages;
+using Vonage.Messages.Viber;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Messages;
+namespace DotnetCliCodeSnippets.Messages.Sms;
 
-public class SendSms : ICodeSnippet
+public class SendViberImage : ICodeSnippet
 {
     public async Task Execute()
     {
@@ -21,11 +23,14 @@ public class SendSms : ICodeSnippet
 
         var vonageClient = new VonageClient(credentials);
         
-        var request = new Vonage.Messages.Sms.SmsRequest
+        var request = new ViberImageRequest
         {
             To = to,
             From = brandName,
-            Text = "An SMS sent using the Vonage Messages API"
+            Image = new Attachment
+            {
+                Url = "https://example.com/image.png"
+            }
         };
 
         var response = await vonageClient.MessagesClient.SendAsync(request);
