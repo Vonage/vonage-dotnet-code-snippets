@@ -35,17 +35,11 @@ public class SendWhatsAppMtm : ICodeSnippet
             Template = new MessageTemplate
             {
                 Name = "whatsapp:hsm:technology:nexmo:mytemplate",
-                Parameters =  new List<object>
+                Parameters =  new List<string>
                 {
-                    new {
-                        @default = "Vonage Verification"
-                    },
-                    new {
-                        @default = "64873"
-                    },
-                    new {
-                        @default = "10"
-                    }
+                    "Vonage Verification"
+                    "64873",
+                    "10"
                 }
             }
         };
