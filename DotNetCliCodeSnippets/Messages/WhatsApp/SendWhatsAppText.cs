@@ -12,13 +12,10 @@ public class SendWhatsAppText : ICodeSnippet
     {
         var to = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
         var brandName = Environment.GetEnvironmentVariable("VONAGE_BRAND_NAME") ?? "VONAGE_BRAND_NAME";
-        var apiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-        var apiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+        var appId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
+        var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
 
-        var credentials = Credentials.FromApiKeyAndSecret(
-            apiKey,
-            apiSecret
-        );
+        var credentials = Credentials.FromAppIdAndPrivateKeyPath(appId, privateKeyPath);
 
         var vonageClient = new VonageClient(credentials);
 
