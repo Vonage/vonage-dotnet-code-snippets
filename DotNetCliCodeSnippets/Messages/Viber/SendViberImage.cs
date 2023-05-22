@@ -24,10 +24,10 @@ public class SendViberImage : ICodeSnippet
         {
             To = to,
             From = brandName,
-            Image = new Attachment
+            Image = new CaptionedAttachment
             {
                 Url = "https://example.com/image.png"
-            }
+            },
         };
 
         var response = await vonageClient.MessagesClient.SendAsync(request);
