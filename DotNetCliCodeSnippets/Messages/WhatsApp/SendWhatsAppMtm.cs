@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Vonage;
 using Vonage.Messages.WhatsApp;
@@ -27,17 +28,17 @@ public class SendWhatsAppMtm : ICodeSnippet
             WhatsApp = new MessageWhatsApp
             {
                 Policy = "deterministic",
-                Locale = "en-GB"
+                Locale = "en-GB",
             },
             Template = new MessageTemplate
             {
                 Name = "whatsapp:hsm:technology:nexmo:mytemplate",
-                Parameters =  new List<string>
+                Parameters =  new List<string>()
                 {
-                    "Vonage Verification"
+                    "Vonage Verification",
                     "64873",
-                    "10"
-                }
+                    "10",
+                }.ToList<object>(),
             }
         };
 
