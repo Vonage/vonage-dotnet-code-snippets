@@ -33,12 +33,12 @@ public class SendWhatsAppMtm : ICodeSnippet
             Template = new MessageTemplate
             {
                 Name = "whatsapp:hsm:technology:nexmo:mytemplate",
-                Parameters =  new List<string>()
+                Parameters =  new List<object>
                 {
                     "Vonage Verification",
                     "64873",
                     "10",
-                }.ToList<object>(),
+                },
             }
         };
 
