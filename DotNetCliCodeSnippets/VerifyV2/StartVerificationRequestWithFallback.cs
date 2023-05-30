@@ -9,7 +9,7 @@ using Vonage.VerifyV2.StartVerification.WhatsApp;
 
 namespace DotnetCliCodeSnippets.VerifyV2;
 
-public class StartVerificationRequestFallbackWorkflow: ICodeSnippet
+public class StartVerificationRequestWithFallback: ICodeSnippet
 {
     public async Task Execute()
     {
