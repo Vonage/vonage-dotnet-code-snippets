@@ -10,7 +10,7 @@
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="Vonage" Version="6.0.1-rc" />
+    <PackageReference Include="Vonage" Version="6.3.2" />
   </ItemGroup>
 
   <ItemGroup>
