@@ -5,12 +5,10 @@ using Vonage.Request;
 using Vonage.VerifyV2.StartVerification;
 using Vonage.VerifyV2.StartVerification.Email;
 using Vonage.VerifyV2.StartVerification.SilentAuth;
-using Vonage.VerifyV2.StartVerification.Sms;
-using Vonage.VerifyV2.StartVerification.WhatsApp;
 
 namespace DotnetCliCodeSnippets.VerifyV2;
 
-public class StartVerificationRequestWithFallback: ICodeSnippet
+public class StartVerificationRequestWithFallback : ICodeSnippet
 {
     public async Task Execute()
     {
