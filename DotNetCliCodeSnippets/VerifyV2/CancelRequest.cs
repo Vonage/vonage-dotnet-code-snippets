@@ -9,12 +9,12 @@ public class CancelRequest : ICodeSnippet
 {
     public async Task Execute()
     {
-        var appId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
-        var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-        var requestId = Guid.Parse(Environment.GetEnvironmentVariable("REQUEST_ID") ?? "REQUEST_ID");
-        var credentials = Credentials.FromAppIdAndPrivateKeyPath(appId, privateKeyPath);
+        var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
+        var VONAGE_APPLICATION_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+        var REQUEST_ID = Guid.Parse(Environment.GetEnvironmentVariable("REQUEST_ID") ?? "REQUEST_ID");
+        var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_APPLICATION_PRIVATE_KEY_PATH);
         var client = new VonageClient(credentials);
-        var request = Vonage.VerifyV2.Cancel.CancelRequest.Parse(requestId);
+        var request = Vonage.VerifyV2.Cancel.CancelRequest.Parse(REQUEST_ID);
         var response = await client.VerifyV2Client.CancelAsync(request);
         var message = response.Match(
             success => "Request has been cancelled",
