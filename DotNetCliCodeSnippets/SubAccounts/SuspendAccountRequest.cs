@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Vonage;
 using Vonage.Request;
-using Vonage.SubAccounts.TransferAmount;
 using Vonage.SubAccounts.UpdateSubAccount;
 
 namespace DotnetCliCodeSnippets.SubAccounts;
