@@ -19,8 +19,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Meetings\Guides\" />
-  </ItemGroup>
-
 </Project>
