@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.CreateRoom;
 using Vonage.Meetings.CreateTheme;
 using Vonage.Request;
 

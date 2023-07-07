@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.GetRooms;
-using Vonage.Meetings.GetThemes;
 using Vonage.Request;
 
 namespace DotnetCliCodeSnippets.Meetings.Snippets;
 
-public class GetThemes: ICodeSnippet
+public class GetThemes : ICodeSnippet
 {
     public async Task Execute()
     {

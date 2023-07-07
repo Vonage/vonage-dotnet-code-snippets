@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.DeleteTheme;
 using Vonage.Meetings.GetRecordings;
 using Vonage.Request;
 
 namespace DotnetCliCodeSnippets.Meetings.Snippets;
 
-public class GetRecordings: ICodeSnippet
+public class GetRecordings : ICodeSnippet
 {
     public async Task Execute()
     {

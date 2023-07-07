@@ -6,7 +6,7 @@ using Vonage.Request;
 
 namespace DotnetCliCodeSnippets.Meetings.Snippets;
 
-public class CreateLongTermRoom  : ICodeSnippet
+public class CreateLongTermRoom : ICodeSnippet
 {
     public async Task Execute()
     {
