@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.GetRecording;
+using Vonage.Meetings.DeleteRecording;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Snippets;
+namespace DotnetCliCodeSnippets.Meetings;
 
-public class GetRecording : ICodeSnippet
+public class DeleteRecording : ICodeSnippet
 {
     public async Task Execute()
     {
@@ -15,11 +15,11 @@ public class GetRecording : ICodeSnippet
         var recordingId = Guid.Parse(Environment.GetEnvironmentVariable("RECORDING_ID") ?? "RECORDING_ID");
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(applicationId, privateKeyPath);
         var client = new VonageClient(credentials);
-        var request = GetRecordingRequest.Parse(recordingId);
-        var response = await client.MeetingsClient.GetRecordingAsync(request);
+        var request = DeleteRecordingRequest.Parse(recordingId);
+        var response = await client.MeetingsClient.DeleteRecordingAsync(request);
         var message = response.Match(
-            success => $"Recording retrieved: {success.Id}",
-            failure => $"Recording retrieval failed: {failure.GetFailureMessage()}");
+            success => "Recording deleted",
+            failure => $"Recording deletion failed: {failure.GetFailureMessage()}");
         Console.WriteLine(message);
     }
 }

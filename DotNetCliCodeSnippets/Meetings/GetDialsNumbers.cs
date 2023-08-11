@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.GetRoom;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Guides;
+namespace DotnetCliCodeSnippets.Meetings;
 
-public class RetrieveRoom : ICodeSnippet
+public class ListDialInNumbers : ICodeSnippet
 {
     public async Task Execute()
     {
@@ -14,7 +13,10 @@ public class RetrieveRoom : ICodeSnippet
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(applicationId, privateKeyPath);
         var client = new VonageClient(credentials);
-        var request = GetRoomRequest.Parse(new Guid("9f6fe8ae-3458-4a72-b532-8276d5533e97"));
-        var response = await client.MeetingsClient.GetRoomAsync(request);
+        var response = await client.MeetingsClient.GetDialNumbersAsync();
+        var message = response.Match(
+            success => $"Numbers retrieved: {success.Length}",
+            failure => $"Numbers retrieval failed: {failure.GetFailureMessage()}");
+        Console.WriteLine(message);
     }
 }

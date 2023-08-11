@@ -5,7 +5,7 @@ using Vonage.Meetings.Common;
 using Vonage.Meetings.UpdateThemeLogo;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Snippets;
+namespace DotnetCliCodeSnippets.Meetings;
 
 public class UploadLogo : ICodeSnippet
 {
