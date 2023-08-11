@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.GetRoomsByTheme;
+using Vonage.Meetings.UpdateApplication;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Guides;
+namespace DotnetCliCodeSnippets.Meetings;
 
-public class ListRoomsByTheme : ICodeSnippet
+public class UpdateApplication : ICodeSnippet
 {
     public async Task Execute()
     {
         var applicationId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+        var themeId = Guid.Parse(Environment.GetEnvironmentVariable("THEME_ID") ?? "THEME_ID");
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(applicationId, privateKeyPath);
         var client = new VonageClient(credentials);
-        var request = GetRoomsByThemeRequest.Build()
-            .WithThemeId(new Guid("e8b1d80b-8f78-4578-94f2-328596e01387"))
-            .Create();
-        var response = await client.MeetingsClient.GetRoomsByThemeAsync(request);
+        var request = UpdateApplicationRequest.Parse(themeId);
+        var response = await client.MeetingsClient.UpdateApplicationAsync(request);
         var message = response.Match(
-            success => $"Rooms retrieved: {success.Rooms}",
-            failure => $"Rooms retrieval failed: {failure.GetFailureMessage()}");
+            success => $"Application was updated: {success.DefaultThemeId}",
+            failure => $"Application update failed: {failure.GetFailureMessage()}");
         Console.WriteLine(message);
     }
 }

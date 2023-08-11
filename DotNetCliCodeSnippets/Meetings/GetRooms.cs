@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.DeleteTheme;
+using Vonage.Meetings.GetRooms;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Guides;
+namespace DotnetCliCodeSnippets.Meetings;
 
-public class DeleteTheme : ICodeSnippet
+public class GetRooms : ICodeSnippet
 {
     public async Task Execute()
     {
@@ -14,10 +14,11 @@ public class DeleteTheme : ICodeSnippet
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(applicationId, privateKeyPath);
         var client = new VonageClient(credentials);
-        var request = DeleteThemeRequest.Build()
-            .WithThemeId(new Guid("e8b1d80b-8f78-4578-94f2-328596e01387"))
-            .WithForceDelete()
-            .Create();
-        var response = await client.MeetingsClient.DeleteThemeAsync(request);
+        var request = GetRoomsRequest.Build().Create();
+        var response = await client.MeetingsClient.GetRoomsAsync(request);
+        var message = response.Match(
+            success => $"Rooms retrieved: {success.Rooms}",
+            failure => $"Rooms retrieval failed: {failure.GetFailureMessage()}");
+        Console.WriteLine(message);
     }
 }

@@ -4,7 +4,7 @@ using Vonage;
 using Vonage.Meetings.DeleteTheme;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Snippets;
+namespace DotnetCliCodeSnippets.Meetings;
 
 public class DeleteTheme : ICodeSnippet
 {

@@ -4,22 +4,24 @@ using Vonage;
 using Vonage.Meetings.CreateRoom;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Guides;
+namespace DotnetCliCodeSnippets.Meetings;
 
-public class CreateRoomWithTheme : ICodeSnippet
+public class CreateInstantRoom : ICodeSnippet
 {
     public async Task Execute()
     {
         var applicationId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-        var expirationDate = DateTime.Parse(Environment.GetEnvironmentVariable("EXPIRATION_DATE") ?? "EXPIRATION_DATE");
+        var displayName = Environment.GetEnvironmentVariable("ROOM_DISPLAY_NAME") ?? "ROOM_DISPLAY_NAME";
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(applicationId, privateKeyPath);
         var client = new VonageClient(credentials);
         var request = CreateRoomRequest.Build()
-            .WithDisplayName("New Meetings Room")
-            .AsLongTermRoom(expirationDate)
-            .WithThemeId("e8b1d80b-8f78-4578-94f2-328596e01387")
+            .WithDisplayName(displayName)
             .Create();
         var response = await client.MeetingsClient.CreateRoomAsync(request);
+        var message = response.Match(
+            success => $"Instant room has been created: {success.Id}",
+            failure => $"Room creation failed: {failure.GetFailureMessage()}");
+        Console.WriteLine(message);
     }
 }

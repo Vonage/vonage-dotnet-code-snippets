@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Vonage;
-using Vonage.Meetings.GetRooms;
+using Vonage.Meetings.GetTheme;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Meetings.Snippets;
+namespace DotnetCliCodeSnippets.Meetings;
 
-public class GetRooms : ICodeSnippet
+public class GetTheme : ICodeSnippet
 {
     public async Task Execute()
     {
         var applicationId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+        var themeId = Guid.Parse(Environment.GetEnvironmentVariable("THEME_ID") ?? "THEME_ID");
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(applicationId, privateKeyPath);
         var client = new VonageClient(credentials);
-        var request = GetRoomsRequest.Build().Create();
-        var response = await client.MeetingsClient.GetRoomsAsync(request);
+        var request = GetThemeRequest.Parse(themeId);
+        var response = await client.MeetingsClient.GetThemeAsync(request);
         var message = response.Match(
-            success => $"Rooms retrieved: {success.Rooms}",
-            failure => $"Rooms retrieval failed: {failure.GetFailureMessage()}");
+            success => $"Theme retrieved: {success.ThemeId}",
+            failure => $"Theme retrieval failed: {failure.GetFailureMessage()}");
         Console.WriteLine(message);
     }
 }
