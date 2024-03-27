@@ -39,7 +39,7 @@ namespace DotnetCliCodeSnippets.Application
                 Name = applicationName, 
                 Capabilities = new ApplicationCapabilities{ Messages = messagesCapability } 
             };
-            var response = await client.ApplicationClient.CreateApplicaitonAsync(request);
+            var response = await client.ApplicationClient.CreateApplicationAsync(request);
 
             Console.WriteLine(JsonConvert.SerializeObject(response));
 

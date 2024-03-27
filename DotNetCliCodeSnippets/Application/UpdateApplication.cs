@@ -5,6 +5,7 @@ using Vonage.Applications.Capabilities;
 using Vonage.Common;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -38,20 +39,13 @@ namespace DotnetCliCodeSnippets.Application
                     Method = "POST"
                 });
             var messagesCapability = new Vonage.Applications.Capabilities.Messages(messagesWebhooks);
-            var voiceWebhooks = new Dictionary<Webhook.Type, Webhook>();
-            voiceWebhooks.Add(Webhook.Type.AnswerUrl,
-                new Webhook
-                {
-                    Address = "https://example.com/webhooks/answer",
-                    Method = "GET"
-                });
-            voiceWebhooks.Add(Webhook.Type.EventUrl,
-                new Webhook
-                {
-                    Address = "https://example.com/webhooks/events",
-                    Method = "POST"
-                });
-            var voiceCapability = new Vonage.Applications.Capabilities.Voice(voiceWebhooks);
+            var voiceWebhooks = new Dictionary<VoiceWebhookType, Vonage.Applications.Capabilities.Voice.VoiceWebhook>();
+            voiceWebhooks.Add(VoiceWebhookType.AnswerUrl, new Vonage.Applications.Capabilities.Voice.VoiceWebhook(new Uri("https://example.com/webhooks/answer"), HttpMethod.Get));
+            voiceWebhooks.Add(VoiceWebhookType.EventUrl, new Vonage.Applications.Capabilities.Voice.VoiceWebhook(new Uri("https://example.com/webhooks/events"), HttpMethod.Post));
+            var voiceCapability = new Vonage.Applications.Capabilities.Voice
+            {
+                Webhooks = voiceWebhooks,
+            };
             var rtcWebhooks = new Dictionary<Webhook.Type, Webhook>();
             rtcWebhooks.Add(Webhook.Type.EventUrl,
                 new Webhook
