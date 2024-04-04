@@ -10,8 +10,8 @@ public class SendWhatsAppText : ICodeSnippet
 {
     public async Task Execute()
     {
-        var to = Environment.GetEnvironmentVariable("MESSAGES_SANDBOX_ALLOW_LISTED_TO_NUMBER") ?? "MESSAGES_SANDBOX_ALLOW_LISTED_TO_NUMBER";
-        var brandName = Environment.GetEnvironmentVariable("MESSAGES_SANDBOX_WHATSAPP_NUMBER") ?? "MESSAGES_SANDBOX_WHATSAPP_NUMBER";
+        var messagesSandboxAllowListedToNumber = Environment.GetEnvironmentVariable("MESSAGES_SANDBOX_ALLOW_LISTED_TO_NUMBER") ?? "MESSAGES_SANDBOX_ALLOW_LISTED_TO_NUMBER";
+        var messagesSandboxWhatsAppNumber = Environment.GetEnvironmentVariable("MESSAGES_SANDBOX_WHATSAPP_NUMBER") ?? "MESSAGES_SANDBOX_WHATSAPP_NUMBER";
         var appId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
 
@@ -21,8 +21,8 @@ public class SendWhatsAppText : ICodeSnippet
 
         var request = new WhatsAppTextRequest
         {
-            To = to,
-            From = brandName,
+            To = messagesSandboxAllowListedToNumber,
+            From = messagesSandboxWhatsAppNumber,
             Text = "A WhatsApp text message sent using the Vonage Messages API via the Messages Sandbox"
         };
 
