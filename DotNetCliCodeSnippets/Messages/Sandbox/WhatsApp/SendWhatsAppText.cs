@@ -10,20 +10,21 @@ public class SendWhatsAppText : ICodeSnippet
 {
     public async Task Execute()
     {
-        var to = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-        var brandName = Environment.GetEnvironmentVariable("VONAGE_BRAND_NAME") ?? "VONAGE_BRAND_NAME";
+        var messagesSandboxAllowListedToNumber = Environment.GetEnvironmentVariable("MESSAGES_SANDBOX_ALLOW_LISTED_TO_NUMBER") ?? "MESSAGES_SANDBOX_ALLOW_LISTED_TO_NUMBER";
+        var messagesSandboxWhatsAppNumber = Environment.GetEnvironmentVariable("MESSAGES_SANDBOX_WHATSAPP_NUMBER") ?? "MESSAGES_SANDBOX_WHATSAPP_NUMBER";
         var appId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
         var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
 
+        // Set "Url.Api" to "https://messages-sandbox.nexmo.com" in appsettings.json
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(appId, privateKeyPath);
 
         var vonageClient = new VonageClient(credentials);
 
         var request = new WhatsAppTextRequest
         {
-            To = to,
-            From = brandName,
-            Text = "A WhatsApp text message sent using the Vonage Messages API"
+            To = messagesSandboxAllowListedToNumber,
+            From = messagesSandboxWhatsAppNumber,
+            Text = "A WhatsApp text message sent using the Vonage Messages API via the Messages Sandbox"
         };
 
         var response = await vonageClient.MessagesClient.SendAsync(request);
