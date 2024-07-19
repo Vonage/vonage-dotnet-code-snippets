@@ -4,7 +4,7 @@ using Vonage;
 using Vonage.Messages.WhatsApp;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Messages.WhatsApp;
+namespace DotnetCliCodeSnippets.Messages.Sandbox.WhatsApp;
 
 public class SendWhatsAppText : ICodeSnippet
 {

@@ -4,7 +4,7 @@ using Vonage;
 using Vonage.Messages.Messenger;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Messages.Messenger;
+namespace DotnetCliCodeSnippets.Messages.Sandbox.Messenger;
 
 public class SendMessengerText : ICodeSnippet
 {

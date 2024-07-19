@@ -4,7 +4,7 @@ using Vonage;
 using Vonage.Messages.Viber;
 using Vonage.Request;
 
-namespace DotnetCliCodeSnippets.Messages.Sms;
+namespace DotnetCliCodeSnippets.Messages.Sandbox.Viber;
 
 public class SendViberText : ICodeSnippet
 {
