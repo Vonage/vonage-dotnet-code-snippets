@@ -20,7 +20,7 @@ namespace DotnetCliCodeSnippets.Voice
             var credentials = Credentials.FromAppIdAndPrivateKeyPath(vonageApplicationId, vonagePrivateKeyPath);
             var client = new VonageClient(credentials);
 
-            var command = new TalkCommand() { Text = text};
+            var command = new TalkCommand() { Text = text, Language = "en-US"};
 
             var response = await client.VoiceClient.StartTalkAsync(uuid, command);
 
