@@ -30,8 +30,8 @@ public class SendRcsStandaloneRichCardMessage: ICodeSnippet
                         {
                             StandaloneCard = new
                             {
-                                ThumbnailImageAlignment = "Call now!",
-                                CardOrientation = "postback_data_1234",
+                                ThumbnailImageAlignment = "RIGHT",
+                                CardOrientation = "VERTICAL",
                                 CardContent = new
                                 {
                                     Title = "Quick question",
