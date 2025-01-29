@@ -13,17 +13,17 @@ namespace DotnetCliCodeSnippets.Voice
     {
         public async Task Execute()
         {
-            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-            var vonagePrivateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-            var toNumber = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var vonageNumber = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";                                    
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+            var VOICE_TO_NUMBER = Environment.GetEnvironmentVariable("VOICE_TO_NUMBER") ?? "VOICE_TO_NUMBER";
+            var VONAGE_VIRTUAL_NUMBER = Environment.GetEnvironmentVariable("VONAGE_VIRTUAL_NUMBER") ?? "VONAGE_VIRTUAL_NUMBER";                                    
 
-            var creds = Credentials.FromAppIdAndPrivateKeyPath(vonageApplicationId, vonagePrivateKeyPath);
+            var creds = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
             var client = new VonageClient(creds);
 
             var answerUrl = "https://nexmo-community.github.io/ncco-examples/text-to-speech.json";
-            var toEndpoint = new PhoneEndpoint() { Number = toNumber };
-            var fromEndpoint = new PhoneEndpoint() { Number = vonageNumber };
+            var toEndpoint = new PhoneEndpoint() { Number = VOICE_TO_NUMBER };
+            var fromEndpoint = new PhoneEndpoint() { Number = VONAGE_VIRTUAL_NUMBER };
 
             var command = new CallCommand() { To = new Endpoint[] { toEndpoint }, From = fromEndpoint, AnswerUrl = new[] { answerUrl } };
             var response = await client.VoiceClient.CreateCallAsync(command);

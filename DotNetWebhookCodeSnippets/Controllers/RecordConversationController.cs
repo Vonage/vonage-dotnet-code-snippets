@@ -13,7 +13,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
         [HttpGet("webhooks/answer")]
         public IActionResult Answer()
         {
-            var confName = Environment.GetEnvironmentVariable("CONF_NAME") ?? "CONF_NAME";
+            var VOICE_CONFERENCE_NAME = Environment.GetEnvironmentVariable("VOICE_CONFERENCE_NAME") ?? "VOICE_CONFERENCE_NAME";
             var host = Request.Host.ToString();
             //Uncomment the next line if using ngrok with --host-header option
             //host = Request.Headers["X-Original-Host"];
@@ -21,7 +21,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
 
             var conversationAction = new ConversationAction
             { 
-                Name = confName, Record = true, 
+                Name = VOICE_CONFERENCE_NAME, Record = true, 
                 EventMethod = "POST",
                 EventUrl = new [] { $"{sitebase}/recordconversation/webhooks/recording" }
             };

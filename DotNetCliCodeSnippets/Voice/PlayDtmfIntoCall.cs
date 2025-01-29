@@ -12,17 +12,17 @@ namespace DotnetCliCodeSnippets.Voice
     {
         public async Task Execute()
         {
-            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-            var vonagePrivateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-            var uuid = Environment.GetEnvironmentVariable("UUID") ?? "UUID";
-            var digits = Environment.GetEnvironmentVariable("DIGITS") ?? "DIGITS";
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+            var VOICE_CALL_ID = Environment.GetEnvironmentVariable("VOICE_CALL_ID") ?? "VOICE_CALL_ID";
+            var VOICE_DTMF_DIGITS = Environment.GetEnvironmentVariable("VOICE_DTMF_DIGITS") ?? "VOICE_DTMF_DIGITS";
 
-            var credentials = Credentials.FromAppIdAndPrivateKeyPath(vonageApplicationId, vonagePrivateKeyPath);
+            var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
             var client = new VonageClient(credentials);
 
-            var command = new DtmfCommand() { Digits = digits };
+            var command = new DtmfCommand() { Digits = VOICE_DTMF_DIGITS };
 
-            var response = await client.VoiceClient.StartDtmfAsync(uuid, command);
+            var response = await client.VoiceClient.StartDtmfAsync(VOICE_CALL_ID, command);
 
             Console.WriteLine($"Play dtmf complete message: {response.Message}");
         }

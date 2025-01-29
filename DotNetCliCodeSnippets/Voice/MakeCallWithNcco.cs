@@ -16,24 +16,23 @@ namespace DotnetCliCodeSnippets.Voice
 
         public async Task Execute()
         {
-            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-            var vonagePrivateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-            var toNumber = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var vonageNumber = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";
-            var eventUrl = new[] { Environment.GetEnvironmentVariable("EVENT_URL") ?? "https://example.com" };            
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+            var VOICE_TO_NUMBER = Environment.GetEnvironmentVariable("VOICE_TO_NUMBER") ?? "VOICE_TO_NUMBER";
+            var VONAGE_VIRTUAL_NUMBER = Environment.GetEnvironmentVariable("VONAGE_VIRTUAL_NUMBER") ?? "VONAGE_VIRTUAL_NUMBER";
 
-            var creds = Credentials.FromAppIdAndPrivateKeyPath(vonageApplicationId, vonagePrivateKeyPath);
+            var creds = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
             var client = new VonageClient(creds);
 
-            var toEndpoint = new PhoneEndpoint() { Number = toNumber };
-            var fromEndpoint = new PhoneEndpoint() { Number = vonageNumber };
+            var toEndpoint = new PhoneEndpoint() { Number = VOICE_TO_NUMBER };
+            var fromEndpoint = new PhoneEndpoint() { Number = VONAGE_VIRTUAL_NUMBER };
             var extraText = "";
             for (var i = 0; i < 50; i++)
                 extraText += $"{i} ";
             var talkAction = new TalkAction() { Text = "This is a text to speech call from Vonage " + extraText };
             var ncco = new Ncco(talkAction);
 
-            var command = new CallCommand() { To = new Endpoint[] { toEndpoint }, From = fromEndpoint, Ncco = ncco, EventUrl = eventUrl };
+            var command = new CallCommand() { To = new Endpoint[] { toEndpoint }, From = fromEndpoint, Ncco = ncco };
             var response = await client.VoiceClient.CreateCallAsync(command);
 
             Console.WriteLine($"Call Created with call uuid: {response.Uuid}");

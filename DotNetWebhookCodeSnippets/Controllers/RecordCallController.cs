@@ -14,8 +14,8 @@ namespace DotNetWebhookCodeSnippets.Controllers
         [HttpGet("webhooks/answer")]
         public IActionResult Answer()
         {
-            var toNumber = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var vonageNumber = Environment.GetEnvironmentVariable("VONAGE_NUMBER") ?? "VONAGE_NUMBER";
+            var VOICE_TO_NUMBER = Environment.GetEnvironmentVariable("VOICE_TO_NUMBER") ?? "VOICE_TO_NUMBER";
+            var VONAGE_VIRTUAL_NUMBER = Environment.GetEnvironmentVariable("VONAGE_VIRTUAL_NUMBER") ?? "VONAGE_VIRTUAL_NUMBER";
             var host = Request.Host.ToString();
             //Uncomment the next line if using ngrok with --host-header option
             //host = Request.Headers["X-Original-Host"];
@@ -27,7 +27,7 @@ namespace DotNetWebhookCodeSnippets.Controllers
                 EventMethod = "POST"
             };
 
-            var connectAction = new ConnectAction() { From = vonageNumber, Endpoint = new[] { new PhoneEndpoint{ Number = toNumber } } };
+            var connectAction = new ConnectAction() { From = VONAGE_VIRTUAL_NUMBER, Endpoint = new[] { new PhoneEndpoint{ Number = VOICE_TO_NUMBER } } };
 
             var ncco = new Ncco(recordAction, connectAction);            
             return Ok(ncco.ToString());

@@ -10,12 +10,12 @@ namespace DotnetCliCodeSnippets.Voice
     {
         public async Task Execute()
         {
-            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-            var vonagePrivateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-            var uuid = Environment.GetEnvironmentVariable("UUID") ?? "UUID";
-            var nccoUrl = Environment.GetEnvironmentVariable("NCCO_URL") ?? "NCCO_URL";
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+            var VOICE_CALL_ID = Environment.GetEnvironmentVariable("VOICE_CALL_ID") ?? "VOICE_CALL_ID";
+            var VOICE_NCCO_URL = Environment.GetEnvironmentVariable("VOICE_NCCO_URL") ?? "VOICE_NCCO_URL";
 
-            var credentials = Credentials.FromAppIdAndPrivateKeyPath(vonageApplicationId, vonagePrivateKeyPath);
+            var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
             var client = new VonageClient(credentials);
             
             var callEditCommand = new CallEditCommand()
@@ -23,11 +23,11 @@ namespace DotnetCliCodeSnippets.Voice
                 Action = CallEditCommand.ActionType.transfer,
                 Destination = new Destination()
                 {
-                    Url = new[] { nccoUrl }
+                    Url = new[] { VOICE_NCCO_URL }
                 }
             };
 
-            var response = await client.VoiceClient.UpdateCallAsync(uuid, callEditCommand);
+            var response = await client.VoiceClient.UpdateCallAsync(VOICE_CALL_ID, callEditCommand);
 
             Console.WriteLine($"Call transfer success: {response}");
         }
