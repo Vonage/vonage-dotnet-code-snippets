@@ -11,9 +11,9 @@ public class MarkAsRead : ICodeSnippet
     public async Task Execute()
     {
         var messageUuid = Environment.GetEnvironmentVariable("MESSAGE_UUID") ?? "MESSAGE_UUID";
-        var appId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
-        var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-        var credentials = Credentials.FromAppIdAndPrivateKeyPath(appId, privateKeyPath);
+        var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+        var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+        var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
         var vonageClient = new VonageClient(credentials);
         await vonageClient.MessagesClient.UpdateAsync(WhatsAppUpdateMessageRequest.Build(messageUuid));
     }
