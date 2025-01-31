@@ -11,25 +11,22 @@ public class SendMessengerAudio : ICodeSnippet
 {
     public async Task Execute()
     {
-        var to = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-        var brandName = Environment.GetEnvironmentVariable("VONAGE_BRAND_NAME") ?? "VONAGE_BRAND_NAME";
+        var MESSENGER_RECIPIENT_ID = Environment.GetEnvironmentVariable("MESSENGER_RECIPIENT_ID") ?? "MESSENGER_RECIPIENT_ID";
+        var MESSENGER_SENDER_ID = Environment.GetEnvironmentVariable("MESSENGER_SENDER_ID") ?? "MESSENGER_SENDER_ID";
         var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
         var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-
+        var AUDIO_URL = Environment.GetEnvironmentVariable("AUDIO_URL") ?? "AUDIO_URL";
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
-
         var vonageClient = new VonageClient(credentials);
-        
         var request = new MessengerAudioRequest
         {
-            To = to,
-            From = brandName,
+            To = MESSENGER_RECIPIENT_ID,
+            From = MESSENGER_SENDER_ID,
             Audio = new Attachment
             {
-                Url = "https://file-examples.com/storage/fe6bd68931628d5b79b8f47/2017/11/file_example_MP3_700KB.mp3"
+                Url = AUDIO_URL
             }
         };
-
         var response = await vonageClient.MessagesClient.SendAsync(request);
         Console.WriteLine($"Message UUID: {response.MessageUuid}");
     }
