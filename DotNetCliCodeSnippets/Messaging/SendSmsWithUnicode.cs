@@ -12,8 +12,8 @@ namespace DotnetCliCodeSnippets.Messaging
     {
         public async Task Execute()
         {
-            var toNumber = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-            var vonageBrandName = Environment.GetEnvironmentVariable("VONAGE_BRAND_NAME") ?? "VONAGE_BRAND_NAME";
+            var SMS_TO_NUMBER = Environment.GetEnvironmentVariable("SMS_TO_NUMBER") ?? "SMS_TO_NUMBER";
+            var SMS_SENDER_ID = Environment.GetEnvironmentVariable("SMS_SENDER_ID") ?? "SMS_SENDER_ID";
             var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
             var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
 
@@ -26,8 +26,8 @@ namespace DotnetCliCodeSnippets.Messaging
 
             var response = await vonageClient.SmsClient.SendAnSmsAsync(new SendSmsRequest()
             {
-                To = toNumber,
-                From = vonageBrandName,
+                To = SMS_TO_NUMBER,
+                From = SMS_SENDER_ID,
                 Text = "こんにちは世界",
                 Type = SmsType.Unicode
             });
