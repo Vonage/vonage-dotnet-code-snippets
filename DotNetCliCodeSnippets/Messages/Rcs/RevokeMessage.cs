@@ -14,11 +14,11 @@ public class RevokeMessage : ICodeSnippet
 {
     public async Task Execute()
     {
-        var messageUuid = Environment.GetEnvironmentVariable("MESSAGE_UUID") ?? "MESSAGE_UUID";
-        var appId = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
-        var privateKeyPath = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
-        var credentials = Credentials.FromAppIdAndPrivateKeyPath(appId, privateKeyPath);
+        var MESSAGES_MESSAGE_ID = Environment.GetEnvironmentVariable("MESSAGES_MESSAGE_ID") ?? "MESSAGES_MESSAGE_ID";
+        var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+        var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+        var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
         var vonageClient = new VonageClient(credentials);
-        await vonageClient.MessagesClient.UpdateAsync(RcsUpdateMessageRequest.Build(messageUuid));
+        await vonageClient.MessagesClient.UpdateAsync(RcsUpdateMessageRequest.Build(MESSAGES_MESSAGE_ID));
     }
 }
