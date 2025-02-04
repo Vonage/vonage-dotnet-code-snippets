@@ -12,15 +12,15 @@ namespace DotnetCliCodeSnippets.Accounts
         {
             var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
             var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
-            var apiKey = Environment.GetEnvironmentVariable("API_KEY") ?? "API_KEY";
-            var newSecret = Environment.GetEnvironmentVariable("NEW_SECRET") ?? "NEW_SECRET";
+            var ACCOUNT_ID = Environment.GetEnvironmentVariable("ACCOUNT_ID") ?? "ACCOUNT_ID";
+            var ACCOUNT_SECRET_VALUE = Environment.GetEnvironmentVariable("ACCOUNT_SECRET_VALUE") ?? "ACCOUNT_SECRET_VALUE";
 
             var credentials = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
             var client = new VonageClient(credentials);
 
-            var request = new CreateSecretRequest { Secret = newSecret };
+            var request = new CreateSecretRequest { Secret = ACCOUNT_SECRET_VALUE };
 
-            var response = await client.AccountClient.CreateApiSecretAsync(request, apiKey);
+            var response = await client.AccountClient.CreateApiSecretAsync(request, ACCOUNT_ID);
 
             Console.WriteLine($"New Secret Created id:{response.Id}");
         }
