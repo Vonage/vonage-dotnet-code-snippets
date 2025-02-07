@@ -13,10 +13,10 @@ namespace DotnetCliCodeSnippets.Application
     {
         public async Task Execute()
         {
-            var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-            var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
 
-            var credentials = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
             var client = new VonageClient(credentials);
 
             var request = new ListApplicationsRequest { Page = 1, PageSize = 10 };

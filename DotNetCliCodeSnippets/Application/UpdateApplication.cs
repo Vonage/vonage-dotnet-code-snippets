@@ -15,14 +15,11 @@ namespace DotnetCliCodeSnippets.Application
     {
         public async Task Execute()
         {
-            var name = Environment.GetEnvironmentVariable("APPLICATION_NAME") ?? "APPLICATION_NAME";
-            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-            var vonageApiKey = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-            var vonageApiSecret = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
-
-            var credentials = Credentials.FromApiKeyAndSecret(vonageApiKey, vonageApiSecret);
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
             var client = new VonageClient(credentials);
-
             var messagesWebhooks = new Dictionary<Webhook.Type, Webhook>();
             messagesWebhooks.Add(
                 Webhook.Type.InboundUrl,
@@ -56,7 +53,7 @@ namespace DotnetCliCodeSnippets.Application
             var rtcCapability = new Rtc(rtcWebhooks);
             var vbcCapability = new Vbc();
             var request = new CreateApplicationRequest { 
-                Name = name,
+                Name = "New App Name",
                 Capabilities = new ApplicationCapabilities 
                 { 
                     Messages = messagesCapability,
@@ -65,7 +62,7 @@ namespace DotnetCliCodeSnippets.Application
                     Vbc = vbcCapability 
                 } 
             };
-            var response = await client.ApplicationClient.UpdateApplicationAsync(vonageApplicationId, request);
+            var response = await client.ApplicationClient.UpdateApplicationAsync(VONAGE_APPLICATION_ID, request);
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
     }
