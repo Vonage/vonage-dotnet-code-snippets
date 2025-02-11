@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Conversation\Leg\" />
-    <Folder Include="Conversation\Member\" />
   </ItemGroup>
 
 
