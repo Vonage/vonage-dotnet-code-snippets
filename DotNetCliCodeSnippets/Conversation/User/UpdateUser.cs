@@ -15,12 +15,12 @@ public class UpdateUser : ICodeSnippet
 {
     public async Task Execute()
     {
-        var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
-        var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+        var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+        var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
         var USER_NAME = Environment.GetEnvironmentVariable("USER_NAME") ?? "USER_NAME";
         var USER_DISPLAY_NAME = Environment.GetEnvironmentVariable("USER_DISPLAY_NAME") ?? "USER_DISPLAY_NAME";
         var USER_ID = Environment.GetEnvironmentVariable("USER_ID") ?? "USER_ID";
-        var credentials = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+        var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
         var client = new VonageClient(credentials);
         var response = await client.UsersClient.UpdateUserAsync(UpdateUserRequest.Build()
             .WithId(USER_ID)

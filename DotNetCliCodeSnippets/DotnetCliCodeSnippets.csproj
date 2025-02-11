@@ -20,6 +20,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Conversation\Event\" />
+    <Folder Include="Conversation\Leg\" />
+    <Folder Include="Conversation\Member\" />
+  </ItemGroup>
+
 
 
 </Project>
