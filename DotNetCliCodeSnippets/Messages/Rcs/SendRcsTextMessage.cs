@@ -25,6 +25,7 @@ public class SendRcsTextMessage : ICodeSnippet
             To = MESSAGES_TO_NUMBER,
             From = RCS_SENDER_ID,
             Text = "This is an RCS text message sent via the Vonage Messages API",
+            TimeToLeave = 3600
         };
         var response = await vonageClient.MessagesClient.SendAsync(request);
         Console.WriteLine($"Message UUID: {response.MessageUuid}");
