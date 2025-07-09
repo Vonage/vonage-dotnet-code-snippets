@@ -9,7 +9,7 @@ using Vonage.Request;
 
 namespace DotnetCliCodeSnippets.Voice;
 
-public class StopAudioStreamIntoCall : ICodeSnippet
+public class StopAudioStreamInCall : ICodeSnippet
 {
     public async Task Execute()
     {
