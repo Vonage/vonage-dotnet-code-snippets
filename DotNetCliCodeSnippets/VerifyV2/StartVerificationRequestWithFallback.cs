@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Vonage;
 using Vonage.Request;
 using Vonage.VerifyV2.StartVerification;
-using Vonage.VerifyV2.StartVerification.Email;
+using Vonage.VerifyV2.StartVerification.Sms;
+using Vonage.VerifyV2.StartVerification.Voice;
 using Vonage.VerifyV2.StartVerification.SilentAuth;
 
 namespace DotnetCliCodeSnippets.VerifyV2;
@@ -13,7 +14,6 @@ public class StartVerificationRequestWithFallback : ICodeSnippet
     public async Task Execute()
     {
         var TO_NUMBER = Environment.GetEnvironmentVariable("TO_NUMBER") ?? "TO_NUMBER";
-        var TO_EMAIL = Environment.GetEnvironmentVariable("TO_EMAIL") ?? "TO_EMAIL";
         var BRAND_NAME = Environment.GetEnvironmentVariable("VONAGE_BRAND_NAME") ?? "VONAGE_BRAND_NAME";
         var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APP_ID") ?? "VONAGE_APP_ID";
         var VONAGE_APPLICATION_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
@@ -22,7 +22,8 @@ public class StartVerificationRequestWithFallback : ICodeSnippet
         var request = StartVerificationRequest.Build()
             .WithBrand(BRAND_NAME)
             .WithWorkflow(SilentAuthWorkflow.Parse(TO_NUMBER))
-            .WithFallbackWorkflow(EmailWorkflow.Parse(TO_EMAIL))
+            .WithFallbackWorkflow(SmsWorkflow.Parse(TO_NUMBER))
+            .WithFallbackWorkflow(VoiceWorkflow.Parse(TO_NUMBER))
             .Create();
         var response = await client.VerifyV2Client.StartVerificationAsync(request);
         var message = response.Match(
