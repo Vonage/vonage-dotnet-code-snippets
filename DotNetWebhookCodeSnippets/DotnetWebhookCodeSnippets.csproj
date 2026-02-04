@@ -15,7 +15,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-      <PackageReference Include="Vonage" Version="8.17.1" />
+      <PackageReference Include="Vonage" Version="8.22.0" />
   </ItemGroup>
 
 </Project>
