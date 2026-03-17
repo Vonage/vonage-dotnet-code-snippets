@@ -20,7 +20,7 @@ namespace DotnetCliCodeSnippets.Numbers
 
             var smsCallbackUrl = Environment.GetEnvironmentVariable("SMS_CALLBACK_URL") ?? "SMS_CALLBACK_URL";
             
-            var vonageApplicationId = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var vonageApplicationId = Environment.GetEnvironmentVariable(VonageConstants.ApplicationId) ?? VonageConstants.ApplicationId;
 
             var voiceCallbackType = Environment.GetEnvironmentVariable("VOICE_CALLBACK_TYPE") ?? "VOICE_CALLBACK_TYPE";
             var voiceCallbackValue = Environment.GetEnvironmentVariable("VOICE_CALLBACK_VALUE") ?? "VOICE_CALLBACK_VALUE";

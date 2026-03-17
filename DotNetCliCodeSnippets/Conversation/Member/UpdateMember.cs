@@ -15,8 +15,8 @@ public class UpdateMember : ICodeSnippet
 {
     public async Task Execute()
     {
-        var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
-        var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+        var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable(VonageConstants.ApplicationId) ?? VonageConstants.ApplicationId;
+        var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable(VonageConstants.PrivateKeyPath) ?? VonageConstants.PrivateKeyPath;
         var CONV_ID = Environment.GetEnvironmentVariable("CONV_ID") ?? "CONV_ID";
         var CONV_MEMBER_ID = Environment.GetEnvironmentVariable("CONV_MEMBER_ID") ?? "CONV_MEMBER_ID";
         var CONV_MEMBER_FROM = Environment.GetEnvironmentVariable("CONV_MEMBER_FROM") ?? "CONV_MEMBER_FROM";
