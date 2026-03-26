@@ -81,7 +81,7 @@ The non-webhook snippets are designed to be run from the cli - in order to run a
 in the argument -s or -snippet and set it equal to the partially qualified name of the snippet, e.g.
 
 ```ps
-dotnet run --project .\DotNetCliCodeSnippets\DotnetCliCodeSnippets.csproj --s=Messaging.SendSms
+dotnet run --project .\DotNetCliCodeSnippets\DotnetCliCodeSnippets.csproj --snippet Messaging.SendSms
 ```
 
 ### Webhook snippets
