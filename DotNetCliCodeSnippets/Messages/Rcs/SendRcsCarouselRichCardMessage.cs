@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Vonage;
 using Vonage.Messages.Rcs;
+using Vonage.Messages.Rcs.Suggestions;
 using Vonage.Request;
 
 #endregion
@@ -22,77 +23,26 @@ public class SendRcsCarouselRichCardMessage : ICodeSnippet
         var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable(VonageConstants.PrivateKeyPath) ?? VonageConstants.PrivateKeyPath;
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
         var vonageClient = new VonageClient(credentials);
-        var request = new RcsCustomRequest
+        var request = new RcsCarouselRequest()
         {
             To = MESSAGES_TO_NUMBER,
             From = RCS_SENDER_ID,
-            Custom =
-                new
-                {
-                    ContentMessage = new
-                    {
-                        RichCard = new
-                        {
-                            CarouselCard = new
-                            {
-                                CardWidth = "MEDIUM",
-                                CardContents = new[]
-                                {
-                                    new
-                                    {
-                                        Title = "Option 1: Photo",
-                                        Description = "Do you prefer this photo?",
-                                        Media = new
-                                        {
-                                            Height = "MEDIUM",
-                                            ContentInfo = new
-                                            {
-                                                FileUrl = MESSAGES_IMAGE_URL,
-                                                ForceRefresh = false
-                                            }
-                                        },
-                                        Suggestions = new[]
-                                        {
-                                            new
-                                            {
-                                                Reply = new
-                                                {
-                                                    Text = "Option 1",
-                                                    PostbackData = "card_1"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    new
-                                    {
-                                        Title = "Option 2: Video",
-                                        Description = "Do you prefer this video?",
-                                        Media = new
-                                        {
-                                            Height = "MEDIUM",
-                                            ContentInfo = new
-                                            {
-                                                FileUrl = MESSAGES_VIDEO_URL,
-                                                ForceRefresh = false
-                                            }
-                                        },
-                                        Suggestions = new[]
-                                        {
-                                            new
-                                            {
-                                                Reply = new
-                                                {
-                                                    Text = "Option 2",
-                                                    PostbackData = "card_2"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            Carousel = new CarouselAttachment(
+                new CardAttachment("Option 1: Photo", "Do you prefer this photo?", new Uri(MESSAGES_IMAGE_URL))
+                    .WithMediaDescription("Picture of a cat")
+                    .WithMediaHeight(CardAttachment.Height.Short)
+                    .WithThumbnailUrl(new Uri(MESSAGES_IMAGE_URL))
+                    .AppendSuggestion(new ReplySuggestion("Option 1", "card_1")),
+                new CardAttachment("Option 2: Video", "Or this video?", new Uri(MESSAGES_VIDEO_URL))
+                    .WithMediaDescription("Video of a cat")
+                    .WithMediaHeight(CardAttachment.Height.Short)
+                    .WithThumbnailUrl(new Uri(MESSAGES_IMAGE_URL))
+                    .AppendSuggestion(new ReplySuggestion("Option 2", "card_2"))
+                ),
+            Rcs = new MessageRcs()
+            {
+              CardWidth  = RcsCardWidth.Small,
+            },
         };
         var response = await vonageClient.MessagesClient.SendAsync(request);
         Console.WriteLine($"Message UUID: {response.MessageUuid}");

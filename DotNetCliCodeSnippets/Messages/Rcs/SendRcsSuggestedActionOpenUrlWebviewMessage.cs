@@ -1,3 +1,5 @@
+#region
+
 using System;
 using System.Threading.Tasks;
 using Vonage;
@@ -5,34 +7,34 @@ using Vonage.Messages.Rcs;
 using Vonage.Messages.Rcs.Suggestions;
 using Vonage.Request;
 
+#endregion
+
 namespace DotnetCliCodeSnippets.Messages.Rcs;
 
-public class SendRcsStandaloneRichCardMessage: ICodeSnippet
+public class SendRcsSuggestedActionOpenUrlWebviewMessage : ICodeSnippet
 {
     public async Task Execute()
     {
         var MESSAGES_TO_NUMBER = Environment.GetEnvironmentVariable("MESSAGES_TO_NUMBER") ?? "MESSAGES_TO_NUMBER";
         var RCS_SENDER_ID = Environment.GetEnvironmentVariable("RCS_SENDER_ID") ?? "RCS_SENDER_ID";
-        var MESSAGES_IMAGE_URL = Environment.GetEnvironmentVariable("MESSAGES_IMAGE_URL") ?? "MESSAGES_IMAGE_URL";
         var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable(VonageConstants.ApplicationId) ?? VonageConstants.ApplicationId;
         var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable(VonageConstants.PrivateKeyPath) ?? VonageConstants.PrivateKeyPath;
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
         var vonageClient = new VonageClient(credentials);
-        var request = new RcsCardRequest()
+        var request = new RcsTextRequest
         {
             To = MESSAGES_TO_NUMBER,
             From = RCS_SENDER_ID,
-            Card = new CardAttachment("Quick question", "Do you like this picture?", new Uri(MESSAGES_IMAGE_URL))
-              .WithMediaDescription("Picture of a cat")
-              .WithMediaHeight(CardAttachment.Height.Short)
-              .WithThumbnailUrl(new Uri(MESSAGES_IMAGE_URL))
-              .AppendSuggestion(new ReplySuggestion("Yes", "suggestion_1"))
-              .AppendSuggestion(new ReplySuggestion("I love it!", "suggestion_2")),
-            Rcs = new MessageRcs()
-            {
-                CardOrientation = RcsCardOrientation.Horizontal,
-                ImageAlignment = RcsImageAlignment.Right,
-            },
+            Text = "Check out our latest offers!",
+            Suggestions =
+            [
+                new OpenWebviewUrlSuggestion(
+                    "Open product page", 
+                    "postback_data_1234",
+                    new Uri("http://example.com/"), 
+                    "A URL for the Example website")
+                    .WithViewMode(OpenWebviewUrlSuggestion.ViewModeValue.Full)
+            ]
         };
         var response = await vonageClient.MessagesClient.SendAsync(request);
         Console.WriteLine($"Message UUID: {response.MessageUuid}");

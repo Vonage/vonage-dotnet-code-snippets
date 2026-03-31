@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Vonage;
 using Vonage.Messages.Rcs;
+using Vonage.Messages.Rcs.Suggestions;
 using Vonage.Request;
 
 namespace DotnetCliCodeSnippets.Messages.Rcs;
@@ -16,30 +17,15 @@ public class SendRcsSuggestedActionShareLocationMessage: ICodeSnippet
         var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable(VonageConstants.PrivateKeyPath) ?? VonageConstants.PrivateKeyPath;
         var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
         var vonageClient = new VonageClient(credentials);
-        var request = new RcsCustomRequest
+        var request = new RcsTextRequest
         {
             To = MESSAGES_TO_NUMBER,
             From = RCS_SENDER_ID,
-            Custom =
-                new
-                {
-                    ContentMessage = new
-                    {
-                        Text = "Your driver will come and meet you at your specified location.",
-                        Suggestions = new[]
-                        {
-                            new
-                            {
-                                Action = new
-                                {
-                                    Text = "Share a location",
-                                    PostbackData = "postback_data_1234",
-                                    ShareLocationAction = new { }
-                                }
-                            }
-                        }
-                    }
-                }
+            Text = "Your driver will come and meet you at your specified location.",
+            Suggestions =
+            [
+                new ShareLocationSuggestion("Share a location", "postback_data_1234"),
+            ]
         };
         var response = await vonageClient.MessagesClient.SendAsync(request);
         Console.WriteLine($"Message UUID: {response.MessageUuid}");
